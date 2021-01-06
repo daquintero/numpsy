@@ -41,7 +41,7 @@ F/m
 
 # Operate between Value objects
 >>> roadtrip_distance = nsy.Variable(
-    name="roadtrip_distance",
+     name="roadtrip_distance",
      symbol= "r",
      number=100,
      unit=nsy.Unit("meter", "m"))

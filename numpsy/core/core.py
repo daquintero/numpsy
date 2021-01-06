@@ -2,7 +2,38 @@ import numpy as np
 import pandas as pd
 import sympy as sy
 
-class Unit():
+def __check_properties__(instance, property):
+    if (hasattr(instance.properties, property)):
+        out = self.properties[property]
+    else:
+        out = None
+
+def __numpsy_repr__(instance):
+    class_name = instance.__class__.__name__
+   
+    return "<Unit name:\"" \
+            + str(self.properties["name"]) \
+            + "\" symbol:\"" \
+            + str(self.properties["symbol"]) \
+            + "\">"
+
+class InstanceMixin():
+    def __init__(self,
+                 name = None,
+                ):
+        self.__name__ = name
+        
+    @property
+    def name(self):
+        """Return name string"""
+        return self.__name__
+    
+    @name.setter
+    def name(self, value):
+        self.__name__ = value
+
+class Unit(InstanceMixin):
+    
     def __type__(self):
         return("Dimension")
     
@@ -10,19 +41,131 @@ class Unit():
                  name = None,
                  symbol = None,
                 ):
-        self.unit = {
-                "name": name,
-                "symbol": symbol,
-        }
-        
+        self.__name__ = name
+        self.__symbol__ = symbol
+
     def __truediv__(self, other):
-        # TODO rearchitecht if self.__type__ == other.__type__ == "Dimension":
-        return self.s / other.s
+        new = Unit()
+        if (hasattr(self, "name") and (hasattr(other, "name"))):
+            new.name = "(" + self.name + "_by_" + other.name + ")" 
+        if (hasattr(self, "symbol") and (hasattr(other, "symbol"))):
+            new.symbol = self.symbol / other.symbol
+        return new
+    
+    @property
+    def symbol(self):
+         """Return unit symbol shorthand from Sympy"""
+         return sy.Symbol(self.__symbol__)
+    
+    @symbol.setter
+    def symbol(self, value):
+        self.__symbol__ = value
+    
+    def __repr__(self):
+        return "<Unit name:\"" \
+            + str(self.name) \
+            + "\" symbol:\"" \
+            + str(self.symbol) \
+            + "\">"
+            
+    s = symbol
+
+class Value(InstanceMixin):
+    
+    def __init__(self,
+                 name = None,
+                 symbol = None,
+                 number = None,
+                 unit = None,
+                 symbolic_expression = None,
+                ):
+        self.__name__ = name
+        self.__symbol__ = symbol
+        self.__number__ = number
+        self.__unit__ = unit
+        self.__symbolic_expression__ = symbolic_expression
+    
+    @property
+    def __type__(self):
+        return("Value")
+    
+    def __truediv__(self, other):
+        new = Value()
+        if (hasattr(self, "symbol") and (hasattr(other, "symbol"))):
+            new.symbol = self.symbol / other.symbol
+        if (hasattr(self, "number") and (hasattr(other, "number"))):
+            new.number = self.number / other.number
+        if (hasattr(self, "unit") and (hasattr(other, "unit"))):
+            new.unit = self.unit / other.unit
+        return new
         
     @property
-    def s(self):
-        """Return unit symbol shorthand from Sympy"""
-        return sy.Symbol(self.unit["symbol"])
+    def number(self):
+        """Return unit numerical value shorthand"""
+        return self.__number__
+    
+    @number.setter
+    def number(self, value):
+        self.__number__ = value
+    
+    @property
+    def symbol(self):
+        """Return unit symbol value shorthand"""
+        return sy.Symbol(self.__symbol__)
+    
+    @symbol.setter
+    def symbol(self, value):
+        self.__symbol__ = value
+    
+    @property
+    def unit(self):
+        """Return unit symbol unit shorthand"""
+        return self.__unit__
+    
+    @unit.setter
+    def unit(self, value):
+        self.__unit__ = value
+    
+    @property
+    def symbolic_expression(self):
+        """Return symbolic expression shorthand shorthand"""
+        return self.__symbolic_expression__
+    
+    @symbolic_expression.setter
+    def symbolic_expression(self, value):
+        """Set symbolic expression shorthand shorthand"""
+        self.__symbolic_expression__ = value
+    
+    u = unit
+    s = symbol
+    n = number
+    se = symbolic_expression
+
+class Constant(Value):
+    
+    def __repr__(self):
+        return "<Constant name:\"" \
+            + str(self.name) \
+            + "\" symbol:\"" \
+            + str(self.symbol) \
+            + "\" number:\"" \
+            + str(self.number) \
+            + "\" unit:\"" \
+            + str(self.unit.s) \
+            + "\">"
+
+class Variable(Value):
+    
+    def __repr__(self):
+       return "<Variable name:\"" \
+            + str(self.name) \
+            + "\" symbol:\"" \
+            + str(self.symbol) \
+            + "\" number:\"" \
+            + str(self.number) \
+            + "\" unit:\"" \
+            + str(self.unit.s) \
+            + "\">"
 
 class Units():
     # TODO append method
@@ -38,67 +181,7 @@ class Units():
         }, index=[0])
         
         return data_frame.iloc[0]
-
-
-class Value():
-    def __init__(self,
-                 name = None,
-                 symbol = None,
-                 number = None,
-                 unit = None,
-                 expression = None,
-                ):
-        self.value = {
-                "name": name,
-                "symbol": symbol,
-                "number": number,
-                "unit": unit,
-                "expression": expression,
-        }
     
-    @property
-    def __type__(self):
-        return("Value")
-    
-    def __truediv__(self, other):
-        out = Value()
-        # TODO rearchitect
-        # if type(self) == type(other):
-        if (hasattr(self, "s") and (hasattr(other, "s"))):
-            out.value["symbol"] = self.s / other.s
-        if (hasattr(self, "n") and (hasattr(other, "n"))):
-            out.value["number"] = self.n / other.n
-        # if (hasattr(self, "u") and (hasattr(other, "u"))):
-        #    out.value["unit"].unit["symbol"] = self.u / other.u
-        return out
-        
-    @property
-    def n(self):
-        """Return unit numerical value shorthand"""
-        return self.value["number"]
-    
-    @property
-    def s(self):
-        """Return unit symbol value shorthand"""
-        return sy.Symbol(self.value["symbol"])
-    
-    @property
-    def u(self):
-        """Return unit symbol unit shorthand"""
-        return self.value["unit"]
-    
-    @property
-    def se(self):
-        """Return symbolic expression shorthand shorthand"""
-        return self.constant["expression"]
-    
-
-class Constant(Value):
-    pass
-
-class Variable(Value):
-    pass
-        
 
 class Constants():
     # TODO import from Pandas CSV
@@ -112,7 +195,7 @@ class Constants():
             "permittivity_vaccum": Constant("permittivity_vaccum",
                                             "\epsilon_0",
                                             8.8541878128e-12,
-                                            self.units.Farad.s / self.units.Meter.s
+                                            self.units.Farad / self.units.Meter
                                            ),
         }, index=[0])
         
