@@ -3,18 +3,21 @@ import pandas as pd
 import sympy as sy
 
 class Unit():
+    def __type__(self):
+        return("Dimension")
+    
     def __init__(self,
-                 unit_name,
-                 unit_symbol,
+                 name = None,
+                 symbol = None,
                 ):
         self.unit = {
-                "name": unit_name,
-                "symbol": unit_symbol,
+                "name": name,
+                "symbol": symbol,
         }
         
-    def __div__(self, other):
-        if type(self.s) == type(other.s):
-            return self.s / other.s
+    def __truediv__(self, other):
+        # TODO rearchitecht if self.__type__ == other.__type__ == "Dimension":
+        return self.s / other.s
         
     @property
     def s(self):
@@ -22,6 +25,7 @@ class Unit():
         return sy.Symbol(self.unit["symbol"])
 
 class Units():
+    # TODO append method
     def __init__(self):
          pass
         
@@ -38,16 +42,16 @@ class Units():
 
 class Value():
     def __init__(self,
-                 variable_name,
-                 symbol,
-                 numerical = None,
+                 name = None,
+                 symbol = None,
+                 number = None,
                  unit = None,
                  expression = None,
                 ):
         self.value = {
-                "name": variable_name,
+                "name": name,
                 "symbol": symbol,
-                "numerical": numerical,
+                "number": number,
                 "unit": unit,
                 "expression": expression,
         }
@@ -56,15 +60,22 @@ class Value():
     def __type__(self):
         return("Value")
     
-    def __div__(self, other):
-        if type(self) == type(other):
-            if (hasattr(self, "s") and (hasattr(other, "s")))
-            return self.s / other.s
+    def __truediv__(self, other):
+        out = Value()
+        # TODO rearchitect
+        # if type(self) == type(other):
+        if (hasattr(self, "s") and (hasattr(other, "s"))):
+            out.value["symbol"] = self.s / other.s
+        if (hasattr(self, "n") and (hasattr(other, "n"))):
+            out.value["number"] = self.n / other.n
+        # if (hasattr(self, "u") and (hasattr(other, "u"))):
+        #    out.value["unit"].unit["symbol"] = self.u / other.u
+        return out
         
     @property
     def n(self):
         """Return unit numerical value shorthand"""
-        return self.value["numerical"]
+        return self.value["number"]
     
     @property
     def s(self):
@@ -72,42 +83,25 @@ class Value():
         return sy.Symbol(self.value["symbol"])
     
     @property
+    def u(self):
+        """Return unit symbol unit shorthand"""
+        return self.value["unit"]
+    
+    @property
     def se(self):
         """Return symbolic expression shorthand shorthand"""
         return self.constant["expression"]
     
-    
-
 
 class Constant(Value):
-    def __init__(self,
-                 variable_name,
-                 symbol,
-                 numerical,
-                 unit = None
-                ):
-        self.constant = {
-                "name": variable_name,
-                "symbol": symbol,
-                "numerical": numerical,
-                "unit": unit,
-        }
-        
-    @property
-    def n(self):
-        """Return unit numerical value shorthand"""
-        return self.constant["numerical"]
-    
-    @property
-    def s(self):
-        """Return unit symbol value shorthand"""
-        return sy.Symbol(self.constant["symbol"])
-    
+    pass
+
 class Variable(Value):
-    
+    pass
         
 
 class Constants():
+    # TODO import from Pandas CSV
     def __init__(self):
         self.units = Units().data
     
@@ -123,6 +117,4 @@ class Constants():
         }, index=[0])
         
         return data_frame.iloc[0]
-    
-c =  Constants().data
 
