@@ -9,14 +9,14 @@ Objectives:
 ## Quick Start
 
 Local install after downloading the Anaconda distribution or equivalent:
-```
+```bash
 >>> git clone https://github.com/daquintero/numpsy.git
 >>> cd numpsy
 >>> python3 setup.py install
 ```
 
 ## Quick Example
-```
+```py
 import numpsy as nsy
 
 # Create a unit and operate with it
@@ -28,15 +28,28 @@ F
 F/m
 
 # Create a constant
->>> e_0 = nsy.Constant(name="permittivity_vaccum", symbol= "\epsilon_0", number=8.8541878128e-12, unit=farad_per_meter)
+>>> e_0 = nsy.Constant(
+    name="permittivity_vaccum",
+    symbol= "\epsilon_0",
+    number=8.8541878128e-12,
+    unit=farad_per_meter)
 >>> e_0.s
+# Prints in LaTex in Jupyter Lab
 \epsilon_0
 >>> e_0.n
 8.8541878128e-12
 
 # Operate between Value objects
->>> roadtrip_distance = nsy.Variable(name="roadtrip_distance", symbol= "r", number=100, unit=nsy.Unit("meter", "m"))
->>> car_speed = nsy.Variable(name="car_speed", symbol= "c", number=20, unit= nsy.Unit("meter", "m") / nsy.Unit("second", "s") )
+>>> roadtrip_distance = nsy.Variable(
+    name="roadtrip_distance",
+     symbol= "r",
+     number=100,
+     unit=nsy.Unit("meter", "m"))
+>>> car_speed = nsy.Variable(
+    name="car_speed",
+    symbol= "c",
+    number=20,
+    unit= nsy.Unit("meter", "m") / nsy.Unit("second", "s") )
 >>> time_to_arrive = roadtrip_distance / car_speed
 >>> time_to_arrive.n
 5.0
