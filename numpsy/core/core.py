@@ -60,13 +60,6 @@ class Unit(InstanceMixin):
     @symbol.setter
     def symbol(self, value):
         self.__symbol__ = value
-    
-    def __repr__(self):
-        return "<Unit name:\"" \
-            + str(self.name) \
-            + "\" symbol:\"" \
-            + str(self.symbol) \
-            + "\">"
             
     s = symbol
 
@@ -142,30 +135,10 @@ class Value(InstanceMixin):
     se = symbolic_expression
 
 class Constant(Value):
-    
-    def __repr__(self):
-        return "<Constant name:\"" \
-            + str(self.name) \
-            + "\" symbol:\"" \
-            + str(self.symbol) \
-            + "\" number:\"" \
-            + str(self.number) \
-            + "\" unit:\"" \
-            + str(self.unit.s) \
-            + "\">"
+    pass
 
 class Variable(Value):
-    
-    def __repr__(self):
-       return "<Variable name:\"" \
-            + str(self.name) \
-            + "\" symbol:\"" \
-            + str(self.symbol) \
-            + "\" number:\"" \
-            + str(self.number) \
-            + "\" unit:\"" \
-            + str(self.unit.s) \
-            + "\">"
+    pass
 
 class Units():
     # TODO append method
