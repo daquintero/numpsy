@@ -33,23 +33,27 @@ F/m
 >>> e_0 = nsy.Constant(
     name="permittivity_vaccum",
     symbol= "\epsilon_0",
-    number=8.8541878128e-12,
+    numerical=8.8541878128e-12,
     unit=farad_per_meter)
 >>> e_0
-<Constant name:"permittivity_vaccum" symbol:"\epsilon_0" symbolic_expression:"None" number:"8.8541878128e-12" unit:"<Unit name:"(Farad_by_meter)" symbol:"" symbolic_expression:"F/m">">
+<Constant name:"permittivity_vaccum" symbol:"\epsilon_0" symbolic_expression:"None" numerical:"8.8541878128e-12" unit:"<Unit name:"(Farad_by_meter)" symbol:"" symbolic_expression:"F/m">">
 >>> e_0.n
 8.8541878128e-12
 
-# Operate between Value objects
->>> roadtrip_distance = nsy.Variable(
-     name="roadtrip_distance",
-     symbol= "r",
-     number=100,
-     unit=nsy.Unit("meter", "m"))
+# Create a variable
+>> capacitor_plate_separation = nsy.Variable(
+...     name="capacitor_plate_separation",
+...     symbol= "d",
+...     numerical=None,
+...     unit=nsy.u.meter
+... )
+>>> capacitor_plate_separation
+<Variable name:"capacitor_plate_separation" symbol:"d" symbolic_expression:"None" numerical:"None" unit:"<Unit name:"Meter" symbol:"m" symbolic_expression:"">">
+
 >>> car_speed = nsy.Variable(
     name="car_speed",
     symbol= "c",
-    number=20,
+    numerical=20,
     unit= nsy.Unit("meter", "m") / nsy.Unit("second", "s") )
 >>> time_to_arrive = roadtrip_distance / car_speed
 >>> time_to_arrive.n
