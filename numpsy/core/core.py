@@ -8,15 +8,55 @@ def __check_properties__(instance, property):
     else:
         out = None
 
-def __numpsy_repr__(instance):
+"""def __numpsy_repr__(instance):
+    string_list = list([])
     class_name = instance.__class__.__name__
-   
-    return "<Unit name:\"" \
-            + str(self.properties["name"]) \
-            + "\" symbol:\"" \
-            + str(self.properties["symbol"]) \
-            + "\">"
+    string_list += ["<"]
+    string_list += class_name
+    if (hasattr(instance, "symbol")):
+        string_list += ["\""]
+        string_list += [instance.symbol]
+        string_list += ["\""]
+    if (hasattr(instance, "number")):
+        string_list += ["\""]
+        string_list += [instance.number]
+        string_list += ["\""]
+    if (hasattr(instance, "unit")):
+        string_list += ["\""]
+        string_list += [instance.unit.symbol]
+        string_list += ["\""]
+    string_list += [">"]
+    print(strig)
+    return "".join(string_list)"""
 
+def __numpsy_repr__(instance):
+    string_list = list([])
+    class_name = instance.__class__.__name__
+    string_list += ["<"]
+    string_list += [class_name]
+    if (hasattr(instance, "name")):
+        string_list += [" name:\""]
+        string_list += [str(instance.name)]
+        string_list += ["\""]
+    if (hasattr(instance, "symbol")):
+        string_list += [" symbol:\""]
+        string_list += [str(instance.symbol)]
+        string_list += ["\""]
+    if (hasattr(instance, "symbolic_expression")):
+        string_list += [" symbolic_expression:\""]
+        string_list += [str(instance.symbolic_expression)]
+        string_list += ["\""]
+    if (hasattr(instance, "number")):
+        string_list += [" number:\""]
+        string_list += [str(instance.number)]
+        string_list += ["\""]
+    if (hasattr(instance, "unit")):
+        string_list += [" unit:\""]
+        string_list += [str(instance.unit)]
+        string_list += ["\""]
+    string_list += [">"]
+    return "".join(string_list)
+            
 class InstanceMixin():
     def __init__(self,
                  name = None,
@@ -31,6 +71,9 @@ class InstanceMixin():
     @name.setter
     def name(self, value):
         self.__name__ = value
+        
+    def __repr__(self):
+        return __numpsy_repr__(self)
 
 class Unit(InstanceMixin):
     
@@ -38,18 +81,20 @@ class Unit(InstanceMixin):
         return("Dimension")
     
     def __init__(self,
-                 name = None,
-                 symbol = None,
+                 name = "",
+                 symbol = "",
+                 symbolic_expression = "",
                 ):
         self.__name__ = name
         self.__symbol__ = symbol
+        self.__symbolic_expression__ = symbolic_expression
 
     def __truediv__(self, other):
         new = Unit()
         if (hasattr(self, "name") and (hasattr(other, "name"))):
             new.name = "(" + self.name + "_by_" + other.name + ")" 
         if (hasattr(self, "symbol") and (hasattr(other, "symbol"))):
-            new.symbol = self.symbol / other.symbol
+            new.symbolic_expression = self.symbol / other.symbol
         return new
     
     @property
@@ -60,14 +105,25 @@ class Unit(InstanceMixin):
     @symbol.setter
     def symbol(self, value):
         self.__symbol__ = value
+        
+    @property
+    def symbolic_expression(self):
+        """Return symbolic expression shorthand shorthand"""
+        return self.__symbolic_expression__
+    
+    @symbolic_expression.setter
+    def symbolic_expression(self, value):
+        """Set symbolic expression shorthand shorthand"""
+        self.__symbolic_expression__ = value
             
     s = symbol
+    se = symbolic_expression
 
 class Value(InstanceMixin):
     
     def __init__(self,
-                 name = None,
-                 symbol = None,
+                 name = "",
+                 symbol = "",
                  number = None,
                  unit = None,
                  symbolic_expression = None,
@@ -85,7 +141,7 @@ class Value(InstanceMixin):
     def __truediv__(self, other):
         new = Value()
         if (hasattr(self, "symbol") and (hasattr(other, "symbol"))):
-            new.symbol = self.symbol / other.symbol
+            new.symbolic_expression = self.symbol / other.symbol
         if (hasattr(self, "number") and (hasattr(other, "number"))):
             new.number = self.number / other.number
         if (hasattr(self, "unit") and (hasattr(other, "unit"))):
@@ -129,6 +185,7 @@ class Value(InstanceMixin):
         """Set symbolic expression shorthand shorthand"""
         self.__symbolic_expression__ = value
     
+    # Shorthands
     u = unit
     s = symbol
     n = number
@@ -174,3 +231,10 @@ class Constants():
         
         return data_frame.iloc[0]
 
+farad_per_meter = Unit("Farad", "F") / Unit("meter", "m")
+e_0 = Constant(
+    name="permittivity_vaccum",
+    symbol= "\epsilon_0",
+    number=8.8541878128e-12,
+    unit=farad_per_meter)
+print(e_0.s)

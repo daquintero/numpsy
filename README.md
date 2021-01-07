@@ -21,10 +21,12 @@ import numpsy as nsy
 
 # Create a unit and operate with it
 >>> farad_unit = nsy.Unit(name="Farad", symbol="F")
->>> farad_unit.s
-F
->>> farad_per_meter = farad_unit / nsy.Unit("Meter", "m")
+>>> farad_unit
+<Unit name:"Farad" symbol:"F" symbolic_expression:"">
+>>> farad_per_meter = farad_unit / nsy.Unit("meter", "m")
 >>> farad_per_meter
+<Unit name:"(Farad_by_meter)" symbol:"" symbolic_expression:"F/m">
+>>> farad_per_meter.se
 F/m
 
 # Create a constant
@@ -33,9 +35,8 @@ F/m
     symbol= "\epsilon_0",
     number=8.8541878128e-12,
     unit=farad_per_meter)
->>> e_0.s
-# Prints in LaTex in Jupyter Lab
-\epsilon_0
+>>> e_0
+<Constant name:"permittivity_vaccum" symbol:"\epsilon_0" symbolic_expression:"None" number:"8.8541878128e-12" unit:"<Unit name:"(Farad_by_meter)" symbol:"" symbolic_expression:"F/m">">
 >>> e_0.n
 8.8541878128e-12
 
