@@ -269,7 +269,28 @@ class Value(InstanceMixin):
     se = symbolic_expression
 
 class Constant(Value):
-    pass
+    @Value.numerical.setter
+    def numerical(self, value):
+        raise Warning("Constant cannot be mutated. You cannot set any attribute value. Instantiate a new variable.")
+    
+    @Value.symbol.setter
+    def symbol(self, value):
+        raise Warning("Constant cannot be mutated. You cannot set any attribute value. Instantiate a new variable.")
+    
+    @Value.unit.setter
+    def unit(self, value):
+        raise Warning("Constant cannot be mutated. You cannot set any attribute value. Instantiate a new variable.")
+    
+    @Value.symbolic_expression.setter
+    def symbolic_expression(self, value):
+        """Set symbolic expression shorthand shorthand"""
+        raise Warning("Constant cannot be mutated. You cannot set any attribute value. Instantiate a new variable.")
+    
+    # Shorthands
+    u = unit
+    s = symbol
+    n = numerical
+    se = symbolic_expression
 
 class Variable(Value):
     pass
