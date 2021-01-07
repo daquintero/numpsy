@@ -68,6 +68,26 @@ def __numpsy_str__(instance):
     string_list += [delimeter + ">"]
     return "".join(string_list)
 
+
+def variable_symbolic_expression_generator(first, second):
+    if first.__symbol__ == "":
+        if first.symbolic_expression == sy.Symbol(""):
+            first_symbolic_variable = first.symbolic_expression
+        else:
+            first_symbolic_variable = first.symbolic_expression
+    else:
+        first_symbolic_variable = first.symbol
+    
+    if second.__symbol__ == "":
+        if second.symbolic_expression == sy.Symbol(""):
+            second_symbolic_variable = second.symbolic_expression
+        else:
+            second_symbolic_variable = second.symbolic_expression
+    else:
+        second_symbolic_variable = second.symbol
+    
+    return [first_symbolic_variable, second_symbolic_variable]
+
         
 class InstanceMixin():
     def __init__(self,
@@ -98,7 +118,7 @@ class Unit(InstanceMixin):
     def __init__(self,
                  name = "",
                  symbol = "",
-                 symbolic_expression = "",
+                 symbolic_expression = sy.Symbol(""),
                 ):
         self.__name__ = name
         self.__symbol__ = symbol
@@ -109,7 +129,8 @@ class Unit(InstanceMixin):
         if (hasattr(self, "name") and (hasattr(other, "name"))):
             new.name = "(" + self.name + "_per_" + other.name + ")" 
         if (hasattr(self, "symbol") and (hasattr(other, "symbol"))):
-            new.symbolic_expression = self.symbol / other.symbol
+            symbol_variables = variable_symbolic_expression_generator(self, other)
+            new.symbolic_expression = symbol_variables[0] / symbol_variables[1]
         return new
     
     def __mul__(self, other):
@@ -117,7 +138,8 @@ class Unit(InstanceMixin):
         if (hasattr(self, "name") and (hasattr(other, "name"))):
             new.name = "(" + self.name + "_times_" + other.name + ")" 
         if (hasattr(self, "symbol") and (hasattr(other, "symbol"))):
-            new.symbolic_expression = self.symbol * other.symbol
+            symbol_variables = variable_symbolic_expression_generator(self, other)
+            new.symbolic_expression = symbol_variables[0] * symbol_variables[1]
         return new
     
     def __add__(self, other):
@@ -125,7 +147,8 @@ class Unit(InstanceMixin):
         if (hasattr(self, "name") and (hasattr(other, "name"))):
             new.name = "(" + self.name + "_plus_" + other.name + ")" 
         if (hasattr(self, "symbol") and (hasattr(other, "symbol"))):
-            new.symbolic_expression = self.symbol + other.symbol
+            ssymbol_variables = variable_symbolic_expression_generator(self, other)
+            new.symbolic_expression = symbol_variables[0] + symbol_variables[1]
         return new
     
     def __sub__(self, other):
@@ -133,7 +156,8 @@ class Unit(InstanceMixin):
         if (hasattr(self, "name") and (hasattr(other, "name"))):
             new.name = "(" + self.name + "_minus_" + other.name + ")" 
         if (hasattr(self, "symbol") and (hasattr(other, "symbol"))):
-            new.symbolic_expression = self.symbol - other.symbol
+            symbol_variables = variable_symbolic_expression_generator(self, other)
+            new.symbolic_expression = symbol_variables[0] - symbol_variables[1]
         return new
     
     @property
@@ -165,7 +189,7 @@ class Value(InstanceMixin):
                  symbol = "",
                  numerical = None,
                  unit = None,
-                 symbolic_expression = None,
+                 symbolic_expression = sy.Symbol(""),
                 ):
         self.__name__ = name
         self.__symbol__ = symbol
@@ -182,7 +206,8 @@ class Value(InstanceMixin):
         if (hasattr(self, "name") and (hasattr(other, "name"))):
             new.name = "(" + self.name + "_per_" + other.name + ")" 
         if (hasattr(self, "symbol") and (hasattr(other, "symbol"))):
-            new.symbolic_expression = self.symbol / other.symbol
+            symbol_variables = variable_symbolic_expression_generator(self, other)
+            new.symbolic_expression = symbol_variables[0] / symbol_variables[1]
         if (hasattr(self, "numerical") and (hasattr(other, "numerical"))):
             new.numerical = self.numerical / other.numerical
         if (hasattr(self, "unit") and (hasattr(other, "unit"))):
@@ -194,7 +219,8 @@ class Value(InstanceMixin):
         if (hasattr(self, "name") and (hasattr(other, "name"))):
             new.name = "(" + self.name + "_times_" + other.name + ")" 
         if (hasattr(self, "symbol") and (hasattr(other, "symbol"))):
-            new.symbolic_expression = self.symbol * other.symbol
+            symbol_variables = variable_symbolic_expression_generator(self, other)
+            new.symbolic_expression = symbol_variables[0] * symbol_variables[1]
         if (hasattr(self, "numerical") and (hasattr(other, "numerical"))):
             new.numerical = self.numerical * other.numerical
         if (hasattr(self, "unit") and (hasattr(other, "unit"))):
@@ -206,7 +232,8 @@ class Value(InstanceMixin):
         if (hasattr(self, "name") and (hasattr(other, "name"))):
             new.name = "(" + self.name + "_plus_" + other.name + ")" 
         if (hasattr(self, "symbol") and (hasattr(other, "symbol"))):
-            new.symbolic_expression = self.symbol + other.symbol
+            symbol_variables = variable_symbolic_expression_generator(self, other)
+            new.symbolic_expression = symbol_variables[0] + symbol_variables[1]
         if (hasattr(self, "numerical") and (hasattr(other, "numerical"))):
             new.numerical = self.numerical + other.numerical
         if (hasattr(self, "unit") and (hasattr(other, "unit"))):
@@ -218,7 +245,8 @@ class Value(InstanceMixin):
         if (hasattr(self, "name") and (hasattr(other, "name"))):
             new.name = "(" + self.name + "_minus_" + other.name + ")" 
         if (hasattr(self, "symbol") and (hasattr(other, "symbol"))):
-            new.symbolic_expression = self.symbol - other.symbol
+            symbol_variables = variable_symbolic_expression_generator(self, other)
+            new.symbolic_expression = symbol_variables[0] - symbol_variables[1]
         if (hasattr(self, "numerical") and (hasattr(other, "numerical"))):
             new.numerical = self.numerical - other.numerical
         if (hasattr(self, "unit") and (hasattr(other, "unit"))):
@@ -271,20 +299,20 @@ class Value(InstanceMixin):
 class Constant(Value):
     @Value.numerical.setter
     def numerical(self, value):
-        raise Warning("Constant cannot be mutated. You cannot set any attribute value. Instantiate a new variable.")
+        print(Warning("Constant cannot be mutated. You cannot set any attribute value. Instantiate a new variable."))
     
     @Value.symbol.setter
     def symbol(self, value):
-        raise Warning("Constant cannot be mutated. You cannot set any attribute value. Instantiate a new variable.")
+        print(Warning("Constant cannot be mutated. You cannot set any attribute value. Instantiate a new variable."))
     
     @Value.unit.setter
     def unit(self, value):
-        raise Warning("Constant cannot be mutated. You cannot set any attribute value. Instantiate a new variable.")
+        print(Warning("Constant cannot be mutated. You cannot set any attribute value. Instantiate a new variable."))
     
     @Value.symbolic_expression.setter
     def symbolic_expression(self, value):
         """Set symbolic expression shorthand shorthand"""
-        raise Warning("Constant cannot be mutated. You cannot set any attribute value. Instantiate a new variable.")
+        print(Warning("Constant cannot be mutated. You cannot set any attribute value. Instantiate a new variable."))
     
     # Shorthands
     u = unit
@@ -306,6 +334,7 @@ class Units():
         data_frame =  pd.DataFrame({
             "Farad": Unit("Farad", "F"),
             "meter": Unit("Meter", "m"),
+            "ratio": Unit("ratio", "")
         }, index=[0])
         
         return data_frame.iloc[0]
