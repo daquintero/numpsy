@@ -68,27 +68,64 @@ def __numpsy_str__(instance):
     string_list += [delimeter + ">"]
     return "".join(string_list)
 
+def name_variable_generator(first, second):
+    if (hasattr(first, "name")):
+        if first.name == "":
+            # TODO in case we want to print some other default
+            first_name_variable = first.name
+        else:
+            first_name_variable = first.name
+    else:
+        first_name_variable = str(first)
+        
+    if (hasattr(second, "name")):
+        if second.name == "":
+            # TODO in case we want to print some other default
+            second_name_variable = second.name
+        else:
+            second_name_variable = second.name
+    else:
+        second_name_variable = str(second)
+    return [first_name_variable, second_name_variable]
 
-def variable_symbolic_expression_generator(first, second):
-    if first.__symbol__ == "":
-        if first.symbolic_expression == sy.Symbol(""):
-            first_symbolic_variable = first.symbolic_expression
-        else:
-            first_symbolic_variable = first.symbolic_expression
+def numerical_variable_generator(first, second):
+    if (hasattr(first, "numerical")):
+        first_numerical = first.numerical
     else:
-        first_symbolic_variable = first.symbol
+        first_numerical = first
     
-    if second.__symbol__ == "":
-        if second.symbolic_expression == sy.Symbol(""):
-            second_symbolic_variable = second.symbolic_expression
-        else:
-            second_symbolic_variable = second.symbolic_expression
+    if (hasattr(second, "numerical")):
+        second_numerical = second.numerical
     else:
-        second_symbolic_variable = second.symbol
+        second_numerical = second
+    return [first_numerical, second_numerical]
+
+def symbolic_expression_variable_generator(first, second):
+    if (hasattr(first, "symbol")):
+        if first.__symbol__ == "":
+            if first.symbolic_expression == sy.Symbol(""):
+                first_symbolic_variable = first.symbolic_expression
+            else:
+                first_symbolic_variable = first.symbolic_expression
+        else:
+            first_symbolic_variable = first.symbol
+    else:
+        first_symbolic_variable = sy.Symbol("Ø")
+    
+    if (hasattr(second, "symbol")):
+        if second.__symbol__ == "":
+            if second.symbolic_expression == sy.Symbol(""):
+                second_symbolic_variable = second.symbolic_expression
+            else:
+                second_symbolic_variable = second.symbolic_expression
+        else:
+            second_symbolic_variable = second.symbol
+    else:
+        second_symbolic_variable = sy.Symbol("Ø")
     
     return [first_symbolic_variable, second_symbolic_variable]
+            
 
-        
 class InstanceMixin():
     def __init__(self,
                  name = None,
@@ -126,38 +163,42 @@ class Unit(InstanceMixin):
 
     def __truediv__(self, other):
         new = Unit()
-        if (hasattr(self, "name") and (hasattr(other, "name"))):
-            new.name = "(" + self.name + "_per_" + other.name + ")" 
-        if (hasattr(self, "symbol") and (hasattr(other, "symbol"))):
-            symbol_variables = variable_symbolic_expression_generator(self, other)
-            new.symbolic_expression = symbol_variables[0] / symbol_variables[1]
+        name_variables = name_variable_generator(self, other)
+        new.name = "(" + name_variables[0] + "_per_" + name_variables[1] + ")" 
+        symbol_variables = symbolic_expression_variable_generator(self, other)
+        new.symbolic_expression = symbol_variables[0] / symbol_variables[1]
         return new
     
     def __mul__(self, other):
         new = Unit()
-        if (hasattr(self, "name") and (hasattr(other, "name"))):
-            new.name = "(" + self.name + "_times_" + other.name + ")" 
-        if (hasattr(self, "symbol") and (hasattr(other, "symbol"))):
-            symbol_variables = variable_symbolic_expression_generator(self, other)
-            new.symbolic_expression = symbol_variables[0] * symbol_variables[1]
+        name_variables = name_variable_generator(self, other)
+        new.name = "(" + name_variables[0] + "_times_" + name_variables[1] + ")"
+        symbol_variables = symbolic_expression_variable_generator(self, other)
+        new.symbolic_expression = symbol_variables[0] * symbol_variables[1]
         return new
     
     def __add__(self, other):
         new = Unit()
-        if (hasattr(self, "name") and (hasattr(other, "name"))):
-            new.name = "(" + self.name + "_plus_" + other.name + ")" 
-        if (hasattr(self, "symbol") and (hasattr(other, "symbol"))):
-            ssymbol_variables = variable_symbolic_expression_generator(self, other)
-            new.symbolic_expression = symbol_variables[0] + symbol_variables[1]
+        name_variables = name_variable_generator(self, other)
+        new.name = "(" + name_variables[0] +  "_plus_" + name_variables[1] + ")"
+        symbol_variables = symbolic_expression_variable_generator(self, other)
+        new.symbolic_expression = symbol_variables[0] + symbol_variables[1]
         return new
     
     def __sub__(self, other):
         new = Unit()
-        if (hasattr(self, "name") and (hasattr(other, "name"))):
-            new.name = "(" + self.name + "_minus_" + other.name + ")" 
-        if (hasattr(self, "symbol") and (hasattr(other, "symbol"))):
-            symbol_variables = variable_symbolic_expression_generator(self, other)
-            new.symbolic_expression = symbol_variables[0] - symbol_variables[1]
+        name_variables = name_variable_generator(self, other)
+        new.name = "(" + name_variables[0] +  "_minus_" + name_variables[1] + ")"
+        symbol_variables = symbolic_expression_variable_generator(self, other)
+        new.symbolic_expression = symbol_variables[0] - symbol_variables[1]
+        return new
+    
+    def __pow__(self, other):
+        new = Unit()
+        name_variables = name_variable_generator(self, other)
+        new.name = "(" + name_variables[0] +  "_power_" + name_variables[1] + ")"
+        symbol_variables = symbolic_expression_variable_generator(self, other)
+        new.symbolic_expression = symbol_variables[0] ** symbol_variables[1]
         return new
     
     @property
@@ -182,6 +223,27 @@ class Unit(InstanceMixin):
     s = symbol
     se = symbolic_expression
 
+def unit_variable_generator(first, second):
+    undefined_unit_default = Unit(name="undefined", symbol="Ø")
+    if (hasattr(first, "unit")):
+        if first.unit == "":
+            # TODO in case we want show other default
+            first_unit_variable = first.unit
+        else:
+            first_unit_variable = first.unit
+    else:
+        first_unit_variable = undefined_unit_default
+    if (hasattr(second, "unit")):
+        if second.unit == "":
+            # TODO in case we want to show some other default
+            second_unit_variable = second.unit
+        else:
+            second_unit_variable = second.unit
+    else:
+        second_unit_variable = undefined_unit_default
+    return [first_unit_variable, second_unit_variable]
+
+
 class Value(InstanceMixin):
     
     def __init__(self,
@@ -203,54 +265,62 @@ class Value(InstanceMixin):
     
     def __truediv__(self, other):
         new = Value()
-        if (hasattr(self, "name") and (hasattr(other, "name"))):
-            new.name = "(" + self.name + "_per_" + other.name + ")" 
-        if (hasattr(self, "symbol") and (hasattr(other, "symbol"))):
-            symbol_variables = variable_symbolic_expression_generator(self, other)
-            new.symbolic_expression = symbol_variables[0] / symbol_variables[1]
-        if (hasattr(self, "numerical") and (hasattr(other, "numerical"))):
-            new.numerical = self.numerical / other.numerical
-        if (hasattr(self, "unit") and (hasattr(other, "unit"))):
-            new.unit = self.unit / other.unit
+        name_variables = name_variable_generator(self, other)
+        new.name = "(" + name_variables[0] +  "_per_" + name_variables[1] + ")"
+        symbol_variables = symbolic_expression_variable_generator(self, other)
+        new.symbolic_expression = symbol_variables[0] / symbol_variables[1]
+        numerical_variables = numerical_variable_generator(self, other)
+        new.numerical = numerical_variables[0] / numerical_variables[1]
+        unit_variables = unit_variable_generator(self, other)
+        new.unit = unit_variables[0] / unit_variables[1] 
         return new
     
     def __mul__(self, other):
         new = Value()
-        if (hasattr(self, "name") and (hasattr(other, "name"))):
-            new.name = "(" + self.name + "_times_" + other.name + ")" 
-        if (hasattr(self, "symbol") and (hasattr(other, "symbol"))):
-            symbol_variables = variable_symbolic_expression_generator(self, other)
-            new.symbolic_expression = symbol_variables[0] * symbol_variables[1]
-        if (hasattr(self, "numerical") and (hasattr(other, "numerical"))):
-            new.numerical = self.numerical * other.numerical
-        if (hasattr(self, "unit") and (hasattr(other, "unit"))):
-            new.unit = self.unit * other.unit
+        name_variables = name_variable_generator(self, other)
+        new.name = "(" + name_variables[0] +  "_times_" + name_variables[1] + ")"
+        symbol_variables = symbolic_expression_variable_generator(self, other)
+        new.symbolic_expression = symbol_variables[0] * symbol_variables[1]
+        numerical_variables = numerical_variable_generator(self, other)
+        new.numerical = numerical_variables[0] * numerical_variables[1]
+        unit_variables = unit_variable_generator(self, other)
+        new.unit = unit_variables[0] * unit_variables[1] 
         return new
     
     def __add__(self, other):
         new = Value()
-        if (hasattr(self, "name") and (hasattr(other, "name"))):
-            new.name = "(" + self.name + "_plus_" + other.name + ")" 
-        if (hasattr(self, "symbol") and (hasattr(other, "symbol"))):
-            symbol_variables = variable_symbolic_expression_generator(self, other)
-            new.symbolic_expression = symbol_variables[0] + symbol_variables[1]
-        if (hasattr(self, "numerical") and (hasattr(other, "numerical"))):
-            new.numerical = self.numerical + other.numerical
-        if (hasattr(self, "unit") and (hasattr(other, "unit"))):
-            new.unit = self.unit + other.unit
+        name_variables = name_variable_generator(self, other)
+        new.name = "(" + name_variables[0] +  "_plus_" + name_variables[1] + ")"
+        symbol_variables = symbolic_expression_variable_generator(self, other)
+        new.symbolic_expression = symbol_variables[0] + symbol_variables[1]
+        numerical_variables = numerical_variable_generator(self, other)
+        new.numerical = numerical_variables[0] + numerical_variables[1]
+        unit_variables = unit_variable_generator(self, other)
+        new.unit = unit_variables[0] + unit_variables[1] 
         return new
     
     def __sub__(self, other):
         new = Value()
-        if (hasattr(self, "name") and (hasattr(other, "name"))):
-            new.name = "(" + self.name + "_minus_" + other.name + ")" 
-        if (hasattr(self, "symbol") and (hasattr(other, "symbol"))):
-            symbol_variables = variable_symbolic_expression_generator(self, other)
-            new.symbolic_expression = symbol_variables[0] - symbol_variables[1]
-        if (hasattr(self, "numerical") and (hasattr(other, "numerical"))):
-            new.numerical = self.numerical - other.numerical
-        if (hasattr(self, "unit") and (hasattr(other, "unit"))):
-            new.unit = self.unit - other.unit
+        name_variables = name_variable_generator(self, other)
+        new.name = "(" + name_variables[0] +  "_minus_" + name_variables[1] + ")"
+        symbol_variables = symbolic_expression_variable_generator(self, other)
+        new.symbolic_expression = symbol_variables[0] - symbol_variables[1]
+        numerical_variables = numerical_variable_generator(self, other)
+        new.numerical = numerical_variables[0] - numerical_variables[1]
+        unit_variables = unit_variable_generator(self, other)
+        new.unit = unit_variables[0] - unit_variables[1]
+        return new
+    
+    def __pow__(self, other):
+        new = Value()
+        name_variables = name_variable_generator(self, other)
+        new.name = "(" + name_variables[0] +  "_power_" + name_variables[1] + ")"
+        symbol_variables = symbolic_expression_variable_generator(self, other)
+        new.symbolic_expression = symbol_variables[0] ** symbol_variables[1]
+        numerical_variables = numerical_variable_generator(self, other)
+        new.numerical = numerical_variables[0] ** numerical_variables[1]
+        unit_variables = unit_variable_generator(self, other)
+        new.unit = unit_variables[0] ** unit_variables[1] 
         return new
         
     @property

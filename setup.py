@@ -4,7 +4,8 @@ import setuptools
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
-setuptools.setup(name='numpsy',
+setuptools.setup(
+      name='numpsy',
       version="0.0.1",
       description='NumpSy - Integrated NumPy, SymPy, Pandas and unit management for scientific programming.',
       long_description=long_description,
@@ -19,4 +20,4 @@ setuptools.setup(name='numpsy',
         "Operating System :: OS Independent",
       ],
       python_requires='>=3.6',
-     )
+)
