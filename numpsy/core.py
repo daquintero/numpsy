@@ -4,7 +4,7 @@ import sympy as sy
 
 def __check_properties__(instance, property):
     if (hasattr(instance.properties, property)):
-        out = self.properties[property]
+        out = instance.properties[property]
     else:
         out = None
 
