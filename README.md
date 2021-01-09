@@ -9,7 +9,7 @@ Objectives:
 
 ## Quick Start
 
-Download the [Anaconda distribution first](https://www.anaconda.com/)
+Download the [Anaconda distribution first](https://www.anaconda.com/).
 
 Pip install:
 ```bash
@@ -59,7 +59,7 @@ F/m
 ```py
 >> capacitor_plate_separation = nsy.Variable(
 ...     name="capacitor_plate_separation",
-...   `  symbol= "d",
+...     symbol= "d",
 ...     numerical=None,
 ...     unit=nsy.u.meter
 ... )

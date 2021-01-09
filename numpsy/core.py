@@ -17,6 +17,10 @@ def __numpsy_repr__(instance):
         string_list += [" name:\""]
         string_list += [str(instance.name)]
         string_list += ["\""]
+    if (hasattr(instance, "name_expression")):
+        string_list += [" name_expression:\""]
+        string_list += [str(instance.name_expression)]
+        string_list += ["\""]
     if (hasattr(instance, "symbol")):
         string_list += [" symbol:\""]
         string_list += [str(instance.symbol)]
@@ -69,23 +73,21 @@ def __numpsy_str__(instance):
     return "".join(string_list)
 
 def name_variable_generator(first, second):
-    if (hasattr(first, "name")):
-        if first.name == "":
-            # TODO in case we want to print some other default
-            first_name_variable = first.name
-        else:
-            first_name_variable = first.name
+    if (hasattr(first, "name") and (first.name!= "")):
+        first_name_variable = first.name
     else:
-        first_name_variable = str(first)
+        if (hasattr(first, "name_expression")):
+            first_name_variable = first.name_expression
+        else:
+            first_name_variable = str(first)
         
-    if (hasattr(second, "name")):
-        if second.name == "":
-            # TODO in case we want to print some other default
-            second_name_variable = second.name
-        else:
-            second_name_variable = second.name
+    if (hasattr(second, "name") and (second.name!= "")):
+        second_name_variable = second.name
     else:
-        second_name_variable = str(second)
+        if (hasattr(second, "name_expression")):
+            second_name_variable = second.name_expression
+        else:
+            second_name_variable = str(second)
     return [first_name_variable, second_name_variable]
 
 def numerical_variable_generator(first, second):
@@ -100,9 +102,12 @@ def numerical_variable_generator(first, second):
         second_numerical = second
     return [first_numerical, second_numerical]
 
+undefined_unit_name = "undefined"
+undefined_unit_symbol = "Ø"
+
 def symbolic_expression_variable_generator(first, second):
     if (hasattr(first, "symbol")):
-        if first.__symbol__ == "":
+        if first.__symbol__ == undefined_unit_symbol:
             if first.symbolic_expression == sy.Symbol(""):
                 first_symbolic_variable = first.symbolic_expression
             else:
@@ -110,10 +115,10 @@ def symbolic_expression_variable_generator(first, second):
         else:
             first_symbolic_variable = first.symbol
     else:
-        first_symbolic_variable = sy.Symbol("Ø")
+        first_symbolic_variable = sy.Symbol(undefined_unit_symbol)
     
     if (hasattr(second, "symbol")):
-        if second.__symbol__ == "":
+        if second.__symbol__ == undefined_unit_symbol:
             if second.symbolic_expression == sy.Symbol(""):
                 second_symbolic_variable = second.symbolic_expression
             else:
@@ -121,16 +126,18 @@ def symbolic_expression_variable_generator(first, second):
         else:
             second_symbolic_variable = second.symbol
     else:
-        second_symbolic_variable = sy.Symbol("Ø")
+        second_symbolic_variable = sy.Symbol(undefined_unit_symbol)
     
     return [first_symbolic_variable, second_symbolic_variable]
             
 
 class InstanceMixin():
     def __init__(self,
-                 name = None,
+                 name = "",
+                 name_expression = "",
                 ):
         self.__name__ = name
+        self.__name_expression__ = name_expression
         
     @property
     def name(self):
@@ -140,6 +147,16 @@ class InstanceMixin():
     @name.setter
     def name(self, value):
         self.__name__ = value
+
+    @property
+    def name_expression(self):
+        """Return name expression consisting of an equivalent string representation to name"""
+        return self.__name_expression__
+
+    @name_expression.setter
+    def name_expression(self, value):
+        """Set name expression consisting of an equivalent string representation to name."""
+        self.__name_expression__ = value
         
     def __repr__(self):
         return __numpsy_repr__(self)
@@ -153,10 +170,10 @@ class Unit(InstanceMixin):
         return("Dimension")
     
     def __init__(self,
-                 name = "",
-                 symbol = "",
-                 symbolic_expression = sy.Symbol(""),
-                ):
+                 name = undefined_unit_name,
+                 symbol = undefined_unit_symbol,
+                 symbolic_expression = sy.Symbol(undefined_unit_symbol),
+                 ):
         self.__name__ = name
         self.__symbol__ = symbol
         self.__symbolic_expression__ = symbolic_expression
@@ -164,7 +181,7 @@ class Unit(InstanceMixin):
     def __truediv__(self, other):
         new = Unit()
         name_variables = name_variable_generator(self, other)
-        new.name = "(" + name_variables[0] + "_per_" + name_variables[1] + ")" 
+        new.name = "(" + name_variables[0] + ")_per_(" + name_variables[1] + ")"
         symbol_variables = symbolic_expression_variable_generator(self, other)
         new.symbolic_expression = symbol_variables[0] / symbol_variables[1]
         return new
@@ -180,7 +197,7 @@ class Unit(InstanceMixin):
     def __add__(self, other):
         new = Unit()
         name_variables = name_variable_generator(self, other)
-        new.name = "(" + name_variables[0] +  "_plus_" + name_variables[1] + ")"
+        new.name = "(" + name_variables[0] + "_plus_" + name_variables[1] + ")"
         symbol_variables = symbolic_expression_variable_generator(self, other)
         new.symbolic_expression = symbol_variables[0] + symbol_variables[1]
         return new
@@ -188,7 +205,7 @@ class Unit(InstanceMixin):
     def __sub__(self, other):
         new = Unit()
         name_variables = name_variable_generator(self, other)
-        new.name = "(" + name_variables[0] +  "_minus_" + name_variables[1] + ")"
+        new.name = "(" + name_variables[0] + "_minus_" + name_variables[1] + ")"
         symbol_variables = symbolic_expression_variable_generator(self, other)
         new.symbolic_expression = symbol_variables[0] - symbol_variables[1]
         return new
@@ -196,7 +213,7 @@ class Unit(InstanceMixin):
     def __pow__(self, other):
         new = Unit()
         name_variables = name_variable_generator(self, other)
-        new.name = "(" + name_variables[0] +  "_power_" + name_variables[1] + ")"
+        new.name = "(" + name_variables[0] + "_power_" + name_variables[1] + ")"
         symbol_variables = symbolic_expression_variable_generator(self, other)
         new.symbolic_expression = symbol_variables[0] ** symbol_variables[1]
         return new
@@ -249,11 +266,13 @@ class Value(InstanceMixin):
     def __init__(self,
                  name = "",
                  symbol = "",
-                 numerical = None,
-                 unit = None,
+                 numerical = np.array([]),
+                 unit = Unit(),
+                 name_expression = "",
                  symbolic_expression = sy.Symbol(""),
                 ):
         self.__name__ = name
+        self.__name_expression__ = name_expression
         self.__symbol__ = symbol
         self.__numerical__ = numerical
         self.__unit__ = unit
@@ -266,7 +285,7 @@ class Value(InstanceMixin):
     def __truediv__(self, other):
         new = Value()
         name_variables = name_variable_generator(self, other)
-        new.name = "(" + name_variables[0] +  "_per_" + name_variables[1] + ")"
+        new.name_expression = "(" + name_variables[0] + ")_per_(" + name_variables[1] + ")"
         symbol_variables = symbolic_expression_variable_generator(self, other)
         new.symbolic_expression = symbol_variables[0] / symbol_variables[1]
         numerical_variables = numerical_variable_generator(self, other)
@@ -274,11 +293,13 @@ class Value(InstanceMixin):
         unit_variables = unit_variable_generator(self, other)
         new.unit = unit_variables[0] / unit_variables[1] 
         return new
+
+    __rtruediv__ = __truediv__
     
     def __mul__(self, other):
         new = Value()
         name_variables = name_variable_generator(self, other)
-        new.name = "(" + name_variables[0] +  "_times_" + name_variables[1] + ")"
+        new.name_expression = "(" + name_variables[0] +  "_times_" + name_variables[1] + ")"
         symbol_variables = symbolic_expression_variable_generator(self, other)
         new.symbolic_expression = symbol_variables[0] * symbol_variables[1]
         numerical_variables = numerical_variable_generator(self, other)
@@ -286,11 +307,12 @@ class Value(InstanceMixin):
         unit_variables = unit_variable_generator(self, other)
         new.unit = unit_variables[0] * unit_variables[1] 
         return new
+    __rmul__ = __mul__
     
     def __add__(self, other):
         new = Value()
         name_variables = name_variable_generator(self, other)
-        new.name = "(" + name_variables[0] +  "_plus_" + name_variables[1] + ")"
+        new.name_expression = "(" + name_variables[0] + "_plus_" + name_variables[1] + ")"
         symbol_variables = symbolic_expression_variable_generator(self, other)
         new.symbolic_expression = symbol_variables[0] + symbol_variables[1]
         numerical_variables = numerical_variable_generator(self, other)
@@ -298,11 +320,13 @@ class Value(InstanceMixin):
         unit_variables = unit_variable_generator(self, other)
         new.unit = unit_variables[0] + unit_variables[1] 
         return new
+
+    __radd__ = __add__
     
     def __sub__(self, other):
         new = Value()
         name_variables = name_variable_generator(self, other)
-        new.name = "(" + name_variables[0] +  "_minus_" + name_variables[1] + ")"
+        new.name_expression = "(" + name_variables[0] +  "_minus_" + name_variables[1] + ")"
         symbol_variables = symbolic_expression_variable_generator(self, other)
         new.symbolic_expression = symbol_variables[0] - symbol_variables[1]
         numerical_variables = numerical_variable_generator(self, other)
@@ -310,11 +334,13 @@ class Value(InstanceMixin):
         unit_variables = unit_variable_generator(self, other)
         new.unit = unit_variables[0] - unit_variables[1]
         return new
+
+    __rsub__ = __sub__
     
     def __pow__(self, other):
         new = Value()
         name_variables = name_variable_generator(self, other)
-        new.name = "(" + name_variables[0] +  "_power_" + name_variables[1] + ")"
+        new.name_expression = "(" + name_variables[0] +  "_power_" + name_variables[1] + ")"
         symbol_variables = symbolic_expression_variable_generator(self, other)
         new.symbolic_expression = symbol_variables[0] ** symbol_variables[1]
         numerical_variables = numerical_variable_generator(self, other)
@@ -322,7 +348,7 @@ class Value(InstanceMixin):
         unit_variables = unit_variable_generator(self, other)
         new.unit = unit_variables[0] ** unit_variables[1] 
         return new
-        
+
     @property
     def numerical(self):
         """Return unit numerical value shorthand"""
@@ -342,23 +368,23 @@ class Value(InstanceMixin):
         self.__symbol__ = value
     
     @property
-    def unit(self):
-        """Return unit symbol unit shorthand"""
-        return self.__unit__
-    
-    @unit.setter
-    def unit(self, value):
-        self.__unit__ = value
-    
-    @property
     def symbolic_expression(self):
-        """Return symbolic expression shorthand shorthand"""
+        """Return symbolic expression consisting of an equivalent mathemtical representation to symbol"""
         return self.__symbolic_expression__
     
     @symbolic_expression.setter
     def symbolic_expression(self, value):
-        """Set symbolic expression shorthand shorthand"""
+        """Set symbolic expression consisting of an equivalent mathemtical representation to symbol."""
         self.__symbolic_expression__ = value
+
+    @property
+    def unit(self):
+        """Return unit symbol unit shorthand"""
+        return self.__unit__
+
+    @unit.setter
+    def unit(self, value):
+        self.__unit__ = value
     
     # Shorthands
     u = unit
@@ -401,13 +427,15 @@ class Units():
     @property
     def data(self):
         "Full dataframe"
-        data_frame =  pd.DataFrame({
+        return pd.DataFrame({
             "Farad": Unit("Farad", "F"),
-            "meter": Unit("Meter", "m"),
+            "meter": Unit("meter", "m"),
             "ratio": Unit("ratio", "")
-        }, index=[0])
-        
-        return data_frame.iloc[0]
+        }, index=[0]).iloc[0]
+
+    @data.setter
+    def data(self, unit):
+        raise NotImplementedError("TODO units appender")
 
 u = Units().data
 
