@@ -1,0 +1,27 @@
+name: Format
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+    
+  # Allows us to run this workflow
+  # manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Pythjon environment
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+      
+      - name: Install Black code formatter
+        run: pip install black
+    
+      - name: Format
+        run: black .
