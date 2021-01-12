@@ -1,6 +1,6 @@
 import sympy as sy
 from . import configuration
-
+from . import core
 
 def __check_properties__(instance, property):
     if hasattr(instance.properties, property):
@@ -126,12 +126,20 @@ def symbolic_expression_variables_generator(first, second):
     return [first_symbolic_variable, second_symbolic_variable]
 
 
+def unit_variable_generator(instance):
+    if hasattr(instance, "unit"):
+        return instance.unit
+    else:
+        return core.Unit()
+
 def full_variable_generator(instance):
     name_variable = name_variable_generator(instance)
     symbolic_variable = symbolic_expression_variable_generator(instance)
     numerical_variable = numerical_variable_generator(instance)
+    unit_variable = unit_variable_generator(instance)
     return {
         "name": name_variable,
         "symbolic": symbolic_variable,
         "numerical": numerical_variable,
+        "unit": unit_variable,
     }

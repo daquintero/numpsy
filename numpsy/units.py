@@ -12,9 +12,12 @@ class Units:
         "Full dataframe"
         return pd.DataFrame(
             {
+                "Hertz": core.Unit("Hertz", "Hz"),
                 "Farad": core.Unit("Farad", "F"),
                 "meter": core.Unit("meter", "m"),
+                "ohm": core.Unit("ohm", "\Omega"),
                 "ratio": core.Unit("ratio", ""),
+                "second": core.Unit("second", "s"),
             },
             index=[0],
         ).iloc[0]

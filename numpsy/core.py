@@ -168,13 +168,24 @@ class Value(InstanceMixin):
         symbol_variables = helpers.symbolic_expression_variables_generator(self, other)
         new.symbolic_expression = symbol_variables[0] / symbol_variables[1]
         numerical_variables = helpers.numerical_variables_generator(self, other)
-        print(numerical_variables)
         new.numerical = numerical_variables[0] / numerical_variables[1]
         unit_variables = unit_variable_generator(self, other)
         new.unit = unit_variables[0] / unit_variables[1]
         return new
 
-    __rtruediv__ = __truediv__
+    def __rtruediv__(self, other):
+        new = Value()
+        name_variables = helpers.name_variables_generator(other, self)
+        new.name_expression = (
+                "(" + name_variables[0] + ")_per_(" + name_variables[1] + ")"
+        )
+        symbol_variables = helpers.symbolic_expression_variables_generator(other, self)
+        new.symbolic_expression = symbol_variables[0] / symbol_variables[1]
+        numerical_variables = helpers.numerical_variables_generator(other, self)
+        new.numerical = numerical_variables[0] / numerical_variables[1]
+        unit_variables = unit_variable_generator(other, self)
+        new.unit = unit_variables[0] / unit_variables[1]
+        return new
 
     def __mul__(self, other):
         new = Value()
@@ -190,7 +201,19 @@ class Value(InstanceMixin):
         new.unit = unit_variables[0] * unit_variables[1]
         return new
 
-    __rmul__ = __mul__
+    def __rmul__(self, other):
+        new = Value()
+        name_variables = helpers.name_variables_generator(other, self)
+        new.name_expression = (
+                "(" + name_variables[0] + "_times_" + name_variables[1] + ")"
+        )
+        symbol_variables = helpers.symbolic_expression_variables_generator(other, self)
+        new.symbolic_expression = symbol_variables[0] * symbol_variables[1]
+        numerical_variables = helpers.numerical_variables_generator(other, self)
+        new.numerical = numerical_variables[0] * numerical_variables[1]
+        unit_variables = unit_variable_generator(other, self)
+        new.unit = unit_variables[0] * unit_variables[1]
+        return new
 
     def __add__(self, other):
         new = Value()
@@ -206,7 +229,19 @@ class Value(InstanceMixin):
         new.unit = unit_variables[0] + unit_variables[1]
         return new
 
-    __radd__ = __add__
+    def __radd__(self, other):
+        new = Value()
+        name_variables = helpers.name_variables_generator(other, self)
+        new.name_expression = (
+            "(" + name_variables[0] + "_plus_" + name_variables[1] + ")"
+        )
+        symbol_variables = helpers.symbolic_expression_variables_generator(other, self)
+        new.symbolic_expression = symbol_variables[0] + symbol_variables[1]
+        numerical_variables = helpers.numerical_variables_generator(other, self)
+        new.numerical = numerical_variables[0] + numerical_variables[1]
+        unit_variables = unit_variable_generator(other, self)
+        new.unit = unit_variables[0] + unit_variables[1]
+        return new
 
     def __sub__(self, other):
         new = Value()
@@ -222,7 +257,19 @@ class Value(InstanceMixin):
         new.unit = unit_variables[0] - unit_variables[1]
         return new
 
-    __rsub__ = __sub__
+    def __rsub__(self, other):
+        new = Value()
+        name_variables = helpers.name_variables_generator(other, self)
+        new.name_expression = (
+                "(" + name_variables[0] + "_minus_" + name_variables[1] + ")"
+        )
+        symbol_variables = helpers.symbolic_expression_variables_generator(other, self)
+        new.symbolic_expression = symbol_variables[0] - symbol_variables[1]
+        numerical_variables = helpers.numerical_variables_generator(other, self)
+        new.numerical = numerical_variables[0] - numerical_variables[1]
+        unit_variables = unit_variable_generator(other, self)
+        new.unit = unit_variables[0] - unit_variables[1]
+        return new
 
     def __pow__(self, other):
         new = Value()

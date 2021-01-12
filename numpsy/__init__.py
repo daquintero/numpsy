@@ -1,4 +1,4 @@
 from .core import Unit, Constant, Variable
 from .units import u, Units
-from .constants import Constants
-from .functions import sinh
+from .constants import c, Constants
+from .functions import sinh, sqrt
