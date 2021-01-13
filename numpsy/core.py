@@ -36,9 +36,6 @@ class InstanceMixin:
     def __repr__(self):
         return helpers.__numpsy_repr__(self)
 
-    # def __str__(self):
-    #     return __numpsy_str__(self)
-
 
 class Unit(InstanceMixin):
     def __init__(
@@ -177,7 +174,7 @@ class Value(InstanceMixin):
         new = Value()
         name_variables = helpers.name_variables_generator(other, self)
         new.name_expression = (
-                "(" + name_variables[0] + ")_per_(" + name_variables[1] + ")"
+            "(" + name_variables[0] + ")_per_(" + name_variables[1] + ")"
         )
         symbol_variables = helpers.symbolic_expression_variables_generator(other, self)
         new.symbolic_expression = symbol_variables[0] / symbol_variables[1]
@@ -205,7 +202,7 @@ class Value(InstanceMixin):
         new = Value()
         name_variables = helpers.name_variables_generator(other, self)
         new.name_expression = (
-                "(" + name_variables[0] + "_times_" + name_variables[1] + ")"
+            "(" + name_variables[0] + "_times_" + name_variables[1] + ")"
         )
         symbol_variables = helpers.symbolic_expression_variables_generator(other, self)
         new.symbolic_expression = symbol_variables[0] * symbol_variables[1]
@@ -261,7 +258,7 @@ class Value(InstanceMixin):
         new = Value()
         name_variables = helpers.name_variables_generator(other, self)
         new.name_expression = (
-                "(" + name_variables[0] + "_minus_" + name_variables[1] + ")"
+            "(" + name_variables[0] + "_minus_" + name_variables[1] + ")"
         )
         symbol_variables = helpers.symbolic_expression_variables_generator(other, self)
         new.symbolic_expression = symbol_variables[0] - symbol_variables[1]

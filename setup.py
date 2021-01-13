@@ -7,7 +7,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 setuptools.setup(
     name="numpsy",
     version="0.0.3",
-    description="NumpSy - Integrated NumPy, SymPy, Pandas and unit management for scientific programming.",
+    description="NumpSy - Integrated NumPy, SymPy, SciPy and Pandas with unit management for scientific programming.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/daquintero/numpsy",

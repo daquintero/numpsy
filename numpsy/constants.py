@@ -1,4 +1,5 @@
 import pandas as pd
+import scipy as sp
 from . import core
 from . import units
 
@@ -14,6 +15,12 @@ class Constants:
         "Symbols from Sympy"
         data_frame = pd.DataFrame(
             {
+                "pi": core.Constant(
+                    "pi",
+                    "\pi",
+                    sp.pi,
+                    self.units.ratio,
+                ),
                 "speed_of_light": core.Constant(
                     "speed_of_light",
                     "c",
@@ -31,5 +38,6 @@ class Constants:
         )
 
         return data_frame.iloc[0]
+
 
 c = Constants().data

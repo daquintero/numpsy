@@ -1,9 +1,11 @@
 import numpy as np
 import sympy as sy
+import sympy.functions.special.elliptic_integrals
 import scipy as sp
 import scipy.special
 from . import core
 from . import helpers
+
 
 def variable_compatibility_check(input):
     if hasattr(input, "__parent_class__"):
@@ -15,6 +17,21 @@ def variable_compatibility_check(input):
         new = core.Variable()
     return new
 
+def complete_elliptical_integral_first_kind(instance=core.Variable()):
+    new = variable_compatibility_check(instance)
+    instance_parameters = helpers.full_variable_generator(instance)
+    new.numerical = sp.special.ellipk(instance_parameters["numerical"])
+    new.symbolic_expression = sy.functions.special.elliptic_integrals.elliptic_k(instance_parameters["symbolic"])
+    new.name_expression = "complete_elliptical_integral_first_kind(" + instance_parameters["name"] + ")"
+    # TODO automate this
+    new.unit.name = "K(" + instance_parameters["unit"].name + ")"
+    # TODO get symbolic parameters
+    new.unit.symbolic_expression = sy.functions.special.elliptic_integrals.elliptic_k(
+        instance_parameters["unit"].symbolic_expression
+    )
+    return new
+
+
 def sqrt(instance=core.Variable()):
     new = variable_compatibility_check(instance)
     instance_parameters = helpers.full_variable_generator(instance)
@@ -24,8 +41,11 @@ def sqrt(instance=core.Variable()):
     # TODO automate this
     new.unit.name = "square_root(" + instance_parameters["unit"].name + ")"
     # TODO get symbolic parameters
-    new.unit.symbolic_expression = sy.sqrt(instance_parameters["unit"].symbolic_expression)
+    new.unit.symbolic_expression = sy.sqrt(
+        instance_parameters["unit"].symbolic_expression
+    )
     return new
+
 
 def sinh(instance=core.Variable()):
     new = variable_compatibility_check(instance)
@@ -36,7 +56,8 @@ def sinh(instance=core.Variable()):
     new.name_expression = "sinh(" + instance_parameters["name"] + ")"
     return new
 
-#def ellipk(instance=core.Variable()):
+
+# def ellipk(instance=core.Variable()):
 #    sp.special.ellipk(m)
 
 

@@ -2,6 +2,7 @@ import sympy as sy
 from . import configuration
 from . import core
 
+
 def __check_properties__(instance, property):
     if hasattr(instance.properties, property):
         out = instance.properties[property]
@@ -131,6 +132,7 @@ def unit_variable_generator(instance):
         return instance.unit
     else:
         return core.Unit()
+
 
 def full_variable_generator(instance):
     name_variable = name_variable_generator(instance)
