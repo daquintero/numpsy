@@ -1,9 +1,8 @@
 import numpy as np
-import pandas as pd
 import sympy as sy
 from . import configuration
 from . import helpers
-
+from . import printers
 
 class InstanceMixin:
     def __init__(
@@ -34,10 +33,14 @@ class InstanceMixin:
         self.__name_expression__ = value
 
     def __repr__(self):
-        return helpers.__numpsy_repr__(self)
+        return printers.__repr__(self)
+
+    def _repr_markdown_(self):
+        return printers._repr_markdown_(self)
 
 
 class Unit(InstanceMixin):
+
     def __init__(
         self,
         name=configuration.undefined_unit_name,
