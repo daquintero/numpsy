@@ -5,3 +5,4 @@ venv/
 numpsy.egg-info/
 .ipynb_checkpoints/
 .idea/
+unreleased/
