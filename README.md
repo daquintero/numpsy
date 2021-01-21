@@ -16,14 +16,8 @@ Download the [Anaconda distribution first](https://www.anaconda.com/).
 
 Pip install:
 ```bash
-$ pip install numpsy
-```
-
-Local install for most recent version:
-```bash
-$ git clone https://github.com/daquintero/numpsy.git
-$ cd numpsy
-$ python3 setup.py install
+<img alt="$ pip install numpsy&#10;```&#10;&#10;Local install for most recent version:&#10;```bash&#10;$" src="docs/latex_readme_svgs/565de272307c8d8325aad51c2842a2de.png" align="middle" width="308.03738295pt" height="39.45205440000001pt"/> git clone https://github.com/daquintero/numpsy.git
+<img alt="$ cd numpsy&#10;$" src="docs/latex_readme_svgs/d230f4e2d21c7ba01c31679270893dec.png" align="middle" width="74.00528849999999pt" height="22.831056599999986pt"/> python3 setup.py install
 ```
 
 ## Quick Example
@@ -54,8 +48,8 @@ meter
 |                     | Unit                            |
 |:--------------------|:--------------------------------|
 | name                | meter                           |
-| symbol              | \begin{equation}m\end{equation} |
-| symbolic_expression | \begin{equation}Ø\end{equation} |
+| symbol              | <p align="center"><img alt="\begin{equation}m\end{equation}" src="docs/latex_readme_svgs/527d9987eeea7e57f03edb180944aa61.png" align="middle" width="357.35353664999997pt" height="16.438356pt"/></p> |
+| symbolic_expression | <p align="center"><img alt="\begin{equation}Ø\end{equation}" src="docs/latex_readme_svgs/07e36bc9221df21fb42516103f345343.png" align="middle" width="356.5297131pt" height="16.438356pt"/></p> |
 
 
 
@@ -69,7 +63,7 @@ meter.s
 
 
 
-$\displaystyle m$
+<img alt="$\displaystyle m$" src="docs/latex_readme_svgs/991606b7eabce3620029b97e1ecd1c31.png" align="middle" width="14.433101099999991pt" height="14.15524440000002pt"/>
 
 
 
@@ -81,7 +75,7 @@ meter.symbol
 
 
 
-$\displaystyle m$
+<img alt="$\displaystyle m$" src="docs/latex_readme_svgs/991606b7eabce3620029b97e1ecd1c31.png" align="middle" width="14.433101099999991pt" height="14.15524440000002pt"/>
 
 
 
@@ -111,8 +105,8 @@ farad_per_meter
 |                     | Unit                                      |
 |:--------------------|:------------------------------------------|
 | name                | (Farad)_per_(meter)                       |
-| symbol              | \begin{equation}Ø\end{equation}           |
-| symbolic_expression | \begin{equation}\frac{F}{m}\end{equation} |
+| symbol              | <p align="center"><img alt="\begin{equation}Ø\end{equation}" src="docs/latex_readme_svgs/07e36bc9221df21fb42516103f345343.png" align="middle" width="356.5297131pt" height="16.438356pt"/></p>           |
+| symbolic_expression | <p align="center"><img alt="\begin{equation}\frac{F}{m}\end{equation}" src="docs/latex_readme_svgs/c9f49e2c2afbf2a26c4fa9f5343f91cd.png" align="middle" width="357.35353664999997pt" height="33.62942055pt"/></p> |
 
 
 
@@ -173,11 +167,11 @@ e_0
 |                     | Constant                                                       |
 |:--------------------|:---------------------------------------------------------------|
 | name                | permittivity_vaccum                                            |
-| symbol              | \begin{equation}\epsilon_0\end{equation}                       |
-| symbolic_expression | \begin{equation}Ø\end{equation}                                |
+| symbol              | <p align="center"><img alt="\begin{equation}\epsilon_0\end{equation}" src="docs/latex_readme_svgs/ad4dfa78b222bfdc9e66a601c0ff1fa7.png" align="middle" width="357.1604223pt" height="16.438356pt"/></p>                       |
+| symbolic_expression | <p align="center"><img alt="\begin{equation}Ø\end{equation}" src="docs/latex_readme_svgs/07e36bc9221df21fb42516103f345343.png" align="middle" width="356.5297131pt" height="16.438356pt"/></p>                                |
 | numerical           | 8.8541878128e-12                                               |
-| unit                | Symbol: \begin{equation}Ø\end{equation}                        |
-|                     | Symbolic Expression: \begin{equation}\frac{F}{m}\end{equation} |
+| unit                | Symbol: <p align="center"><img alt="\begin{equation}Ø\end{equation}" src="docs/latex_readme_svgs/07e36bc9221df21fb42516103f345343.png" align="middle" width="356.5297131pt" height="16.438356pt"/></p>                        |
+|                     | Symbolic Expression: <p align="center"><img alt="\begin{equation}\frac{F}{m}\end{equation}" src="docs/latex_readme_svgs/c9f49e2c2afbf2a26c4fa9f5343f91cd.png" align="middle" width="357.35353664999997pt" height="33.62942055pt"/></p> |
 
 
 
@@ -189,7 +183,7 @@ e_0.s
 
 
 
-$\displaystyle \epsilon_0$
+<img alt="$\displaystyle \epsilon_0$" src="docs/latex_readme_svgs/8f9f4380689f9e8c59e9b9243394de50.png" align="middle" width="13.224938099999992pt" height="14.15524440000002pt"/>
 
 
 
@@ -222,11 +216,11 @@ e_d
 |                     | Constant                                             |
 |:--------------------|:-----------------------------------------------------|
 | name                | dielectric_permittivity                              |
-| symbol              | \begin{equation}\epsilon_d\end{equation}             |
-| symbolic_expression | \begin{equation}Ø\end{equation}                      |
+| symbol              | <p align="center"><img alt="\begin{equation}\epsilon_d\end{equation}" src="docs/latex_readme_svgs/ff3c0c16a41ac38c3e2a96276f65416f.png" align="middle" width="357.3056784pt" height="16.438356pt"/></p>             |
+| symbolic_expression | <p align="center"><img alt="\begin{equation}Ø\end{equation}" src="docs/latex_readme_svgs/07e36bc9221df21fb42516103f345343.png" align="middle" width="356.5297131pt" height="16.438356pt"/></p>                      |
 | numerical           | 5                                                    |
-| unit                | Symbol: \begin{equation}\end{equation}               |
-|                     | Symbolic Expression: \begin{equation}Ø\end{equation} |
+| unit                | Symbol: <p align="center"><img alt="\begin{equation}\end{equation}" src="docs/latex_readme_svgs/e0b0f8e64d3d3c1d20e400710d0c4c41.png" align="middle" width="21.004643549999997pt" height="16.438356pt"/></p>               |
+|                     | Symbolic Expression: <p align="center"><img alt="\begin{equation}Ø\end{equation}" src="docs/latex_readme_svgs/07e36bc9221df21fb42516103f345343.png" align="middle" width="356.5297131pt" height="16.438356pt"/></p> |
 
 
 
@@ -259,11 +253,11 @@ capacitor_plate_separation
 |                     | Variable                                             |
 |:--------------------|:-----------------------------------------------------|
 | name                | capacitor_plate_separation                           |
-| symbol              | \begin{equation}d\end{equation}                      |
-| symbolic_expression | \begin{equation}Ø\end{equation}                      |
+| symbol              | <p align="center"><img alt="\begin{equation}d\end{equation}" src="docs/latex_readme_svgs/0763f4bd58e4e7c340249488c269f6b2.png" align="middle" width="354.41496915pt" height="16.438356pt"/></p>                      |
+| symbolic_expression | <p align="center"><img alt="\begin{equation}Ø\end{equation}" src="docs/latex_readme_svgs/07e36bc9221df21fb42516103f345343.png" align="middle" width="356.5297131pt" height="16.438356pt"/></p>                      |
 | numerical           |                                                      |
-| unit                | Symbol: \begin{equation}m\end{equation}              |
-|                     | Symbolic Expression: \begin{equation}Ø\end{equation} |
+| unit                | Symbol: <p align="center"><img alt="\begin{equation}m\end{equation}" src="docs/latex_readme_svgs/527d9987eeea7e57f03edb180944aa61.png" align="middle" width="357.35353664999997pt" height="16.438356pt"/></p>              |
+|                     | Symbolic Expression: <p align="center"><img alt="\begin{equation}Ø\end{equation}" src="docs/latex_readme_svgs/07e36bc9221df21fb42516103f345343.png" align="middle" width="356.5297131pt" height="16.438356pt"/></p> |
 
 
 
@@ -275,7 +269,7 @@ capacitor_plate_separation.s
 
 
 
-$\displaystyle d$
+<img alt="$\displaystyle d$" src="docs/latex_readme_svgs/4db18991b0ea9ff6ae234a6b44f4c33d.png" align="middle" width="8.55596444999999pt" height="22.831056599999986pt"/>
 
 
 
@@ -290,8 +284,8 @@ capacitor_plate_separation.u
 |                     | Unit                            |
 |:--------------------|:--------------------------------|
 | name                | meter                           |
-| symbol              | \begin{equation}m\end{equation} |
-| symbolic_expression | \begin{equation}Ø\end{equation} |
+| symbol              | <p align="center"><img alt="\begin{equation}m\end{equation}" src="docs/latex_readme_svgs/527d9987eeea7e57f03edb180944aa61.png" align="middle" width="357.35353664999997pt" height="16.438356pt"/></p> |
+| symbolic_expression | <p align="center"><img alt="\begin{equation}Ø\end{equation}" src="docs/latex_readme_svgs/07e36bc9221df21fb42516103f345343.png" align="middle" width="356.5297131pt" height="16.438356pt"/></p> |
 
 
 
@@ -338,11 +332,11 @@ capacitance_per_plate_cross_sectional_area
 |                     | Value                                                         |
 |:--------------------|:--------------------------------------------------------------|
 | name                |                                                               |
-| symbol              | \begin{equation}Ø\end{equation}                               |
-| symbolic_expression | \begin{equation}\frac{\epsilon_d}{\epsilon_0 d}\end{equation} |
+| symbol              | <p align="center"><img alt="\begin{equation}Ø\end{equation}" src="docs/latex_readme_svgs/07e36bc9221df21fb42516103f345343.png" align="middle" width="356.5297131pt" height="16.438356pt"/></p>                               |
+| symbolic_expression | <p align="center"><img alt="\begin{equation}\frac{\epsilon_d}{\epsilon_0 d}\end{equation}" src="docs/latex_readme_svgs/40facce99d32bb0b8461bb5c240faaf8.png" align="middle" width="361.4383938pt" height="31.939908pt"/></p> |
 | numerical           | 1.8823484456216984e+16                                        |
-| unit                | Symbol: \begin{equation}Ø\end{equation}                       |
-|                     | Symbolic Expression: \begin{equation}\frac{}{F}\end{equation} |
+| unit                | Symbol: <p align="center"><img alt="\begin{equation}Ø\end{equation}" src="docs/latex_readme_svgs/07e36bc9221df21fb42516103f345343.png" align="middle" width="356.5297131pt" height="16.438356pt"/></p>                       |
+|                     | Symbolic Expression: <p align="center"><img alt="\begin{equation}\frac{}{F}\end{equation}" src="docs/latex_readme_svgs/402400a45934b32960ffdb2768ee6cbf.png" align="middle" width="356.5639506pt" height="23.604652499999997pt"/></p> |
 
 
 
@@ -354,7 +348,7 @@ capacitance_per_plate_cross_sectional_area.se
 
 
 
-$\displaystyle \frac{\epsilon_d}{\epsilon_0 d}$
+<img alt="$\displaystyle \frac{\epsilon_d}{\epsilon_0 d}$" src="docs/latex_readme_svgs/3b5a0ea48104bf18f1e9d21678c8f47d.png" align="middle" width="22.602815399999997pt" height="36.3965877pt"/>
 
 
 
@@ -397,11 +391,11 @@ device_capacitance
 |                     | Value                                                           |
 |:--------------------|:----------------------------------------------------------------|
 | name                |                                                                 |
-| symbol              | \begin{equation}Ø\end{equation}                                 |
-| symbolic_expression | \begin{equation}\frac{\epsilon_d Ø}{\epsilon_0 d}\end{equation} |
+| symbol              | <p align="center"><img alt="\begin{equation}Ø\end{equation}" src="docs/latex_readme_svgs/07e36bc9221df21fb42516103f345343.png" align="middle" width="356.5297131pt" height="16.438356pt"/></p>                                 |
+| symbolic_expression | <p align="center"><img alt="\begin{equation}\frac{\epsilon_d Ø}{\epsilon_0 d}\end{equation}" src="docs/latex_readme_svgs/dad110002c83361e975cb3d3bb56b501.png" align="middle" width="363.6983922pt" height="36.894244199999996pt"/></p> |
 | numerical           | 18823.484456216982                                              |
-| unit                | Symbol: \begin{equation}Ø\end{equation}                         |
-|                     | Symbolic Expression: \begin{equation}\frac{Ø}{F}\end{equation}  |
+| unit                | Symbol: <p align="center"><img alt="\begin{equation}Ø\end{equation}" src="docs/latex_readme_svgs/07e36bc9221df21fb42516103f345343.png" align="middle" width="356.5297131pt" height="16.438356pt"/></p>                         |
+|                     | Symbolic Expression: <p align="center"><img alt="\begin{equation}\frac{Ø}{F}\end{equation}" src="docs/latex_readme_svgs/d68142045363ae526a2af7e213720bbf.png" align="middle" width="356.5639506pt" height="34.42851555pt"/></p>  |
 
 
 
@@ -425,7 +419,7 @@ device_capacitance.se
 
 
 
-$\displaystyle \frac{\epsilon_d Ø}{\epsilon_0 d}$
+<img alt="$\displaystyle \frac{\epsilon_d Ø}{\epsilon_0 d}$" src="docs/latex_readme_svgs/5dbd605233a76725ccf89e2d69434815.png" align="middle" width="27.12282045pt" height="46.30526009999998pt"/>
 
 
 
@@ -438,7 +432,7 @@ device_capacitance.symbol
 
 
 
-$\displaystyle F$
+<img alt="$\displaystyle F$" src="docs/latex_readme_svgs/fdd7fc3481f50c7725212c5c1aae26f9.png" align="middle" width="12.85392569999999pt" height="22.465723500000017pt"/>
 
 
 
@@ -467,11 +461,11 @@ nsy.sqrt(device_capacitance)
 |                     | Value                                                                 |
 |:--------------------|:----------------------------------------------------------------------|
 | name                |                                                                       |
-| symbol              | \begin{equation}Ø\end{equation}                                       |
-| symbolic_expression | \begin{equation}\sqrt{F}\end{equation}                                |
+| symbol              | <p align="center"><img alt="\begin{equation}Ø\end{equation}" src="docs/latex_readme_svgs/07e36bc9221df21fb42516103f345343.png" align="middle" width="356.5297131pt" height="16.438356pt"/></p>                                       |
+| symbolic_expression | <p align="center"><img alt="\begin{equation}\sqrt{F}\end{equation}" src="docs/latex_readme_svgs/247c82731ced3e2bf916ff89a21707eb.png" align="middle" width="363.41327385pt" height="19.487407499999996pt"/></p>                                |
 | numerical           | 137.19870428038664                                                    |
-| unit                | Symbol: \begin{equation}Ø\end{equation}                               |
-|                     | Symbolic Expression: \begin{equation}\sqrt{\frac{Ø}{F}}\end{equation} |
+| unit                | Symbol: <p align="center"><img alt="\begin{equation}Ø\end{equation}" src="docs/latex_readme_svgs/07e36bc9221df21fb42516103f345343.png" align="middle" width="356.5297131pt" height="16.438356pt"/></p>                               |
+|                     | Symbolic Expression: <p align="center"><img alt="\begin{equation}\sqrt{\frac{Ø}{F}}\end{equation}" src="docs/latex_readme_svgs/35eabbee1c39b85838aa31462abebb1e.png" align="middle" width="366.75572669999997pt" height="39.452455349999994pt"/></p> |
 
 
 
@@ -487,11 +481,11 @@ nsy.sinh(device_capacitance)
 |                     | Value                                                                 |
 |:--------------------|:----------------------------------------------------------------------|
 | name                |                                                                       |
-| symbol              | \begin{equation}Ø\end{equation}                                       |
-| symbolic_expression | \begin{equation}\sinh{\left(F \right)}\end{equation}                  |
+| symbol              | <p align="center"><img alt="\begin{equation}Ø\end{equation}" src="docs/latex_readme_svgs/07e36bc9221df21fb42516103f345343.png" align="middle" width="356.5297131pt" height="16.438356pt"/></p>                                       |
+| symbolic_expression | <p align="center"><img alt="\begin{equation}\sinh{\left(F \right)}\end{equation}" src="docs/latex_readme_svgs/b81ce41e775ff0ebf8f4e88329b48ac4.png" align="middle" width="378.9840615pt" height="16.438356pt"/></p>                  |
 | numerical           | inf                                                                   |
-| unit                | Symbol: \begin{equation}Ø\end{equation}                               |
-|                     | Symbolic Expression: \begin{equation}\sqrt{\frac{Ø}{F}}\end{equation} |
+| unit                | Symbol: <p align="center"><img alt="\begin{equation}Ø\end{equation}" src="docs/latex_readme_svgs/07e36bc9221df21fb42516103f345343.png" align="middle" width="356.5297131pt" height="16.438356pt"/></p>                               |
+|                     | Symbolic Expression: <p align="center"><img alt="\begin{equation}\sqrt{\frac{Ø}{F}}\end{equation}" src="docs/latex_readme_svgs/35eabbee1c39b85838aa31462abebb1e.png" align="middle" width="366.75572669999997pt" height="39.452455349999994pt"/></p> |
 
 
 

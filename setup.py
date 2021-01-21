@@ -1,12 +1,12 @@
 #!/usr/bin/env python
 import setuptools
 
-with open("README.md", "r", encoding="utf-8") as fh:
+with open("README_RAW.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setuptools.setup(
     name="numpsy",
-    version="0.0.3",
+    version="0.0.4",
     description="NumpSy - Integrated NumPy, SymPy, SciPy and Pandas with unit management for scientific programming with IPython.",
     long_description=long_description,
     long_description_content_type="text/markdown",
