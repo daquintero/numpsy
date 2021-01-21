@@ -17,12 +17,17 @@ def variable_compatibility_check(input):
         new = core.Variable()
     return new
 
+
 def complete_elliptical_integral_first_kind(instance=core.Variable()):
     new = variable_compatibility_check(instance)
     instance_parameters = helpers.full_variable_generator(instance)
     new.numerical = sp.special.ellipk(instance_parameters["numerical"])
-    new.symbolic_expression = sy.functions.special.elliptic_integrals.elliptic_k(instance_parameters["symbolic"])
-    new.name_expression = "complete_elliptical_integral_first_kind(" + instance_parameters["name"] + ")"
+    new.symbolic_expression = sy.functions.special.elliptic_integrals.elliptic_k(
+        instance_parameters["symbolic"]
+    )
+    new.name_expression = (
+        "complete_elliptical_integral_first_kind(" + instance_parameters["name"] + ")"
+    )
     # TODO automate this
     new.unit.name = "K(" + instance_parameters["unit"].name + ")"
     # TODO get symbolic parameters

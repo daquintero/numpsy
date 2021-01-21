@@ -5,6 +5,7 @@ from . import configuration
 from . import helpers
 from . import printers
 
+
 class DataMixin:
     def __init__(self):
         pass
@@ -19,25 +20,31 @@ class DataMixin:
         if hasattr(self, "numerical"):
             data["numerical"] = self.numerical
         if hasattr(self, "symbol"):
-            a = sy.latex(self.symbol, mode='equation')
+            a = sy.latex(self.symbol, mode="equation")
             data["symbol"] = a
         if hasattr(self, "symbolic_expression"):
             if sy.latex(self.symbolic_expression):
-                b = sy.latex(self.symbolic_expression, mode='equation')
+                b = sy.latex(self.symbolic_expression, mode="equation")
             else:
                 b = ""
             data["symbolic_expression"] = b
         if hasattr(self, "unit"):
-            #if self.unit.symbol:
+            # if self.unit.symbol:
             #    data["unit"] = "$" + self.unit.__symbol__ + "$"
-            #else:
+            # else:
             #    data["unit"] = "$" + sy.latex(self.unit.data.symbolic_expression) + "$"
             self.unit.data.symbol = "$" + self.unit.data.symbol + "$"
-            self.unit.data.symbolic_expression = "$" + self.unit.data.symbolic_expression + "$"
-            data["unit"] = "Symbol: " + self.unit.data["symbol"].values[0] + "\n" \
-                           + "Symbolic Expression: "+ self.unit.data["symbolic_expression"].values[0]
+            self.unit.data.symbolic_expression = (
+                "$" + self.unit.data.symbolic_expression + "$"
+            )
+            data["unit"] = (
+                "Symbol: "
+                + self.unit.data["symbol"].values[0]
+                + "\n"
+                + "Symbolic Expression: "
+                + self.unit.data["symbolic_expression"].values[0]
+            )
         return pd.DataFrame([data], index=[self.__class__.__name__])
-
 
     @data.setter
     def data(self, value):
@@ -46,13 +53,14 @@ class DataMixin:
         if hasattr(self, "name_expression") & hasattr(value, "name_expression"):
             self.name_expression = value.name_expression
         if hasattr(self, "numerical") & hasattr(value, "numerical"):
-            self.numerical  = value.numerical
+            self.numerical = value.numerical
         if hasattr(self, "symbol") & hasattr(value, "symbol"):
             self.symbol = value.__symbol__
         if hasattr(self, "symbolic_expression") & hasattr(value, "symbolic_expression"):
             self.symbolic_expression = value.__symbolic_expression__
         if hasattr(self, "unit") & hasattr(value, "unit"):
             self.unit = value.unit
+
 
 class InstanceMixin(DataMixin):
     def __init__(
@@ -63,7 +71,6 @@ class InstanceMixin(DataMixin):
         self.__name__ = name
         self.__name_expression__ = name_expression
         self.data
-
 
     @property
     def name(self):
@@ -92,7 +99,6 @@ class InstanceMixin(DataMixin):
 
 
 class Unit(InstanceMixin):
-
     def __init__(
         self,
         name=configuration.undefined_unit_name,
@@ -210,7 +216,6 @@ class Value(InstanceMixin):
         self.__numerical__ = numerical
         self.__unit__ = unit
         self.__symbolic_expression__ = symbolic_expression
-
 
     @property
     def __type__(self):

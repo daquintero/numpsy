@@ -1,7 +1,4 @@
-import pandas as pd
-import sympy as sy
 import copy
-from . import configuration
 
 
 def __repr__(instance):
@@ -21,6 +18,7 @@ def __repr__(instance):
     output = instance.data
     return instance.__class__.__name__ + str(output)
 
+
 def markdownify(instance):
     if instance.__class__.__name__ == "Unit":
         display_columns = ["name", "symbol", "symbolic_expression"]
@@ -29,5 +27,6 @@ def markdownify(instance):
     markdown_instance = copy.deepcopy(instance)
     return markdown_instance.data.loc[:, display_columns]
 
+
 def _repr_markdown_(display_dataframe):
-      return markdownify(display_dataframe).T.to_markdown()
+    return markdownify(display_dataframe).T.to_markdown()
