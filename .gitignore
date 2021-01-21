@@ -1,8 +1,7 @@
-build/
-numpsy.egg-info/
-dist/
-venv/
-numpsy.egg-info/
 .ipynb_checkpoints/
 .idea/
+build/
+dist/
+numpsy.egg-info/
+venv/
 unreleased/

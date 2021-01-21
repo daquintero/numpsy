@@ -1,6 +1,6 @@
 # NumpSy
 
-Straight up mix between NumPy, SymPy and Pandas into a value single-declaration extendable framework to simulatenously perform symbolic and numerical operations.
+Straight up mix between NumPy, SymPy, SciPy, and Pandas into a value single-declaration extendable framework to simulatenously perform symbolic and numerical operations.
 
 Objectives:
 1. Ever think you wanted to simultaneously perform numerical and symbolic mathematics for an engineering or optimization derivation? Now you can pretty much intuitively derivate simultaneously whilst performing unit management automatically.
@@ -16,8 +16,14 @@ Download the [Anaconda distribution first](https://www.anaconda.com/).
 
 Pip install:
 ```bash
-<img alt="$ pip install numpsy&#10;```&#10;&#10;Local install for most recent version:&#10;```bash&#10;$" src="docs/latex_readme_svgs/565de272307c8d8325aad51c2842a2de.png" align="middle" width="308.03738295pt" height="39.45205440000001pt"/> git clone https://github.com/daquintero/numpsy.git
-<img alt="$ cd numpsy&#10;$" src="docs/latex_readme_svgs/d230f4e2d21c7ba01c31679270893dec.png" align="middle" width="74.00528849999999pt" height="22.831056599999986pt"/> python3 setup.py install
+$ pip install numpsy
+```
+
+Local install for most recent version:
+```bash
+$ git clone https://github.com/daquintero/numpsy.git
+$ cd numpsy
+$ python3 setup.py install
 ```
 
 ## Quick Example
