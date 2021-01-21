@@ -10,72 +10,6 @@ def __check_properties__(instance, property):
         out = None
 
 
-def __numpsy_repr__(instance):
-    string_list = list([])
-    class_name = instance.__class__.__name__
-    string_list += ["<"]
-    string_list += [class_name]
-    if hasattr(instance, "name"):
-        string_list += [' name:"']
-        string_list += [str(instance.name)]
-        string_list += ['"']
-    if hasattr(instance, "name_expression"):
-        string_list += [' name_expression:"']
-        string_list += [str(instance.name_expression)]
-        string_list += ['"']
-    if hasattr(instance, "symbol"):
-        string_list += [' symbol:"']
-        string_list += [str(instance.symbol)]
-        string_list += ['"']
-    if hasattr(instance, "symbolic_expression"):
-        string_list += [' symbolic_expression:"']
-        string_list += [str(instance.symbolic_expression)]
-        string_list += ['"']
-    if hasattr(instance, "numerical"):
-        string_list += [' numerical:"']
-        string_list += [str(instance.numerical)]
-        string_list += ['"']
-    if hasattr(instance, "unit"):
-        string_list += [' unit:"']
-        string_list += [str(instance.unit)]
-        string_list += ['"']
-    string_list += [">"]
-    return "".join(string_list)
-
-
-def __numpsy_str__(instance):
-    string_list = list([])
-    class_name = instance.__class__.__name__
-    string_list += ["<"]
-    string_list += [class_name]
-    if class_name == "Unit":
-        delimeter = "\n\t\t"
-    else:
-        delimeter = "\n\t"
-    if hasattr(instance, "name"):
-        string_list += [delimeter + 'name:"']
-        string_list += [str(instance.name)]
-        string_list += ['"']
-    if hasattr(instance, "symbol"):
-        string_list += [delimeter + 'symbol:"']
-        string_list += [str(instance.symbol)]
-        string_list += ['"']
-    if hasattr(instance, "symbolic_expression"):
-        string_list += [delimeter + 'symbolic_expression:"']
-        string_list += [str(instance.symbolic_expression)]
-        string_list += ['"']
-    if hasattr(instance, "numerical"):
-        string_list += [delimeter + 'numerical:"']
-        string_list += [str(instance.numerical)]
-        string_list += ['"']
-    if hasattr(instance, "unit"):
-        string_list += [delimeter + 'unit:"']
-        string_list += [str(instance.unit)]
-        string_list += ['"']
-    string_list += [delimeter + ">"]
-    return "".join(string_list)
-
-
 def name_variable_generator(instance):
     if hasattr(instance, "name") and (instance.name != ""):
         instance_name_variable = instance.name
@@ -110,10 +44,7 @@ def numerical_variables_generator(first, second):
 def symbolic_expression_variable_generator(instance):
     if hasattr(instance, "symbol"):
         if instance.__symbol__ == configuration.undefined_unit_symbol:
-            if instance.symbolic_expression == sy.Symbol(""):
-                instance_symbolic_variable = instance.symbolic_expression
-            else:
-                instance_symbolic_variable = instance.symbolic_expression
+            instance_symbolic_variable = instance.symbolic_expression
         else:
             instance_symbolic_variable = instance.symbol
     else:
