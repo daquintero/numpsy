@@ -1,22 +1,7 @@
 import pandas as pd
 import sympy as sy
-
-def tabulate_instance(instance):
-    output = pd.DataFrame({})
-    if hasattr(instance, "name"):
-        output["name"] = instance.name
-    if hasattr(instance, "name_expression"):
-        output["name_expression"] = instance.name_expression
-    if hasattr(instance, "numerical"):
-        output["numerical"] = instance.numerical
-    if hasattr(instance, "symbol"):
-        output["symbol"] = "$" + sy.latex(instance.symbol) + "$"
-        output["symbol"]
-    if hasattr(instance, "symbolic_expression"):
-        output["symbolic_expression"] = "$" + sy.latex(instance.symbolic_expression) + "$"
-    #if hasattr(instance, "unit"):
-    #    output["unit"] = instance.unit
-    return output
+import copy
+from . import configuration
 
 
 def __repr__(instance):
@@ -33,9 +18,16 @@ def __repr__(instance):
 
     It also aims to enhance the functionality available via the sympy printers
     """
-    output = tabulate_instance(instance)
+    output = instance.data
     return instance.__class__.__name__ + str(output)
 
-def _repr_markdown_(instance):
-    data = tabulate_instance(instance)
-    return data.to_markdown()
+def markdownify(instance):
+    if instance.__class__.__name__ == "Unit":
+        display_columns = ["name", "symbol", "symbolic_expression"]
+    else:
+        display_columns = ["name", "symbol", "symbolic_expression", "numerical", "unit"]
+    markdown_instance = copy.deepcopy(instance)
+    return markdown_instance.data.loc[:, display_columns]
+
+def _repr_markdown_(display_dataframe):
+      return markdownify(display_dataframe).T.to_markdown()

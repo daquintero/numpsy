@@ -44,10 +44,7 @@ def numerical_variables_generator(first, second):
 def symbolic_expression_variable_generator(instance):
     if hasattr(instance, "symbol"):
         if instance.__symbol__ == configuration.undefined_unit_symbol:
-            if instance.symbolic_expression == sy.Symbol(""):
-                instance_symbolic_variable = instance.symbolic_expression
-            else:
-                instance_symbolic_variable = instance.symbolic_expression
+            instance_symbolic_variable = instance.symbolic_expression
         else:
             instance_symbolic_variable = instance.symbol
     else:
