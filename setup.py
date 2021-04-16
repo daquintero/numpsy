@@ -14,6 +14,14 @@ setuptools.setup(
     author="Dario Quintero",
     author_email="darioaquintero@gmail.com",
     packages=setuptools.find_packages(),
+    install_requires=[
+        "ipython",
+        "numpy",
+        "pandas",
+        "sympy",
+        "scipy",
+        "tabulate"
+    ],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
