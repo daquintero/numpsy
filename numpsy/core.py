@@ -102,8 +102,10 @@ class Unit(InstanceMixin):
     def __init__(
         self,
         name=configuration.undefined_unit_name,
+        n=configuration.undefined_unit_name,
         name_expression=configuration.undefined_unit_name,
         symbol=configuration.undefined_unit_symbol,
+        s=configuration.undefined_unit_symbol,
         symbolic_expression=sy.Symbol(configuration.undefined_unit_symbol),
     ):
         self.__name__ = name
