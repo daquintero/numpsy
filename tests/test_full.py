@@ -6,7 +6,18 @@ class TestHelpers(unittest.TestCase):
     def test_select_available_property_(self):
         self.assertEqual(nsy.helpers.__select_available_property__("first", "default", "default"), "first")
         self.assertEqual(nsy.helpers.__select_available_property__("default", "second", "default"), "second")
-        self.assertEqual(nsy.helpers.__select_available_property__("default", "default", "default", "optional"), "optional")
+        self.assertEqual(nsy.helpers.__select_available_property__("default",
+                                                                   "default",
+                                                                   "default",
+                                                                   "optional"),
+                         "optional")
+        self.assertEqual(nsy.helpers.__select_available_property__("default",
+                                                                   "default",
+                                                                   "default",
+                                                                   "default",
+                                                                   "optional"
+                                                                   ),
+                         "optional")
         self.assertEqual(nsy.helpers.__select_available_property__(nsy.configuration.undefined_unit_symbol,
                                                                    nsy.configuration.undefined_unit_symbol,
                                                                    nsy.configuration.undefined_unit_symbol),
@@ -38,7 +49,7 @@ class TestCore(unittest.TestCase):
         self.assertEqual(self.unit.__symbolic_expression__, nsy.configuration.undefined_unit_symbol)
 
     def test_shortcut_initialization(self):
-        self.unit_shortcut = nsy.Unit(n="unit", s="u")
+        self.unit_shortcut = nsy.Unit(na="unit", s="u")
         self.unit_long = nsy.Unit(name="unit", symbol="u")
         self.assertEqual(self.unit_shortcut.name, self.unit_long.name)
         self.assertEqual(self.unit_shortcut.na, self.unit_long.na)

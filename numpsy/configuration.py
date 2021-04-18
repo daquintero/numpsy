@@ -3,6 +3,7 @@ import sympy as sy
 
 undefined_unit_name = "undefined"
 undefined_unit_symbol = "Ø"
+undefined_unit_symbolic_expression = sy.Symbol(undefined_unit_symbol)
 
 undefined_value_name = ""
 undefined_value_symbol = "Ø"

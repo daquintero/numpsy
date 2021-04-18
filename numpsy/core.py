@@ -8,7 +8,7 @@ from . import printers
 
 class DataMixin:
     def __init__(self):
-        pass
+        super(DataMixin, self).__init__()
 
     @property
     def data(self):
@@ -20,8 +20,11 @@ class DataMixin:
         if hasattr(self, "numerical"):
             data["numerical"] = self.numerical
         if hasattr(self, "symbol"):
-            a = sy.latex(self.symbol, mode="equation")
-            data["symbol"] = a
+            if bool(self.symbol):
+                a = sy.latex(self.symbol, mode="equation")
+                data["symbol"] = a
+            else:
+                raise ValueError("Sympy incompatible symbol input: self.symbol: " + str(self.__symbol__) + " for class: " + str(self.__class__))
         if hasattr(self, "symbolic_expression"):
             if sy.latex(self.symbolic_expression):
                 b = sy.latex(self.symbolic_expression, mode="equation")
@@ -69,6 +72,7 @@ class InstanceMixin(DataMixin):
         n=configuration.undefined_unit_name,
         name_expression=configuration.undefined_unit_name,
     ):
+        super(InstanceMixin, self).__init__()
         self.__name__ = helpers.__select_available_property__(name,
                                                               n,
                                                               configuration.undefined_unit_name)
@@ -110,15 +114,18 @@ class Unit(InstanceMixin):
     def __init__(
         self,
         name=configuration.undefined_unit_name,
-        n=configuration.undefined_unit_name,
+        na=configuration.undefined_unit_name,
         name_expression=configuration.undefined_unit_name,
         symbol=configuration.undefined_unit_symbol,
         s=configuration.undefined_unit_symbol,
         symbolic_expression=sy.Symbol(configuration.undefined_unit_symbol),
     ):
+        super(Unit, self).__init__()
         self.__name__ = helpers.__select_available_property__(name,
-                                                              n,
-                                                              configuration.undefined_unit_name)
+                                                              na,
+                                                              configuration.undefined_unit_name,
+
+                                                              )
         self.__name_expression__ = helpers.__select_available_property__(name_expression,
                                                                          self.__name__,
                                                                          configuration.undefined_unit_name)
@@ -127,7 +134,7 @@ class Unit(InstanceMixin):
                                                                 configuration.undefined_unit_symbol)
         self.__symbolic_expression__ = helpers.__select_available_property__(symbolic_expression,
                                                                              self.__symbol__,
-                                                                             configuration.undefined_unit_symbol)
+                                                                             configuration.undefined_unit_symbolic_expression)
         self.data
 
     def __truediv__(self, other):
@@ -173,7 +180,10 @@ class Unit(InstanceMixin):
     @property
     def symbol(self):
         """Return unit symbol shorthand from Sympy"""
-        return sy.Symbol(self.__symbol__)
+        if bool(self.__symbol__):
+            return sy.Symbol(self.__symbol__)
+        else:
+            raise ValueError("Sympy incompatible symbol input: self.symbol" + str(self.__symbol__) + "for class: " + str(self.__class__))
 
     @symbol.setter
     def symbol(self, value):
@@ -223,7 +233,7 @@ class Value(InstanceMixin):
     def __init__(
         self,
         name=configuration.undefined_value_name,
-        n=configuration.undefined_value_name,
+        na=configuration.undefined_value_name,
         name_expression=configuration.undefined_value_name,
         numerical=configuration.undefined_value_numerical,
         symbol=configuration.undefined_unit_symbol,
@@ -232,8 +242,9 @@ class Value(InstanceMixin):
         se=configuration.undefined_value_symbolic_expression,
         unit=Unit(),
     ):
+        super(Value, self).__init__()
         self.__name__ = helpers.__select_available_property__(name,
-                                                              n,
+                                                              na,
                                                               configuration.undefined_value_name)
         self.__name_expression__ = helpers.__select_available_property__(name_expression,
                                                                          self.__name__,
@@ -244,7 +255,7 @@ class Value(InstanceMixin):
         self.__symbolic_expression__ = helpers.__select_available_property__(symbolic_expression,
                                                                              se,
                                                                              configuration.undefined_value_symbolic_expression,
-                                                                             sy.Symbol(self.__symbol__))
+                                                                             )
         self.__numerical__ = numerical
         self.__unit__ = unit
 

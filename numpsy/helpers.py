@@ -24,9 +24,12 @@ def __select_available_property__(first, second, default, *kwargs):
         return first
     elif (first == default) and (second == default):
         try:
-            if bool(kwargs[0]) and (kwargs[0] != default):
-                return kwargs[0]
-            elif bool(kwargs[0]) and (kwargs[0] == default):
+            if bool(kwargs):
+                for kwarg in kwargs:
+                    if bool(kwarg) and (kwarg != default):
+                        return kwarg
+                return default
+            else:
                 return default
         except:
             return default
@@ -75,6 +78,8 @@ def symbolic_expression_variable_generator(instance):
             instance_symbolic_variable = instance.symbolic_expression
         else:
             instance_symbolic_variable = instance.symbol
+    elif str(instance).isnumeric():
+        return instance
     else:
         instance_symbolic_variable = sy.Symbol(configuration.undefined_unit_symbol)
     return instance_symbolic_variable
