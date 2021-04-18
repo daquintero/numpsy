@@ -10,6 +10,34 @@ def __check_properties__(instance, property):
         out = None
 
 
+def __select_available_property__(first, second, default, *kwargs):
+    # TODO check this fix might be a bit dodgy for sympy comparisons.
+    first = str(first)
+    second = str(second)
+    default = str(default)
+
+    if (first != default) and (second == default) and bool(first):
+        return first
+    elif (first == default) and (second != default) and bool(second):
+        return second
+    elif (first == second) and (first != default) and (second != default) and bool(first):
+        return first
+    elif (first == default) and (second == default):
+        try:
+            if bool(kwargs[0]) and (kwargs[0] != default):
+                return kwargs[0]
+            elif bool(kwargs[0]) and (kwargs[0] == default):
+                return default
+        except:
+            return default
+    elif (first != second) and (first != default) and (second != default):
+        raise ValueError("Incongruent properties assignments, first: " + str(first) + ", second: " + str(second) + " default: " + str(default))
+    else:
+        print(Warning("Incompatible property assignment, first: " + str(first) + ", second: " + str(
+            second) + ", assigning default: " + str(default)))
+        return default
+
+
 def name_variable_generator(instance):
     if hasattr(instance, "name") and (instance.name != ""):
         instance_name_variable = instance.name

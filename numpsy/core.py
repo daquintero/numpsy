@@ -65,11 +65,16 @@ class DataMixin:
 class InstanceMixin(DataMixin):
     def __init__(
         self,
-        name="",
-        name_expression="",
+        name=configuration.undefined_unit_name,
+        n=configuration.undefined_unit_name,
+        name_expression=configuration.undefined_unit_name,
     ):
-        self.__name__ = name
-        self.__name_expression__ = name_expression
+        self.__name__ = helpers.__select_available_property__(name,
+                                                              n,
+                                                              configuration.undefined_unit_name)
+        self.__name_expression__ = helpers.__select_available_property__(name_expression,
+                                                                         self.__name__,
+                                                                         configuration.undefined_unit_name)
         self.data
 
     @property
@@ -97,6 +102,9 @@ class InstanceMixin(DataMixin):
     def _repr_markdown_(self):
         return printers._repr_markdown_(self)
 
+    na = name
+    nae = name_expression
+
 
 class Unit(InstanceMixin):
     def __init__(
@@ -108,10 +116,18 @@ class Unit(InstanceMixin):
         s=configuration.undefined_unit_symbol,
         symbolic_expression=sy.Symbol(configuration.undefined_unit_symbol),
     ):
-        self.__name__ = name
-        self.__name_expression__ = name_expression
-        self.__symbol__ = symbol
-        self.__symbolic_expression__ = symbolic_expression
+        self.__name__ = helpers.__select_available_property__(name,
+                                                              n,
+                                                              configuration.undefined_unit_name)
+        self.__name_expression__ = helpers.__select_available_property__(name_expression,
+                                                                         self.__name__,
+                                                                         configuration.undefined_unit_name)
+        self.__symbol__ = helpers.__select_available_property__(symbol,
+                                                                s,
+                                                                configuration.undefined_unit_symbol)
+        self.__symbolic_expression__ = helpers.__select_available_property__(symbolic_expression,
+                                                                             self.__symbol__,
+                                                                             configuration.undefined_unit_symbol)
         self.data
 
     def __truediv__(self, other):
@@ -178,7 +194,8 @@ class Unit(InstanceMixin):
 
 
 def unit_variable_generator(first, second):
-    undefined_unit_default = Unit(name="undefined", symbol="Ø")
+    undefined_unit_default = Unit(name=configuration.undefined_unit_name,
+                                  symbol=configuration.undefined_unit_symbol)
     if hasattr(first, "unit"):
         if first.unit == "":
             # TODO in case we want show other default
@@ -205,19 +222,31 @@ class Value(InstanceMixin):
 
     def __init__(
         self,
-        name="",
+        name=configuration.undefined_value_name,
+        n=configuration.undefined_value_name,
+        name_expression=configuration.undefined_value_name,
+        numerical=configuration.undefined_value_numerical,
         symbol=configuration.undefined_unit_symbol,
-        numerical=np.array([]),
+        s=configuration.undefined_unit_symbol,
+        symbolic_expression=configuration.undefined_value_symbolic_expression,
+        se=configuration.undefined_value_symbolic_expression,
         unit=Unit(),
-        name_expression="",
-        symbolic_expression=sy.Symbol(configuration.undefined_unit_symbol),
     ):
-        self.__name__ = name
-        self.__name_expression__ = name_expression
-        self.__symbol__ = symbol
+        self.__name__ = helpers.__select_available_property__(name,
+                                                              n,
+                                                              configuration.undefined_value_name)
+        self.__name_expression__ = helpers.__select_available_property__(name_expression,
+                                                                         self.__name__,
+                                                                         configuration.undefined_value_name)
+        self.__symbol__ = helpers.__select_available_property__(symbol,
+                                                                s,
+                                                                configuration.undefined_value_symbol)
+        self.__symbolic_expression__ = helpers.__select_available_property__(symbolic_expression,
+                                                                             se,
+                                                                             configuration.undefined_value_symbolic_expression,
+                                                                             sy.Symbol(self.__symbol__))
         self.__numerical__ = numerical
         self.__unit__ = unit
-        self.__symbolic_expression__ = symbolic_expression
 
     @property
     def __type__(self):
