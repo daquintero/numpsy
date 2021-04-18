@@ -14,31 +14,38 @@ def __select_available_property__(first, second, default, *kwargs):
     # TODO check this fix might be a bit dodgy for sympy comparisons.
     first = str(first)
     second = str(second)
-    default = str(default)
+    if isinstance(default, list):
+        default_i = str(default[0])
+    else:
+        default_i = str(default)
 
-    if (first != default) and (second == default) and bool(first):
+    if (first != default_i) and (second == default_i) and bool(first):
         return first
-    elif (first == default) and (second != default) and bool(second):
+    elif (first == default_i) and (second != default_i) and bool(second):
         return second
-    elif (first == second) and (first != default) and (second != default) and bool(first):
+    elif (first == second) and (first != default_i) and (second != default_i) and bool(first):
         return first
-    elif (first == default) and (second == default):
+    elif (first == default_i) and (second == default_i):
         try:
             if bool(kwargs):
                 for kwarg in kwargs:
-                    if bool(kwarg) and (kwarg != default):
-                        return kwarg
-                return default
+                    if isinstance(default, list):
+                        if bool(kwarg) and all((kwarg != default_j) for default_j in default):
+                            return kwarg
+                    else:
+                        if (kwarg != default_i):
+                            return kwarg
+                return default_i
             else:
-                return default
+                return default_i
         except:
-            return default
-    elif (first != second) and (first != default) and (second != default):
-        raise ValueError("Incongruent properties assignments, first: " + str(first) + ", second: " + str(second) + " default: " + str(default))
+            return default_i
+    elif (first != second) and (first != default_i) and (second != default_i):
+        raise ValueError("Incongruent properties assignments, first: " + str(first) + ", second: " + str(second) + " default: " + str(default_i))
     else:
         print(Warning("Incompatible property assignment, first: " + str(first) + ", second: " + str(
-            second) + ", assigning default: " + str(default)))
-        return default
+            second) + ", assigning default: " + str(default_i)))
+        return default_i
 
 
 def name_variable_generator(instance):

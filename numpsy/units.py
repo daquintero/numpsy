@@ -16,7 +16,6 @@ class Units:
                 "Farad": core.Unit(name="Farad", symbol="F"),
                 "meter": core.Unit(name="meter", symbol="m"),
                 "ohm": core.Unit(name="ohm", symbol="\Omega"),
-                "ratio": core.Unit(name="ratio", symbol=""),
                 "second": core.Unit(name="second", symbol="s"),
             },
             index=[0],

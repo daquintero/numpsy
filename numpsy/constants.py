@@ -18,8 +18,7 @@ class Constants:
                 "pi": core.Constant(
                     name="pi",
                     symbol="\pi",
-                    numerical=sp.pi,
-                    unit=self.units.ratio,
+                    numerical=sp.pi
                 ),
                 "speed_of_light": core.Constant(
                     name="speed_of_light",

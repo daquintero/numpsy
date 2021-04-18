@@ -1,4 +1,3 @@
-import numpy as np
 import sympy as sy
 import pandas as pd
 from . import configuration
@@ -123,15 +122,18 @@ class Unit(InstanceMixin):
         super(Unit, self).__init__()
         self.__name__ = helpers.__select_available_property__(name,
                                                               na,
-                                                              configuration.undefined_unit_name,
-
-                                                              )
+                                                              [configuration.undefined_unit_name,
+                                                               configuration.undefined_unit_symbol],
+                                                              symbol,
+                                                              s)
         self.__name_expression__ = helpers.__select_available_property__(name_expression,
                                                                          self.__name__,
                                                                          configuration.undefined_unit_name)
         self.__symbol__ = helpers.__select_available_property__(symbol,
                                                                 s,
-                                                                configuration.undefined_unit_symbol)
+                                                                [configuration.undefined_unit_symbol,
+                                                                 configuration.undefined_unit_name],
+                                                                name)
         self.__symbolic_expression__ = helpers.__select_available_property__(symbolic_expression,
                                                                              self.__symbol__,
                                                                              configuration.undefined_unit_symbolic_expression)
@@ -245,7 +247,10 @@ class Value(InstanceMixin):
         super(Value, self).__init__()
         self.__name__ = helpers.__select_available_property__(name,
                                                               na,
-                                                              configuration.undefined_value_name)
+                                                              configuration.undefined_value_name,
+                                                              symbol,
+                                                              s
+                                                              )
         self.__name_expression__ = helpers.__select_available_property__(name_expression,
                                                                          self.__name__,
                                                                          configuration.undefined_value_name)
