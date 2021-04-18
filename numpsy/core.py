@@ -148,7 +148,7 @@ class Unit(InstanceMixin):
                                                                  configuration.undefined_unit_name],
                                                                 name)
         self.__symbolic_expression__ = helpers.__select_available_property__(symbolic_expression,
-                                                                             self.__symbol__,
+                                                                             self.symbol,
                                                                              configuration.undefined_unit_symbolic_expression)
         self.__print_style__ = print_style
         self.data
@@ -278,9 +278,10 @@ class Value(InstanceMixin):
                                                                              se,
                                                                              configuration.undefined_value_symbolic_expression,
                                                                              )
-        self.__numerical__ = helpers.__select_available_property__(numerical,
-                                                                   n,
-                                                                   configuration.undefined_value_numerical)
+        self.__numerical__ = helpers.__validate_numeric__(helpers.__select_available_property__(
+            numerical,
+            n,
+            configuration.undefined_value_numerical))
         self.__print_style__ = print_style
         self.__unit__ = unit
 

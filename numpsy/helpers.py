@@ -12,41 +12,46 @@ def __check_properties__(instance, property):
 
 def __select_available_property__(first, second, default, *kwargs):
     # TODO check this fix might be a bit dodgy for sympy comparisons.
-    first = str(first)
-    second = str(second)
+    first_str = str(first)
+    second_str = str(second)
     if isinstance(default, list):
-        default_i = str(default[0])
+        default_i_str = str(default[0])
+        default_i = default[0]
     else:
-        default_i = str(default)
+        default_i_str = str(default)
+        default_i = default
 
-    if (first != default_i) and (second == default_i) and bool(first):
+    if (first_str != default_i_str) and (second_str == default_i_str) and bool(first_str):
         return first
-    elif (first == default_i) and (second != default_i) and bool(second):
+    elif (first_str == default_i_str) and (second_str != default_i_str) and bool(second_str):
         return second
-    elif (first == second) and (first != default_i) and (second != default_i) and bool(first):
+    elif (first_str == second_str) and (first_str != default_i_str) and (second_str != default_i_str) and bool(first_str):
         return first
-    elif (first == default_i) and (second == default_i):
+    elif (first_str == default_i_str) and (second_str == default_i_str):
         try:
             if bool(kwargs):
                 for kwarg in kwargs:
                     if isinstance(default, list):
-                        if bool(kwarg) and all((kwarg != default_j) for default_j in default):
+                        if bool(kwarg) and all((kwarg != str(default_j)) for default_j in default):
                             return kwarg
                     else:
-                        if (kwarg != default_i):
+                        if (kwarg != default_i_str):
                             return kwarg
                 return default_i
             else:
                 return default_i
         except:
             return default_i
-    elif (first != second) and (first != default_i) and (second != default_i):
-        raise ValueError("Incongruent properties assignments, first: " + str(first) + ", second: " + str(second) + " default: " + str(default_i))
+    elif (first_str != second_str) and (first_str != default_i_str) and (second_str != default_i_str):
+        raise ValueError("Incongruent properties assignments, first: " + str(first) + ", second_str: " + str(second) + " default: " + str(default_i))
     else:
-        print(Warning("Incompatible property assignment, first: " + str(first) + ", second: " + str(
+        print(Warning("Incompatible property assignment, first: " + str(first) + ", second_str: " + str(
             second) + ", assigning default: " + str(default_i)))
         return default_i
 
+def __validate_numeric__(input):
+    # TODO implement
+    return input
 
 def name_variable_generator(instance):
     if hasattr(instance, "name") and (instance.name != ""):
@@ -82,7 +87,8 @@ def numerical_variables_generator(first, second):
 def symbolic_expression_variable_generator(instance):
     if hasattr(instance, "symbol"):
         if instance.__symbol__ == configuration.undefined_unit_symbol:
-            instance_symbolic_variable = instance.symbolic_expression
+            if hasattr(instance, "symbolic_expression"):
+                instance_symbolic_variable = instance.symbolic_expression
         else:
             instance_symbolic_variable = instance.symbol
     elif str(instance).isnumeric():

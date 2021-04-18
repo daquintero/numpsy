@@ -46,7 +46,7 @@ class TestCore(unittest.TestCase):
         self.assertEqual(self.unit.__name__, nsy.configuration.undefined_unit_name)
         self.assertEqual(self.unit.__name_expression__, nsy.configuration.undefined_unit_name)
         self.assertEqual(self.unit.__symbol__, nsy.configuration.undefined_unit_symbol)
-        self.assertEqual(self.unit.__symbolic_expression__, nsy.configuration.undefined_unit_symbol)
+        self.assertEqual(self.unit.__symbolic_expression__, nsy.configuration.undefined_unit_symbolic_expression)
 
     def test_shortcut_initialization(self):
         self.unit_shortcut = nsy.Unit(na="unit", s="u")
@@ -55,6 +55,11 @@ class TestCore(unittest.TestCase):
         self.assertEqual(self.unit_shortcut.na, self.unit_long.na)
         self.assertEqual(self.unit_shortcut.symbol, self.unit_long.symbol)
         self.assertEqual(self.unit_shortcut.s, self.unit_long.s)
+
+    def test_multiplication(self):
+        self.variable_shorthand_1 = nsy.V(s="\mu_{nb}", n=1)
+        self.variable_shorthand_2 = nsy.V(s="\mu_{pe}", n=1)
+        self.assertIsNotNone(self.variable_shorthand_1 * self.variable_shorthand_2)
 
 
 if __name__ == '__main__':
