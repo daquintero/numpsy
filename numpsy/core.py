@@ -70,6 +70,7 @@ class InstanceMixin(DataMixin):
         name=configuration.undefined_unit_name,
         n=configuration.undefined_unit_name,
         name_expression=configuration.undefined_unit_name,
+        print_style=configuration.undefined_print_style
     ):
         super(InstanceMixin, self).__init__()
         self.__name__ = helpers.__select_available_property__(name,
@@ -78,6 +79,7 @@ class InstanceMixin(DataMixin):
         self.__name_expression__ = helpers.__select_available_property__(name_expression,
                                                                          self.__name__,
                                                                          configuration.undefined_unit_name)
+        self.__print_style__ = print_style
         self.data
 
     @property
@@ -99,6 +101,15 @@ class InstanceMixin(DataMixin):
         """Set name expression consisting of an equivalent string representation to name."""
         self.__name_expression__ = value
 
+    @property
+    def print_style(self):
+        """Return name string"""
+        return self.__print_style__
+
+    @print_style.setter
+    def print_style(self, value):
+        self.__print_style__ = value
+
     def __repr__(self):
         return printers.__repr__(self)
 
@@ -107,6 +118,7 @@ class InstanceMixin(DataMixin):
 
     na = name
     nae = name_expression
+    p = print_style
 
 
 class Unit(InstanceMixin):
@@ -118,6 +130,7 @@ class Unit(InstanceMixin):
         symbol=configuration.undefined_unit_symbol,
         s=configuration.undefined_unit_symbol,
         symbolic_expression=sy.Symbol(configuration.undefined_unit_symbol),
+        print_style=configuration.undefined_print_style
     ):
         super(Unit, self).__init__()
         self.__name__ = helpers.__select_available_property__(name,
@@ -137,6 +150,7 @@ class Unit(InstanceMixin):
         self.__symbolic_expression__ = helpers.__select_available_property__(symbolic_expression,
                                                                              self.__symbol__,
                                                                              configuration.undefined_unit_symbolic_expression)
+        self.__print_style__ = print_style
         self.data
 
     def __truediv__(self, other):
@@ -237,17 +251,20 @@ class Value(InstanceMixin):
         name=configuration.undefined_value_name,
         na=configuration.undefined_value_name,
         name_expression=configuration.undefined_value_name,
+        n=configuration.undefined_value_numerical,
         numerical=configuration.undefined_value_numerical,
         symbol=configuration.undefined_unit_symbol,
         s=configuration.undefined_unit_symbol,
         symbolic_expression=configuration.undefined_value_symbolic_expression,
         se=configuration.undefined_value_symbolic_expression,
+        print_style=configuration.undefined_print_style,
         unit=Unit(),
     ):
         super(Value, self).__init__()
         self.__name__ = helpers.__select_available_property__(name,
                                                               na,
-                                                              configuration.undefined_value_name,
+                                                              [configuration.undefined_value_name,
+                                                               configuration.undefined_value_symbol],
                                                               symbol,
                                                               s
                                                               )
@@ -261,7 +278,10 @@ class Value(InstanceMixin):
                                                                              se,
                                                                              configuration.undefined_value_symbolic_expression,
                                                                              )
-        self.__numerical__ = numerical
+        self.__numerical__ = helpers.__select_available_property__(numerical,
+                                                                   n,
+                                                                   configuration.undefined_value_numerical)
+        self.__print_style__ = print_style
         self.__unit__ = unit
 
     @property
@@ -481,3 +501,8 @@ class Constant(Value):
 
 class Variable(Value):
     pass
+
+# Shorthand classes
+C = Constant
+V = Variable
+U = Unit

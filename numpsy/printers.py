@@ -1,5 +1,5 @@
 import copy
-
+from . import configuration
 
 def __repr__(instance):
     """Main pretty printing instance representation method.
@@ -20,13 +20,57 @@ def __repr__(instance):
 
 
 def markdownify(instance):
-    if instance.__class__.__name__ == "Unit":
-        display_columns = ["name", "symbol", "symbolic_expression"]
+    if hasattr(instance, "print_style") and bool(instance.print_style):
+        if instance.print_style == configuration.available_print_styles["full"]:
+            if instance.__class__.__name__ == "Unit":
+                display_columns = ["name", "symbol", "symbolic_expression"]
+            else:
+                display_columns = ["name", "symbol", "symbolic_expression", "numerical", "unit"]
+            markdown_instance = copy.deepcopy(instance)
+            return markdown_instance.data.loc[:, display_columns].T.to_markdown()
+
+        if instance.print_style == configuration.available_print_styles["numpy"]:
+            if instance.__class__.__name__ == "Unit":
+                display_columns = ["symbolic_expression"]
+                markdown_instance = copy.deepcopy(instance)
+                return markdown_instance.data.loc[:, display_columns].T.to_markdown()
+            else:
+                return instance.numerical
+
+        if instance.print_style == configuration.available_print_styles["sympy"]:
+            if instance.__class__.__name__ == "Unit":
+                display_columns = ["symbol", "symbolic_expression"]
+            else:
+                display_columns = ["symbol", "symbolic_expression"]
+            markdown_instance = copy.deepcopy(instance)
+            return markdown_instance.data.loc[:, display_columns].T.to_markdown()
     else:
-        display_columns = ["name", "symbol", "symbolic_expression", "numerical", "unit"]
-    markdown_instance = copy.deepcopy(instance)
-    return markdown_instance.data.loc[:, display_columns]
+        if configuration.setup.print_style == configuration.available_print_styles["full"]:
+            if instance.__class__.__name__ == "Unit":
+                display_columns = ["name", "symbol", "symbolic_expression"]
+            else:
+                display_columns = ["name", "symbol", "symbolic_expression", "numerical", "unit"]
+            markdown_instance = copy.deepcopy(instance)
+            return markdown_instance.data.loc[:, display_columns].T.to_markdown()
+
+        if configuration.setup.print_style == configuration.available_print_styles["numpy"]:
+            if instance.__class__.__name__ == "Unit":
+                display_columns = ["symbolic_expression"]
+                markdown_instance = copy.deepcopy(instance)
+                return markdown_instance.data.loc[:, display_columns].T.to_markdown()
+            else:
+                return instance.numerical
+
+
+        if configuration.setup.print_style == configuration.available_print_styles["sympy"]:
+            if instance.__class__.__name__ == "Unit":
+                display_columns = ["symbol", "symbolic_expression"]
+            else:
+                display_columns = ["symbol", "symbolic_expression"]
+            markdown_instance = copy.deepcopy(instance)
+            return markdown_instance.data.loc[:, display_columns].T.to_markdown()
+
 
 
 def _repr_markdown_(display_dataframe):
-    return markdownify(display_dataframe).T.to_markdown()
+    return markdownify(display_dataframe)
