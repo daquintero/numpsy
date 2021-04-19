@@ -63,7 +63,9 @@ class TestCore(unittest.TestCase):
 
 class TestFunctions(unittest.TestCase):
     def test_exp(self):
-        self.assert_(nsy.exp(1))
+        self.assertTrue(nsy.exp(1))
+        self.assertTrue(nsy.log(1))
+        self.assertTrue(nsy.log10(1))
 
 if __name__ == '__main__':
     unittest.main()

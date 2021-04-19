@@ -71,6 +71,25 @@ def exp(instance=core.Variable()):
     return new
 
 
+def log(instance=core.Variable()):
+    new = __variable_compatibility_check__(instance)
+    instance_parameters = helpers.full_variable_generator(instance)
+    new.numerical = np.log(instance_parameters["numerical"])
+    # TODO operate on both symbolic variables
+    new.symbolic_expression = sy.log(instance_parameters["symbolic"])
+    new.name_expression = "exp(" + instance_parameters["name"] + ")"
+    return new
+
+def log10(instance=core.Variable()):
+    new = __variable_compatibility_check__(instance)
+    instance_parameters = helpers.full_variable_generator(instance)
+    new.numerical = np.log10(instance_parameters["numerical"])
+    # TODO operate on both symbolic variables
+    new.symbolic_expression = sy.log(instance_parameters["symbolic"], 10)
+    new.name_expression = "exp(" + instance_parameters["name"] + ")"
+    return new
+
+
 e = exp
 
 

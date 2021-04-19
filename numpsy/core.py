@@ -250,6 +250,7 @@ class Value(InstanceMixin):
         se=configuration.undefined_value_symbolic_expression,
         print_style=configuration.undefined_print_style,
         unit=Unit(),
+        u=Unit(),
     ):
         super(Value, self).__init__()
         self.__name__ = helpers.__select_available_property__(name,
@@ -274,7 +275,10 @@ class Value(InstanceMixin):
             n,
             configuration.undefined_value_numerical))
         self.__print_style__ = print_style
-        self.__unit__ = unit
+        self.__unit__ = helpers.__select_available_property__(unit,
+                                                              u,
+                                                              undefined_unit_default,
+                                                              )
 
     @property
     def __type__(self):

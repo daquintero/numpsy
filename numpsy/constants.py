@@ -38,5 +38,5 @@ class Constants:
 
         return data_frame.iloc[0]
 
-
+# TODO potentially rename to constants library
 c = Constants().data
