@@ -153,12 +153,22 @@ class Unit(InstanceMixin):
         self.__print_style__ = print_style
         self.data
 
-    def __truediv__(self, other):
+    def __add__(self, other):
         new = Unit()
         name_variables = helpers.name_variables_generator(self, other)
-        new.name = "(" + name_variables[0] + ")_per_(" + name_variables[1] + ")"
+        new.name = "(" + name_variables[0] + "_plus_" + name_variables[1] + ")"
         symbol_variables = helpers.symbolic_expression_variables_generator(self, other)
-        new.symbolic_expression = symbol_variables[0] / symbol_variables[1]
+        new.symbolic_expression = symbol_variables[0] + symbol_variables[1]
+        return new
+
+    def __neg__(self):
+        new = Value()
+        name_variable = helpers.name_variable_generator(self)
+        new.name = (
+            "minus" + name_variable
+        )
+        symbol_variable = helpers.symbolic_expression_variable_generator(self)
+        new.symbolic_expression = - symbol_variable
         return new
 
     def __mul__(self, other):
@@ -167,14 +177,6 @@ class Unit(InstanceMixin):
         new.name = "(" + name_variables[0] + "_times_" + name_variables[1] + ")"
         symbol_variables = helpers.symbolic_expression_variables_generator(self, other)
         new.symbolic_expression = symbol_variables[0] * symbol_variables[1]
-        return new
-
-    def __add__(self, other):
-        new = Unit()
-        name_variables = helpers.name_variables_generator(self, other)
-        new.name = "(" + name_variables[0] + "_plus_" + name_variables[1] + ")"
-        symbol_variables = helpers.symbolic_expression_variables_generator(self, other)
-        new.symbolic_expression = symbol_variables[0] + symbol_variables[1]
         return new
 
     def __sub__(self, other):
@@ -191,6 +193,14 @@ class Unit(InstanceMixin):
         new.name = "(" + name_variables[0] + "_power_" + name_variables[1] + ")"
         symbol_variables = helpers.symbolic_expression_variables_generator(self, other)
         new.symbolic_expression = symbol_variables[0] ** symbol_variables[1]
+        return new
+
+    def __truediv__(self, other):
+        new = Unit()
+        name_variables = helpers.name_variables_generator(self, other)
+        new.name = "(" + name_variables[0] + ")_per_(" + name_variables[1] + ")"
+        symbol_variables = helpers.symbolic_expression_variables_generator(self, other)
+        new.symbolic_expression = symbol_variables[0] / symbol_variables[1]
         return new
 
     @property
@@ -218,27 +228,8 @@ class Unit(InstanceMixin):
     s = symbol
     se = symbolic_expression
 
-
-def unit_variable_generator(first, second):
-    undefined_unit_default = Unit(name=configuration.undefined_unit_name,
-                                  symbol=configuration.undefined_unit_symbol)
-    if hasattr(first, "unit"):
-        if first.unit == "":
-            # TODO in case we want show other default
-            first_unit_variable = first.unit
-        else:
-            first_unit_variable = first.unit
-    else:
-        first_unit_variable = undefined_unit_default
-    if hasattr(second, "unit"):
-        if second.unit == "":
-            # TODO in case we want to show some other default
-            second_unit_variable = second.unit
-        else:
-            second_unit_variable = second.unit
-    else:
-        second_unit_variable = undefined_unit_default
-    return [first_unit_variable, second_unit_variable]
+undefined_unit_default = Unit(name=configuration.undefined_unit_name,
+                              symbol=configuration.undefined_unit_symbol)
 
 
 class Value(InstanceMixin):
@@ -289,32 +280,32 @@ class Value(InstanceMixin):
     def __type__(self):
         return "Value"
 
-    def __truediv__(self, other):
+    def __add__(self, other):
         new = Value()
         name_variables = helpers.name_variables_generator(self, other)
         new.name_expression = (
-            "(" + name_variables[0] + ")_per_(" + name_variables[1] + ")"
+            "(" + name_variables[0] + "_plus_" + name_variables[1] + ")"
         )
         symbol_variables = helpers.symbolic_expression_variables_generator(self, other)
-        new.symbolic_expression = symbol_variables[0] / symbol_variables[1]
+        new.symbolic_expression = symbol_variables[0] + symbol_variables[1]
         numerical_variables = helpers.numerical_variables_generator(self, other)
-        new.numerical = numerical_variables[0] / numerical_variables[1]
-        unit_variables = unit_variable_generator(self, other)
-        new.unit = unit_variables[0] / unit_variables[1]
+        new.numerical = numerical_variables[0] + numerical_variables[1]
+        unit_variables = helpers.__unit_variables_generator__(self, other)
+        new.unit = unit_variables[0] + unit_variables[1]
         return new
 
-    def __rtruediv__(self, other):
+    def __neg__(self):
         new = Value()
-        name_variables = helpers.name_variables_generator(other, self)
+        name_variable = helpers.name_variable_generator(self)
         new.name_expression = (
-            "(" + name_variables[0] + ")_per_(" + name_variables[1] + ")"
+            "minus" + name_variable
         )
-        symbol_variables = helpers.symbolic_expression_variables_generator(other, self)
-        new.symbolic_expression = symbol_variables[0] / symbol_variables[1]
-        numerical_variables = helpers.numerical_variables_generator(other, self)
-        new.numerical = numerical_variables[0] / numerical_variables[1]
-        unit_variables = unit_variable_generator(other, self)
-        new.unit = unit_variables[0] / unit_variables[1]
+        symbol_variable = helpers.symbolic_expression_variable_generator(self)
+        new.symbolic_expression = - symbol_variable
+        numerical_variable = helpers.numerical_variable_generator(self)
+        new.numerical = - numerical_variable
+        unit_variable = helpers.__unit_variable_generator__(self)
+        new.unit = - unit_variable
         return new
 
     def __mul__(self, other):
@@ -327,78 +318,8 @@ class Value(InstanceMixin):
         new.symbolic_expression = symbol_variables[0] * symbol_variables[1]
         numerical_variables = helpers.numerical_variables_generator(self, other)
         new.numerical = numerical_variables[0] * numerical_variables[1]
-        unit_variables = unit_variable_generator(self, other)
+        unit_variables = helpers.__unit_variables_generator__(self, other)
         new.unit = unit_variables[0] * unit_variables[1]
-        return new
-
-    def __rmul__(self, other):
-        new = Value()
-        name_variables = helpers.name_variables_generator(other, self)
-        new.name_expression = (
-            "(" + name_variables[0] + "_times_" + name_variables[1] + ")"
-        )
-        symbol_variables = helpers.symbolic_expression_variables_generator(other, self)
-        new.symbolic_expression = symbol_variables[0] * symbol_variables[1]
-        numerical_variables = helpers.numerical_variables_generator(other, self)
-        new.numerical = numerical_variables[0] * numerical_variables[1]
-        unit_variables = unit_variable_generator(other, self)
-        new.unit = unit_variables[0] * unit_variables[1]
-        return new
-
-    def __add__(self, other):
-        new = Value()
-        name_variables = helpers.name_variables_generator(self, other)
-        new.name_expression = (
-            "(" + name_variables[0] + "_plus_" + name_variables[1] + ")"
-        )
-        symbol_variables = helpers.symbolic_expression_variables_generator(self, other)
-        new.symbolic_expression = symbol_variables[0] + symbol_variables[1]
-        numerical_variables = helpers.numerical_variables_generator(self, other)
-        new.numerical = numerical_variables[0] + numerical_variables[1]
-        unit_variables = unit_variable_generator(self, other)
-        new.unit = unit_variables[0] + unit_variables[1]
-        return new
-
-    def __radd__(self, other):
-        new = Value()
-        name_variables = helpers.name_variables_generator(other, self)
-        new.name_expression = (
-            "(" + name_variables[0] + "_plus_" + name_variables[1] + ")"
-        )
-        symbol_variables = helpers.symbolic_expression_variables_generator(other, self)
-        new.symbolic_expression = symbol_variables[0] + symbol_variables[1]
-        numerical_variables = helpers.numerical_variables_generator(other, self)
-        new.numerical = numerical_variables[0] + numerical_variables[1]
-        unit_variables = unit_variable_generator(other, self)
-        new.unit = unit_variables[0] + unit_variables[1]
-        return new
-
-    def __sub__(self, other):
-        new = Value()
-        name_variables = helpers.name_variables_generator(self, other)
-        new.name_expression = (
-            "(" + name_variables[0] + "_minus_" + name_variables[1] + ")"
-        )
-        symbol_variables = helpers.symbolic_expression_variables_generator(self, other)
-        new.symbolic_expression = symbol_variables[0] - symbol_variables[1]
-        numerical_variables = helpers.numerical_variables_generator(self, other)
-        new.numerical = numerical_variables[0] - numerical_variables[1]
-        unit_variables = unit_variable_generator(self, other)
-        new.unit = unit_variables[0] - unit_variables[1]
-        return new
-
-    def __rsub__(self, other):
-        new = Value()
-        name_variables = helpers.name_variables_generator(other, self)
-        new.name_expression = (
-            "(" + name_variables[0] + "_minus_" + name_variables[1] + ")"
-        )
-        symbol_variables = helpers.symbolic_expression_variables_generator(other, self)
-        new.symbolic_expression = symbol_variables[0] - symbol_variables[1]
-        numerical_variables = helpers.numerical_variables_generator(other, self)
-        new.numerical = numerical_variables[0] - numerical_variables[1]
-        unit_variables = unit_variable_generator(other, self)
-        new.unit = unit_variables[0] - unit_variables[1]
         return new
 
     def __pow__(self, other):
@@ -411,8 +332,92 @@ class Value(InstanceMixin):
         new.symbolic_expression = symbol_variables[0] ** symbol_variables[1]
         numerical_variables = helpers.numerical_variables_generator(self, other)
         new.numerical = numerical_variables[0] ** numerical_variables[1]
-        unit_variables = unit_variable_generator(self, other)
+        unit_variables = helpers.__unit_variables_generator__(self, other)
         new.unit = unit_variables[0] ** unit_variables[1]
+        return new
+
+    def __sub__(self, other):
+        new = Value()
+        name_variables = helpers.name_variables_generator(self, other)
+        new.name_expression = (
+            "(" + name_variables[0] + "_minus_" + name_variables[1] + ")"
+        )
+        symbol_variables = helpers.symbolic_expression_variables_generator(self, other)
+        new.symbolic_expression = symbol_variables[0] - symbol_variables[1]
+        numerical_variables = helpers.numerical_variables_generator(self, other)
+        new.numerical = numerical_variables[0] - numerical_variables[1]
+        unit_variables = helpers.__unit_variables_generator__(self, other)
+        new.unit = unit_variables[0] - unit_variables[1]
+        return new
+
+    def __radd__(self, other):
+        new = Value()
+        name_variables = helpers.name_variables_generator(other, self)
+        new.name_expression = (
+            "(" + name_variables[0] + "_plus_" + name_variables[1] + ")"
+        )
+        symbol_variables = helpers.symbolic_expression_variables_generator(other, self)
+        new.symbolic_expression = symbol_variables[0] + symbol_variables[1]
+        numerical_variables = helpers.numerical_variables_generator(other, self)
+        new.numerical = numerical_variables[0] + numerical_variables[1]
+        unit_variables = helpers.__unit_variables_generator__(other, self)
+        new.unit = unit_variables[0] + unit_variables[1]
+        return new
+
+    def __rmul__(self, other):
+        new = Value()
+        name_variables = helpers.name_variables_generator(other, self)
+        new.name_expression = (
+            "(" + name_variables[0] + "_times_" + name_variables[1] + ")"
+        )
+        symbol_variables = helpers.symbolic_expression_variables_generator(other, self)
+        new.symbolic_expression = symbol_variables[0] * symbol_variables[1]
+        numerical_variables = helpers.numerical_variables_generator(other, self)
+        new.numerical = numerical_variables[0] * numerical_variables[1]
+        unit_variables = helpers.__unit_variables_generator__(other, self)
+        new.unit = unit_variables[0] * unit_variables[1]
+        return new
+
+    def __rsub__(self, other):
+        new = Value()
+        name_variables = helpers.name_variables_generator(other, self)
+        new.name_expression = (
+            "(" + name_variables[0] + "_minus_" + name_variables[1] + ")"
+        )
+        symbol_variables = helpers.symbolic_expression_variables_generator(other, self)
+        new.symbolic_expression = symbol_variables[0] - symbol_variables[1]
+        numerical_variables = helpers.numerical_variables_generator(other, self)
+        new.numerical = numerical_variables[0] - numerical_variables[1]
+        unit_variables = helpers.__unit_variables_generator__(other, self)
+        new.unit = unit_variables[0] - unit_variables[1]
+        return new
+
+    def __rtruediv__(self, other):
+        new = Value()
+        name_variables = helpers.name_variables_generator(other, self)
+        new.name_expression = (
+            "(" + name_variables[0] + ")_per_(" + name_variables[1] + ")"
+        )
+        symbol_variables = helpers.symbolic_expression_variables_generator(other, self)
+        new.symbolic_expression = symbol_variables[0] / symbol_variables[1]
+        numerical_variables = helpers.numerical_variables_generator(other, self)
+        new.numerical = numerical_variables[0] / numerical_variables[1]
+        unit_variables = helpers.__unit_variables_generator__(other, self)
+        new.unit = unit_variables[0] / unit_variables[1]
+        return new
+
+    def __truediv__(self, other):
+        new = Value()
+        name_variables = helpers.name_variables_generator(self, other)
+        new.name_expression = (
+            "(" + name_variables[0] + ")_per_(" + name_variables[1] + ")"
+        )
+        symbol_variables = helpers.symbolic_expression_variables_generator(self, other)
+        new.symbolic_expression = symbol_variables[0] / symbol_variables[1]
+        numerical_variables = helpers.numerical_variables_generator(self, other)
+        new.numerical = numerical_variables[0] / numerical_variables[1]
+        unit_variables = helpers.__unit_variables_generator__(self, other)
+        new.unit = unit_variables[0] / unit_variables[1]
         return new
 
     @property

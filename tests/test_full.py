@@ -61,6 +61,9 @@ class TestCore(unittest.TestCase):
         self.variable_shorthand_2 = nsy.V(s="\mu_{pe}", n=1)
         self.assertIsNotNone(self.variable_shorthand_1 * self.variable_shorthand_2)
 
+class TestFunctions(unittest.TestCase):
+    def test_exp(self):
+        self.assert_(nsy.exp(1))
 
 if __name__ == '__main__':
     unittest.main()

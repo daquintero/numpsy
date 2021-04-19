@@ -7,7 +7,7 @@ from . import core
 from . import helpers
 
 
-def variable_compatibility_check(input):
+def __variable_compatibility_check__(input):
     if hasattr(input, "__parent_class__"):
         if input.__parent_class__ == "Value":
             new = input.__class__()
@@ -19,7 +19,7 @@ def variable_compatibility_check(input):
 
 
 def complete_elliptical_integral_first_kind(instance=core.Variable()):
-    new = variable_compatibility_check(instance)
+    new = __variable_compatibility_check__(instance)
     instance_parameters = helpers.full_variable_generator(instance)
     new.numerical = sp.special.ellipk(instance_parameters["numerical"])
     new.symbolic_expression = sy.functions.special.elliptic_integrals.elliptic_k(
@@ -38,7 +38,7 @@ def complete_elliptical_integral_first_kind(instance=core.Variable()):
 
 
 def sqrt(instance=core.Variable()):
-    new = variable_compatibility_check(instance)
+    new = __variable_compatibility_check__(instance)
     instance_parameters = helpers.full_variable_generator(instance)
     new.numerical = np.sqrt(instance_parameters["numerical"])
     new.symbolic_expression = sy.sqrt(instance_parameters["symbolic"])
@@ -53,13 +53,25 @@ def sqrt(instance=core.Variable()):
 
 
 def sinh(instance=core.Variable()):
-    new = variable_compatibility_check(instance)
+    new = __variable_compatibility_check__(instance)
     instance_parameters = helpers.full_variable_generator(instance)
     new.numerical = np.sinh(instance_parameters["numerical"])
     # TODO operate on both symbolic variables
     new.symbolic_expression = sy.sinh(instance_parameters["symbolic"])
     new.name_expression = "sinh(" + instance_parameters["name"] + ")"
     return new
+
+def exp(instance=core.Variable()):
+    new = __variable_compatibility_check__(instance)
+    instance_parameters = helpers.full_variable_generator(instance)
+    new.numerical = np.exp(instance_parameters["numerical"])
+    # TODO operate on both symbolic variables
+    new.symbolic_expression = sy.exp(instance_parameters["symbolic"])
+    new.name_expression = "exp(" + instance_parameters["name"] + ")"
+    return new
+
+
+e = exp
 
 
 # def ellipk(instance=core.Variable()):

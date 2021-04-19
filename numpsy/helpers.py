@@ -53,6 +53,23 @@ def __validate_numeric__(input):
     # TODO implement
     return input
 
+def __unit_variable_generator__(instance):
+    if hasattr(instance, "unit"):
+        if instance.unit == "":
+            # TODO in case we want show other default
+            instance_unit_variable = instance.unit
+        else:
+            instance_unit_variable = instance.unit
+    else:
+        instance_unit_variable = core.undefined_unit_default
+    return instance_unit_variable
+
+def __unit_variables_generator__(first, second):
+    first_unit_variable = __unit_variable_generator__(first)
+    second_unit_variable = __unit_variable_generator__(second)
+    return [first_unit_variable, second_unit_variable]
+
+
 def name_variable_generator(instance):
     if hasattr(instance, "name") and (instance.name != ""):
         instance_name_variable = instance.name
