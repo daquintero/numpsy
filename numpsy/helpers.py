@@ -12,9 +12,17 @@ def __check_properties__(instance, property):
 
 
 def __select_available_property__(first, second, default, *kwargs):
-    # TODO check this fix might be a bit dodgy for sympy comparisons.
-    first_str = str(first)
-    second_str = str(second)
+    # TODO check this fix might be a bit dodgy for sympy and numpsy comparisons.
+    if type(first) == core.Unit:
+        first_str = str(first.s)
+    else:
+        first_str = str(first)
+
+    if type(second) == core.Unit:
+        second_str = str(second.s)
+    else:
+        second_str = str(second)
+
     if isinstance(default, list):
         default_i_str = str(default[0])
         default_i = default[0]
