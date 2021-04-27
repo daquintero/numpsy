@@ -285,144 +285,154 @@ class Value(InstanceMixin):
         return "Value"
 
     def __add__(self, other):
-        new = Value()
-        name_variables = helpers.name_variables_generator(self, other)
-        new.name_expression = (
-            "(" + name_variables[0] + "_plus_" + name_variables[1] + ")"
-        )
-        symbol_variables = helpers.symbolic_expression_variables_generator(self, other)
-        new.symbolic_expression = symbol_variables[0] + symbol_variables[1]
-        numerical_variables = helpers.numerical_variables_generator(self, other)
-        new.numerical = numerical_variables[0] + numerical_variables[1]
-        unit_variables = helpers.__unit_variables_generator__(self, other)
-        new.unit = unit_variables[0] + unit_variables[1]
-        return new
+        if configuration.setup.calculation_style == "numpsy":
+            new = Value()
+            name_variables = helpers.name_variables_generator(self, other)
+            new.name_expression = (
+                "(" + name_variables[0] + "_plus_" + name_variables[1] + ")"
+            )
+            symbol_variables = helpers.symbolic_expression_variables_generator(self, other)
+            new.symbolic_expression = symbol_variables[0] + symbol_variables[1]
+            numerical_variables = helpers.numerical_variables_generator(self, other)
+            new.numerical = numerical_variables[0] + numerical_variables[1]
+            unit_variables = helpers.__unit_variables_generator__(self, other)
+            new.unit = unit_variables[0] + unit_variables[1]
+            return new
 
     def __neg__(self):
-        new = Value()
-        name_variable = helpers.name_variable_generator(self)
-        new.name_expression = (
-            "minus" + name_variable
-        )
-        symbol_variable = helpers.symbolic_expression_variable_generator(self)
-        new.symbolic_expression = - symbol_variable
-        numerical_variable = helpers.numerical_variable_generator(self)
-        new.numerical = - numerical_variable
-        unit_variable = helpers.__unit_variable_generator__(self)
-        new.unit = - unit_variable
-        return new
+        if configuration.setup.calculation_style == "numpsy":
+            new = Value()
+            name_variable = helpers.name_variable_generator(self)
+            new.name_expression = (
+                "minus" + name_variable
+            )
+            symbol_variable = helpers.symbolic_expression_variable_generator(self)
+            new.symbolic_expression = - symbol_variable
+            numerical_variable = helpers.numerical_variable_generator(self)
+            new.numerical = - numerical_variable
+            unit_variable = helpers.__unit_variable_generator__(self)
+            new.unit = - unit_variable
+            return new
 
     def __mul__(self, other):
-        new = Value()
-        name_variables = helpers.name_variables_generator(self, other)
-        new.name_expression = (
-            "(" + name_variables[0] + "_times_" + name_variables[1] + ")"
-        )
-        symbol_variables = helpers.symbolic_expression_variables_generator(self, other)
-        new.symbolic_expression = symbol_variables[0] * symbol_variables[1]
-        numerical_variables = helpers.numerical_variables_generator(self, other)
-        new.numerical = numerical_variables[0] * numerical_variables[1]
-        unit_variables = helpers.__unit_variables_generator__(self, other)
-        new.unit = unit_variables[0] * unit_variables[1]
-        return new
+        if configuration.setup.calculation_style == "numpsy":
+            new = Value()
+            name_variables = helpers.name_variables_generator(self, other)
+            new.name_expression = (
+                "(" + name_variables[0] + "_times_" + name_variables[1] + ")"
+            )
+            symbol_variables = helpers.symbolic_expression_variables_generator(self, other)
+            new.symbolic_expression = symbol_variables[0] * symbol_variables[1]
+            numerical_variables = helpers.numerical_variables_generator(self, other)
+            new.numerical = numerical_variables[0] * numerical_variables[1]
+            unit_variables = helpers.__unit_variables_generator__(self, other)
+            new.unit = unit_variables[0] * unit_variables[1]
+            return new
 
     def __pow__(self, other):
-        new = Value()
-        name_variables = helpers.name_variables_generator(self, other)
-        new.name_expression = (
-            "(" + name_variables[0] + "_power_" + name_variables[1] + ")"
-        )
-        symbol_variables = helpers.symbolic_expression_variables_generator(self, other)
-        new.symbolic_expression = symbol_variables[0] ** symbol_variables[1]
-        numerical_variables = helpers.numerical_variables_generator(self, other)
-        new.numerical = numerical_variables[0] ** numerical_variables[1]
-        unit_variables = helpers.__unit_variables_generator__(self, other)
-        new.unit = unit_variables[0] ** unit_variables[1]
-        return new
+        if configuration.setup.calculation_style == "numpsy":
+            new = Value()
+            name_variables = helpers.name_variables_generator(self, other)
+            new.name_expression = (
+                "(" + name_variables[0] + "_power_" + name_variables[1] + ")"
+            )
+            symbol_variables = helpers.symbolic_expression_variables_generator(self, other)
+            new.symbolic_expression = symbol_variables[0] ** symbol_variables[1]
+            numerical_variables = helpers.numerical_variables_generator(self, other)
+            new.numerical = numerical_variables[0] ** numerical_variables[1]
+            unit_variables = helpers.__unit_variables_generator__(self, other)
+            new.unit = unit_variables[0] ** unit_variables[1]
+            return new
 
     def __sub__(self, other):
-        new = Value()
-        name_variables = helpers.name_variables_generator(self, other)
-        new.name_expression = (
-            "(" + name_variables[0] + "_minus_" + name_variables[1] + ")"
-        )
-        symbol_variables = helpers.symbolic_expression_variables_generator(self, other)
-        new.symbolic_expression = symbol_variables[0] - symbol_variables[1]
-        numerical_variables = helpers.numerical_variables_generator(self, other)
-        new.numerical = numerical_variables[0] - numerical_variables[1]
-        unit_variables = helpers.__unit_variables_generator__(self, other)
-        new.unit = unit_variables[0] - unit_variables[1]
-        return new
+        if configuration.setup.calculation_style == "numpsy":
+            new = Value()
+            name_variables = helpers.name_variables_generator(self, other)
+            new.name_expression = (
+                "(" + name_variables[0] + "_minus_" + name_variables[1] + ")"
+            )
+            symbol_variables = helpers.symbolic_expression_variables_generator(self, other)
+            new.symbolic_expression = symbol_variables[0] - symbol_variables[1]
+            numerical_variables = helpers.numerical_variables_generator(self, other)
+            new.numerical = numerical_variables[0] - numerical_variables[1]
+            unit_variables = helpers.__unit_variables_generator__(self, other)
+            new.unit = unit_variables[0] - unit_variables[1]
+            return new
 
     def __radd__(self, other):
-        new = Value()
-        name_variables = helpers.name_variables_generator(other, self)
-        new.name_expression = (
-            "(" + name_variables[0] + "_plus_" + name_variables[1] + ")"
-        )
-        symbol_variables = helpers.symbolic_expression_variables_generator(other, self)
-        new.symbolic_expression = symbol_variables[0] + symbol_variables[1]
-        numerical_variables = helpers.numerical_variables_generator(other, self)
-        new.numerical = numerical_variables[0] + numerical_variables[1]
-        unit_variables = helpers.__unit_variables_generator__(other, self)
-        new.unit = unit_variables[0] + unit_variables[1]
-        return new
+        if configuration.setup.calculation_style == "numpsy":
+            new = Value()
+            name_variables = helpers.name_variables_generator(other, self)
+            new.name_expression = (
+                "(" + name_variables[0] + "_plus_" + name_variables[1] + ")"
+            )
+            symbol_variables = helpers.symbolic_expression_variables_generator(other, self)
+            new.symbolic_expression = symbol_variables[0] + symbol_variables[1]
+            numerical_variables = helpers.numerical_variables_generator(other, self)
+            new.numerical = numerical_variables[0] + numerical_variables[1]
+            unit_variables = helpers.__unit_variables_generator__(other, self)
+            new.unit = unit_variables[0] + unit_variables[1]
+            return new
 
     def __rmul__(self, other):
-        new = Value()
-        name_variables = helpers.name_variables_generator(other, self)
-        new.name_expression = (
-            "(" + name_variables[0] + "_times_" + name_variables[1] + ")"
-        )
-        symbol_variables = helpers.symbolic_expression_variables_generator(other, self)
-        new.symbolic_expression = symbol_variables[0] * symbol_variables[1]
-        numerical_variables = helpers.numerical_variables_generator(other, self)
-        new.numerical = numerical_variables[0] * numerical_variables[1]
-        unit_variables = helpers.__unit_variables_generator__(other, self)
-        new.unit = unit_variables[0] * unit_variables[1]
-        return new
+        if configuration.setup.calculation_style == "numpsy":
+            new = Value()
+            name_variables = helpers.name_variables_generator(other, self)
+            new.name_expression = (
+                "(" + name_variables[0] + "_times_" + name_variables[1] + ")"
+            )
+            symbol_variables = helpers.symbolic_expression_variables_generator(other, self)
+            new.symbolic_expression = symbol_variables[0] * symbol_variables[1]
+            numerical_variables = helpers.numerical_variables_generator(other, self)
+            new.numerical = numerical_variables[0] * numerical_variables[1]
+            unit_variables = helpers.__unit_variables_generator__(other, self)
+            new.unit = unit_variables[0] * unit_variables[1]
+            return new
 
     def __rsub__(self, other):
-        new = Value()
-        name_variables = helpers.name_variables_generator(other, self)
-        new.name_expression = (
-            "(" + name_variables[0] + "_minus_" + name_variables[1] + ")"
-        )
-        symbol_variables = helpers.symbolic_expression_variables_generator(other, self)
-        new.symbolic_expression = symbol_variables[0] - symbol_variables[1]
-        numerical_variables = helpers.numerical_variables_generator(other, self)
-        new.numerical = numerical_variables[0] - numerical_variables[1]
-        unit_variables = helpers.__unit_variables_generator__(other, self)
-        new.unit = unit_variables[0] - unit_variables[1]
-        return new
+        if configuration.setup.calculation_style == "numpsy":
+            new = Value()
+            name_variables = helpers.name_variables_generator(other, self)
+            new.name_expression = (
+                "(" + name_variables[0] + "_minus_" + name_variables[1] + ")"
+            )
+            symbol_variables = helpers.symbolic_expression_variables_generator(other, self)
+            new.symbolic_expression = symbol_variables[0] - symbol_variables[1]
+            numerical_variables = helpers.numerical_variables_generator(other, self)
+            new.numerical = numerical_variables[0] - numerical_variables[1]
+            unit_variables = helpers.__unit_variables_generator__(other, self)
+            new.unit = unit_variables[0] - unit_variables[1]
+            return new
 
     def __rtruediv__(self, other):
-        new = Value()
-        name_variables = helpers.name_variables_generator(other, self)
-        new.name_expression = (
-            "(" + name_variables[0] + ")_per_(" + name_variables[1] + ")"
-        )
-        symbol_variables = helpers.symbolic_expression_variables_generator(other, self)
-        new.symbolic_expression = symbol_variables[0] / symbol_variables[1]
-        numerical_variables = helpers.numerical_variables_generator(other, self)
-        new.numerical = numerical_variables[0] / numerical_variables[1]
-        unit_variables = helpers.__unit_variables_generator__(other, self)
-        new.unit = unit_variables[0] / unit_variables[1]
-        return new
+        if configuration.setup.calculation_style == "numpsy":
+            new = Value()
+            name_variables = helpers.name_variables_generator(other, self)
+            new.name_expression = (
+                "(" + name_variables[0] + ")_per_(" + name_variables[1] + ")"
+            )
+            symbol_variables = helpers.symbolic_expression_variables_generator(other, self)
+            new.symbolic_expression = symbol_variables[0] / symbol_variables[1]
+            numerical_variables = helpers.numerical_variables_generator(other, self)
+            new.numerical = numerical_variables[0] / numerical_variables[1]
+            unit_variables = helpers.__unit_variables_generator__(other, self)
+            new.unit = unit_variables[0] / unit_variables[1]
+            return new
 
     def __truediv__(self, other):
-        new = Value()
-        name_variables = helpers.name_variables_generator(self, other)
-        new.name_expression = (
-            "(" + name_variables[0] + ")_per_(" + name_variables[1] + ")"
-        )
-        symbol_variables = helpers.symbolic_expression_variables_generator(self, other)
-        new.symbolic_expression = symbol_variables[0] / symbol_variables[1]
-        numerical_variables = helpers.numerical_variables_generator(self, other)
-        new.numerical = numerical_variables[0] / numerical_variables[1]
-        unit_variables = helpers.__unit_variables_generator__(self, other)
-        new.unit = unit_variables[0] / unit_variables[1]
-        return new
+        if configuration.setup.calculation_style == "numpsy":
+            new = Value()
+            name_variables = helpers.name_variables_generator(self, other)
+            new.name_expression = (
+                "(" + name_variables[0] + ")_per_(" + name_variables[1] + ")"
+            )
+            symbol_variables = helpers.symbolic_expression_variables_generator(self, other)
+            new.symbolic_expression = symbol_variables[0] / symbol_variables[1]
+            numerical_variables = helpers.numerical_variables_generator(self, other)
+            new.numerical = numerical_variables[0] / numerical_variables[1]
+            unit_variables = helpers.__unit_variables_generator__(self, other)
+            new.unit = unit_variables[0] / unit_variables[1]
+            return new
 
     @property
     def numerical(self):
