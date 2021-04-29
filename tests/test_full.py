@@ -1,4 +1,5 @@
 import unittest
+import numpy as np
 import numpsy as nsy
 
 class TestHelpers(unittest.TestCase):
@@ -60,6 +61,14 @@ class TestCore(unittest.TestCase):
         self.variable_shorthand_1 = nsy.V(s="\mu_{nb}", n=1)
         self.variable_shorthand_2 = nsy.V(s="\mu_{pe}", n=1)
         self.assertIsNotNone(self.variable_shorthand_1 * self.variable_shorthand_2)
+
+    def test_value_initialization_integrated_units(self):
+        self.compounded_constant_1 = nsy.C(s="k", na="Boltzmann constant", n=1.380649e-23, unit=nsy.U(s="J") / nsy.U(s="K"))
+        self.compounded_variable_1 = nsy.V(s="T_a", na="Ambient temperature", n=np.linspace(0.1, 300), unit=nsy.U(s="K"))
+        self.compounded_variable_2 = nsy.V(s="q", na="single electron charge", n=1.602176634e-19, unit=nsy.U(s="J"))
+        self.assertIsNotNone(self.compounded_constant_1)
+        self.assertIsNotNone(self.compounded_variable_1)
+        self.assertIsNotNone(self.compounded_variable_2)
 
 class TestFunctions(unittest.TestCase):
     def test_exp(self):

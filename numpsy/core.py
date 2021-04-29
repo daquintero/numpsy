@@ -228,6 +228,7 @@ class Unit(InstanceMixin):
     s = symbol
     se = symbolic_expression
 
+
 undefined_unit_default = Unit(name=configuration.undefined_unit_name,
                               symbol=configuration.undefined_unit_symbol)
 
