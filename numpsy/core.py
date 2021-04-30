@@ -230,7 +230,9 @@ class Unit(InstanceMixin):
 
 
 undefined_unit_default = Unit(name=configuration.undefined_unit_name,
-                              symbol=configuration.undefined_unit_symbol)
+                              symbol=configuration.undefined_unit_symbol,
+                              symbolic_expression=configuration.undefined_unit_symbolic_expression,
+                              )
 
 
 class Value(InstanceMixin):
@@ -276,9 +278,9 @@ class Value(InstanceMixin):
             n,
             configuration.undefined_value_numerical))
         self.__print_style__ = print_style
-        self.__unit__ = helpers.__select_available_property__(unit,
-                                                              u,
-                                                              undefined_unit_default,
+        self.__unit__ = helpers.__select_available_property__(first=unit,
+                                                              second=u,
+                                                              default=undefined_unit_default,
                                                               )
 
     @property
