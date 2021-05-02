@@ -162,14 +162,18 @@ def __select_available_property__(first, second, default, *kwargs):
         except:
             return default_i
     elif (first_str != second_str) and (first_str != default_i_str) and (second_str != default_i_str):
-        # # TODO Workaround of undiagnosed problem where default_i_str gets a strange default.
-        # if (first_str != None):
-        #     return first
-        # else:
-        raise ValueError("Incongruent properties assignments, first: "
+        # TODO Workaround of undiagnosed problem where default_i_str gets a strange default.
+        if (first_str != None):
+            print(ValueError("Incongruent properties assignments, assigned first: "
                              + str(first_str)
-                             + ", second_str: "
-                             + str(second_str) + " default: " + str(default_i_str))
+                             + ", when second_str: "
+                             + str(second_str) + " and default: " + str(default_i_str)))
+            return first
+        else:
+            raise ValueError("Incongruent properties assignments, first: "
+                                 + str(first_str)
+                                 + ", second_str: "
+                                 + str(second_str) + " default: " + str(default_i_str))
     else:
         print(Warning("Incompatible property assignment, first: " + str(first) + ", second_str: " + str(
             second) + ", assigning default: " + str(default_i)))

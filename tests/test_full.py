@@ -42,6 +42,13 @@ class TestConfiguration(unittest.TestCase):
 
 class TestCore(unittest.TestCase):
 
+    def setUp(self):
+        self.compounded_constant_1 = nsy.C(s="k", na="Boltzmann constant", n=1.380649e-23,
+                                           unit=nsy.U(s="J") / nsy.U(s="K"))
+        self.compounded_variable_1 = nsy.V(s="T_a", na="Ambient temperature", n=np.linspace(0.1, 300),
+                                           unit=nsy.U(s="K"))
+        self.compounded_variable_2 = nsy.V(s="q", na="single electron charge", n=1.602176634e-19, unit=nsy.U(s="J"))
+
     def test_default_initialization(self):
         self.unit = nsy.Unit()
         self.assertEqual(self.unit.__name__, nsy.configuration.undefined_unit_name)
@@ -57,18 +64,18 @@ class TestCore(unittest.TestCase):
         self.assertEqual(self.unit_shortcut.symbol, self.unit_long.symbol)
         self.assertEqual(self.unit_shortcut.s, self.unit_long.s)
 
+    def test_value_initialization_integrated_units(self):
+        self.assertIsNotNone(self.compounded_constant_1)
+        self.assertIsNotNone(self.compounded_variable_1)
+        self.assertIsNotNone(self.compounded_variable_2)
+
     def test_multiplication(self):
         self.variable_shorthand_1 = nsy.V(s="\mu_{nb}", n=1)
         self.variable_shorthand_2 = nsy.V(s="\mu_{pe}", n=1)
         self.assertIsNotNone(self.variable_shorthand_1 * self.variable_shorthand_2)
 
-    def test_value_initialization_integrated_units(self):
-        self.compounded_constant_1 = nsy.C(s="k", na="Boltzmann constant", n=1.380649e-23, unit=nsy.U(s="J") / nsy.U(s="K"))
-        self.compounded_variable_1 = nsy.V(s="T_a", na="Ambient temperature", n=np.linspace(0.1, 300), unit=nsy.U(s="K"))
-        self.compounded_variable_2 = nsy.V(s="q", na="single electron charge", n=1.602176634e-19, unit=nsy.U(s="J"))
-        self.assertIsNotNone(self.compounded_constant_1)
-        self.assertIsNotNone(self.compounded_variable_1)
-        self.assertIsNotNone(self.compounded_variable_2)
+    def test_complex_multiplication_exp_sqrt(self):
+        self.assertTrue(nsy.sqrt(self.compounded_variable_2) * nsy.e(self.compounded_variable_1))
 
 class TestFunctions(unittest.TestCase):
     def test_exp(self):

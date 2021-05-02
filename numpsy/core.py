@@ -162,7 +162,7 @@ class Unit(InstanceMixin):
         return new
 
     def __neg__(self):
-        new = Value()
+        new = Unit()
         name_variable = helpers.name_variable_generator(self)
         new.name = (
             "minus" + name_variable
@@ -229,11 +229,14 @@ class Unit(InstanceMixin):
     se = symbolic_expression
 
 
-undefined_unit_default = Unit(name=configuration.undefined_unit_name,
-                              symbol=configuration.undefined_unit_symbol,
-                              symbolic_expression=configuration.undefined_unit_symbolic_expression,
-                              )
+def undefined_unit_default_generator():
+    return Unit(name=configuration.undefined_unit_name,
+                symbol=configuration.undefined_unit_symbol,
+                symbolic_expression=configuration.undefined_unit_symbolic_expression,
+                )
 
+
+undefined_unit_default = undefined_unit_default_generator()
 
 class Value(InstanceMixin):
     @property
