@@ -6,7 +6,7 @@ with open("README_RAW.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="numpsy",
-    version="0.0.5",
+    version="0.0.6",
     description="NumpSy - Integrated NumPy, SymPy, SciPy and Pandas with unit management for scientific programming with IPython.",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -14,14 +14,16 @@ setuptools.setup(
     author="Dario Quintero",
     author_email="darioaquintero@gmail.com",
     packages=setuptools.find_packages(),
-    install_requires=[
-        "ipython",
-        "numpy",
-        "pandas",
-        "sympy",
-        "scipy",
-        "tabulate"
-    ],
+    # install_requires=[
+    #     "ipython",
+    #     "numpy",
+    #     "pandas",
+    #     "sympy",
+    #     # "scipy",
+    #     "cython",
+    #     "tabulate",
+    # ],
+    # TODO sort out requirements outside of Anaconda3
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
