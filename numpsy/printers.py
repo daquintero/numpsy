@@ -25,7 +25,7 @@ def markdownify(instance):
             if instance.__class__.__name__ == "Unit":
                 display_columns = ["name", "symbol", "symbolic_expression"]
             else:
-                display_columns = ["name", "symbol", "symbolic_expression", "numerical", "unit"]
+                display_columns = ["name", "symbol", "symbolic_expression", "numerical", "unit", "note"]
             markdown_instance = copy.deepcopy(instance)
             return markdown_instance.data.loc[:, display_columns].T.to_markdown()
 
@@ -49,7 +49,7 @@ def markdownify(instance):
             if instance.__class__.__name__ == "Unit":
                 display_columns = ["name", "symbol", "symbolic_expression"]
             else:
-                display_columns = ["name", "symbol", "symbolic_expression", "numerical", "unit"]
+                display_columns = ["name", "symbol", "symbolic_expression", "numerical", "unit", "note"]
             markdown_instance = copy.deepcopy(instance)
             return markdown_instance.data.loc[:, display_columns].T.to_markdown()
 

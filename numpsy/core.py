@@ -16,6 +16,8 @@ class DataMixin:
             data["name"] = self.name
         if hasattr(self, "name_expression"):
             data["name_expression"] = self.name_expression
+        if hasattr(self, "note"):
+            data["note"] = self.note
         if hasattr(self, "numerical"):
             data["numerical"] = self.numerical
         if hasattr(self, "symbol"):
@@ -54,6 +56,8 @@ class DataMixin:
             self.name = value.name
         if hasattr(self, "name_expression") & hasattr(value, "name_expression"):
             self.name_expression = value.name_expression
+        if hasattr(self, "note") & hasattr(value, "note"):
+            self.note = value.note
         if hasattr(self, "numerical") & hasattr(value, "numerical"):
             self.numerical = value.numerical
         if hasattr(self, "symbol") & hasattr(value, "symbol"):
@@ -70,6 +74,7 @@ class InstanceMixin(DataMixin):
         name=configuration.undefined_unit_name,
         n=configuration.undefined_unit_name,
         name_expression=configuration.undefined_unit_name,
+        note=configuration.undefined_note,
         print_style=configuration.undefined_print_style
     ):
         super(InstanceMixin, self).__init__()
@@ -79,6 +84,7 @@ class InstanceMixin(DataMixin):
         self.__name_expression__ = helpers.__select_available_property__(name_expression,
                                                                          self.__name__,
                                                                          configuration.undefined_unit_name)
+        self.__note__ = note
         self.__print_style__ = print_style
         self.data
 
@@ -102,6 +108,16 @@ class InstanceMixin(DataMixin):
         self.__name_expression__ = value
 
     @property
+    def note(self):
+        """Return note string"""
+        return self.__note__
+
+    @note.setter
+    def note(self, value):
+        self.__note__ = value
+
+
+    @property
     def print_style(self):
         """Return name string"""
         return self.__print_style__
@@ -117,6 +133,7 @@ class InstanceMixin(DataMixin):
         return printers._repr_markdown_(self)
 
     na = name
+    no = note
     nae = name_expression
     p = print_style
 
@@ -127,6 +144,7 @@ class Unit(InstanceMixin):
         name=configuration.undefined_unit_name,
         na=configuration.undefined_unit_name,
         name_expression=configuration.undefined_unit_name,
+        note=configuration.undefined_note,
         symbol=configuration.undefined_unit_symbol,
         s=configuration.undefined_unit_symbol,
         symbolic_expression=sy.Symbol(configuration.undefined_unit_symbol),
@@ -142,6 +160,7 @@ class Unit(InstanceMixin):
         self.__name_expression__ = helpers.__select_available_property__(name_expression,
                                                                          self.__name__,
                                                                          configuration.undefined_unit_name)
+        self.__note__ = note
         self.__symbol__ = helpers.__select_available_property__(symbol,
                                                                 s,
                                                                 [configuration.undefined_unit_symbol,
@@ -249,6 +268,7 @@ class Value(InstanceMixin):
         na=configuration.undefined_value_name,
         name_expression=configuration.undefined_value_name,
         n=configuration.undefined_value_numerical,
+        note=configuration.undefined_note,
         numerical=configuration.undefined_value_numerical,
         symbol=configuration.undefined_unit_symbol,
         s=configuration.undefined_unit_symbol,
@@ -269,6 +289,7 @@ class Value(InstanceMixin):
         self.__name_expression__ = helpers.__select_available_property__(name_expression,
                                                                          self.__name__,
                                                                          configuration.undefined_value_name)
+        self.__note__ = note
         self.__symbol__ = helpers.__select_available_property__(symbol,
                                                                 s,
                                                                 configuration.undefined_value_symbol)
