@@ -1,6 +1,8 @@
 import copy
 from . import configuration
 
+
+
 def __repr__(instance):
     """Main pretty printing instance representation method.
 
@@ -25,7 +27,7 @@ def markdownify(instance):
             if instance.__class__.__name__ == "Unit":
                 display_columns = ["name", "symbol", "symbolic_expression"]
             else:
-                display_columns = ["name", "symbol", "symbolic_expression", "numerical", "unit", "note"]
+                display_columns = configuration.setup.value_printer_columns
             markdown_instance = copy.deepcopy(instance)
             return markdown_instance.data.loc[:, display_columns].T.to_markdown()
 
@@ -49,7 +51,7 @@ def markdownify(instance):
             if instance.__class__.__name__ == "Unit":
                 display_columns = ["name", "symbol", "symbolic_expression"]
             else:
-                display_columns = ["name", "symbol", "symbolic_expression", "numerical", "unit", "note"]
+                display_columns = configuration.setup.value_printer_columns
             markdown_instance = copy.deepcopy(instance)
             return markdown_instance.data.loc[:, display_columns].T.to_markdown()
 

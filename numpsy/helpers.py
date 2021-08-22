@@ -164,17 +164,20 @@ def __select_available_property__(first, second, default, *kwargs):
     elif (first_str != second_str) and (first_str != default_i_str) and (second_str != default_i_str):
         # TODO Workaround of undiagnosed problem where default_i_str gets a strange default.
         if (first_str != None):
-            print(ValueError("Incongruent properties assignments, assigned first: "
-                             + str(first_str)
-                             + ", when second_str: "
-                             + str(second_str) + " and default: " + str(default_i_str)))
+            if configuration.setup.debug_mode == True:
+                print(ValueError("Incongruent properties assignments, assigned first: "
+                                 + str(first_str)
+                                 + ", when second_str: "
+                                 + str(second_str) + " and default: " + str(default_i_str)))
             return first
         else:
-            raise ValueError("Incongruent properties assignments, first: "
-                                 + str(first_str)
-                                 + ", second_str: "
-                                 + str(second_str) + " default: " + str(default_i_str))
+            if configuration.setup.debug_mode == True:
+                raise ValueError("Incongruent properties assignments, first: "
+                                     + str(first_str)
+                                     + ", second_str: "
+                                     + str(second_str) + " default: " + str(default_i_str))
     else:
-        print(Warning("Incompatible property assignment, first: " + str(first) + ", second_str: " + str(
-            second) + ", assigning default: " + str(default_i)))
+        if configuration.setup.debug_mode == True:
+            print(Warning("Incompatible property assignment, first: " + str(first) + ", second_str: " + str(
+                second) + ", assigning default: " + str(default_i)))
         return default_i
