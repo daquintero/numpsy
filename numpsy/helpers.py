@@ -36,10 +36,16 @@ def __unit_variables_generator__(first, second):
 
 def name_variable_generator(instance):
     if hasattr(instance, "name") and (instance.name != ""):
-        instance_name_variable = instance.name
+        if not isinstance(instance.name, str):
+            instance_name_variable = str(instance.name)
+        else:
+            instance_name_variable = instance.name
     else:
         if hasattr(instance, "name_expression"):
-            instance_name_variable = instance.name_expression
+            if not isinstance(instance.name_expression, str):
+                instance_name_variable = str(instance.name_expression)
+            else:
+                instance_name_variable = instance.name_expression
         else:
             instance_name_variable = str(instance)
     return instance_name_variable
@@ -66,7 +72,7 @@ def numerical_variables_generator(first, second):
 
 
 def symbolic_expression_variable_generator(instance):
-    if hasattr(instance, "symbol"):
+    if hasattr(instance, "__symbol__"):
         if instance.__symbol__ == configuration.undefined_unit_symbol:
             if hasattr(instance, "symbolic_expression"):
                 if instance.__symbolic_expression__ == configuration.undefined_value_symbolic_expression:

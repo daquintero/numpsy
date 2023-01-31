@@ -13,10 +13,12 @@ class Units:
         return pd.DataFrame(
             {
                 "Hertz": core.Unit(name="Hertz", symbol="Hz"),
+                "Henry": core.Unit(name="Henry", symbol="H"),
                 "Farad": core.Unit(name="Farad", symbol="F"),
                 "meter": core.Unit(name="meter", symbol="m"),
                 "ohm": core.Unit(name="ohm", symbol="\Omega"),
                 "second": core.Unit(name="second", symbol="s"),
+                "ratio": core.Unit(name="ratio", symbol=""),
             },
             index=[0],
         ).iloc[0]

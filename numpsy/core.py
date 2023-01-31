@@ -25,7 +25,9 @@ class DataMixin:
                 a = sy.latex(self.symbol, mode="equation")
                 data["symbol"] = a
             else:
-                raise ValueError("Sympy incompatible symbol input: self.symbol: " + str(self.__symbol__) + " for class: " + str(self.__class__))
+                raise ValueError(
+                    "Sympy incompatible symbol input: self.symbol: " + str(self.__symbol__) + " for class: " + str(
+                        self.__class__))
         if hasattr(self, "symbolic_expression"):
             if sy.latex(self.symbolic_expression):
                 b = sy.latex(self.symbolic_expression, mode="equation")
@@ -39,14 +41,14 @@ class DataMixin:
             #    data["unit"] = "$" + sy.latex(self.unit.data.symbolic_expression) + "$"
             self.unit.data.symbol = "$" + self.unit.data.symbol + "$"
             self.unit.data.symbolic_expression = (
-                "$" + self.unit.data.symbolic_expression + "$"
+                    "$" + self.unit.data.symbolic_expression + "$"
             )
             data["unit"] = (
-                "Symbol: "
-                + self.unit.data["symbol"].values[0]
-                + "\n"
-                + "Symbolic Expression: "
-                + self.unit.data["symbolic_expression"].values[0]
+                    "Symbol: "
+                    + self.unit.data["symbol"].values[0]
+                    + "\n"
+                    + "Symbolic Expression: "
+                    + self.unit.data["symbolic_expression"].values[0]
             )
         return pd.DataFrame([data], index=[self.__class__.__name__])
 
@@ -70,12 +72,12 @@ class DataMixin:
 
 class InstanceMixin(DataMixin):
     def __init__(
-        self,
-        name=configuration.undefined_unit_name,
-        n=configuration.undefined_unit_name,
-        name_expression=configuration.undefined_unit_name,
-        note=configuration.undefined_note,
-        print_style=configuration.undefined_print_style
+            self,
+            name=configuration.undefined_unit_name,
+            n=configuration.undefined_unit_name,
+            name_expression=configuration.undefined_unit_name,
+            note=configuration.undefined_note,
+            print_style=configuration.undefined_print_style
     ):
         super(InstanceMixin, self).__init__()
         self.__name__ = helpers.__select_available_property__(name,
@@ -116,7 +118,6 @@ class InstanceMixin(DataMixin):
     def note(self, value):
         self.__note__ = value
 
-
     @property
     def print_style(self):
         """Return name string"""
@@ -140,15 +141,15 @@ class InstanceMixin(DataMixin):
 
 class Unit(InstanceMixin):
     def __init__(
-        self,
-        name=configuration.undefined_unit_name,
-        na=configuration.undefined_unit_name,
-        name_expression=configuration.undefined_unit_name,
-        note=configuration.undefined_note,
-        symbol=configuration.undefined_unit_symbol,
-        s=configuration.undefined_unit_symbol,
-        symbolic_expression=sy.Symbol(configuration.undefined_unit_symbol),
-        print_style=configuration.undefined_print_style
+            self,
+            name=configuration.undefined_unit_name,
+            na=configuration.undefined_unit_name,
+            name_expression=configuration.undefined_unit_name,
+            note=configuration.undefined_note,
+            symbol=configuration.undefined_unit_symbol,
+            s=configuration.undefined_unit_symbol,
+            symbolic_expression=sy.Symbol(configuration.undefined_unit_symbol),
+            print_style=configuration.undefined_print_style
     ):
         super(Unit, self).__init__()
         self.__name__ = helpers.__select_available_property__(name,
@@ -184,7 +185,7 @@ class Unit(InstanceMixin):
         new = Unit()
         name_variable = helpers.name_variable_generator(self)
         new.name = (
-            "minus" + name_variable
+                "minus" + name_variable
         )
         symbol_variable = helpers.symbolic_expression_variable_generator(self)
         new.symbolic_expression = - symbol_variable
@@ -228,7 +229,9 @@ class Unit(InstanceMixin):
         if bool(self.__symbol__):
             return sy.Symbol(self.__symbol__)
         else:
-            raise ValueError("Sympy incompatible symbol input: self.symbol" + str(self.__symbol__) + "for class: " + str(self.__class__))
+            raise ValueError(
+                "Sympy incompatible symbol input: self.symbol" + str(self.__symbol__) + "for class: " + str(
+                    self.__class__))
 
     @symbol.setter
     def symbol(self, value):
@@ -257,26 +260,27 @@ def undefined_unit_default_generator():
 
 undefined_unit_default = undefined_unit_default_generator()
 
+
 class Value(InstanceMixin):
     @property
     def __parent_class__(self):
         return "Value"
 
     def __init__(
-        self,
-        name=configuration.undefined_value_name,
-        na=configuration.undefined_value_name,
-        name_expression=configuration.undefined_value_name,
-        n=configuration.undefined_value_numerical,
-        note=configuration.undefined_note,
-        numerical=configuration.undefined_value_numerical,
-        symbol=configuration.undefined_unit_symbol,
-        s=configuration.undefined_unit_symbol,
-        symbolic_expression=configuration.undefined_value_symbolic_expression,
-        se=configuration.undefined_value_symbolic_expression,
-        print_style=configuration.undefined_print_style,
-        unit=Unit(),
-        u=Unit(),
+            self,
+            name=configuration.undefined_value_name,
+            na=configuration.undefined_value_name,
+            name_expression=configuration.undefined_value_name,
+            n=configuration.undefined_value_numerical,
+            note=configuration.undefined_note,
+            numerical=configuration.undefined_value_numerical,
+            symbol=configuration.undefined_unit_symbol,
+            s=configuration.undefined_unit_symbol,
+            symbolic_expression=configuration.undefined_value_symbolic_expression,
+            se=configuration.undefined_value_symbolic_expression,
+            print_style=configuration.undefined_print_style,
+            unit=Unit(),
+            u=Unit(),
     ):
         super(Value, self).__init__()
         self.__name__ = helpers.__select_available_property__(name,
@@ -293,6 +297,8 @@ class Value(InstanceMixin):
         self.__symbol__ = helpers.__select_available_property__(symbol,
                                                                 s,
                                                                 configuration.undefined_value_symbol)
+        print("0")
+        print(self.__symbol__)
         self.__symbolic_expression__ = helpers.__select_available_property__(symbolic_expression,
                                                                              se,
                                                                              configuration.undefined_value_symbolic_expression,
@@ -316,7 +322,7 @@ class Value(InstanceMixin):
             new = Value()
             name_variables = helpers.name_variables_generator(self, other)
             new.name_expression = (
-                "(" + name_variables[0] + "_plus_" + name_variables[1] + ")"
+                    "(" + name_variables[0] + "_plus_" + name_variables[1] + ")"
             )
             symbol_variables = helpers.symbolic_expression_variables_generator(self, other)
             new.symbolic_expression = symbol_variables[0] + symbol_variables[1]
@@ -331,7 +337,7 @@ class Value(InstanceMixin):
             new = Value()
             name_variable = helpers.name_variable_generator(self)
             new.name_expression = (
-                "minus" + name_variable
+                    "minus" + name_variable
             )
             symbol_variable = helpers.symbolic_expression_variable_generator(self)
             new.symbolic_expression = - symbol_variable
@@ -346,8 +352,9 @@ class Value(InstanceMixin):
             new = Value()
             name_variables = helpers.name_variables_generator(self, other)
             new.name_expression = (
-                "(" + name_variables[0] + "_times_" + name_variables[1] + ")"
+                    "(" + name_variables[0] + "_times_" + name_variables[1] + ")"
             )
+            new.name = new.name_expression
             symbol_variables = helpers.symbolic_expression_variables_generator(self, other)
             new.symbolic_expression = symbol_variables[0] * symbol_variables[1]
             numerical_variables = helpers.numerical_variables_generator(self, other)
@@ -361,7 +368,7 @@ class Value(InstanceMixin):
             new = Value()
             name_variables = helpers.name_variables_generator(self, other)
             new.name_expression = (
-                "(" + name_variables[0] + "_power_" + name_variables[1] + ")"
+                    "(" + name_variables[0] + "_power_" + name_variables[1] + ")"
             )
             symbol_variables = helpers.symbolic_expression_variables_generator(self, other)
             new.symbolic_expression = symbol_variables[0] ** symbol_variables[1]
@@ -376,7 +383,7 @@ class Value(InstanceMixin):
             new = Value()
             name_variables = helpers.name_variables_generator(self, other)
             new.name_expression = (
-                "(" + name_variables[0] + "_minus_" + name_variables[1] + ")"
+                    "(" + name_variables[0] + "_minus_" + name_variables[1] + ")"
             )
             symbol_variables = helpers.symbolic_expression_variables_generator(self, other)
             new.symbolic_expression = symbol_variables[0] - symbol_variables[1]
@@ -391,7 +398,7 @@ class Value(InstanceMixin):
             new = Value()
             name_variables = helpers.name_variables_generator(other, self)
             new.name_expression = (
-                "(" + name_variables[0] + "_plus_" + name_variables[1] + ")"
+                    "(" + name_variables[0] + "_plus_" + name_variables[1] + ")"
             )
             symbol_variables = helpers.symbolic_expression_variables_generator(other, self)
             new.symbolic_expression = symbol_variables[0] + symbol_variables[1]
@@ -406,7 +413,7 @@ class Value(InstanceMixin):
             new = Value()
             name_variables = helpers.name_variables_generator(other, self)
             new.name_expression = (
-                "(" + name_variables[0] + "_times_" + name_variables[1] + ")"
+                    "(" + name_variables[0] + "_times_" + name_variables[1] + ")"
             )
             symbol_variables = helpers.symbolic_expression_variables_generator(other, self)
             new.symbolic_expression = symbol_variables[0] * symbol_variables[1]
@@ -421,7 +428,7 @@ class Value(InstanceMixin):
             new = Value()
             name_variables = helpers.name_variables_generator(other, self)
             new.name_expression = (
-                "(" + name_variables[0] + "_minus_" + name_variables[1] + ")"
+                    "(" + name_variables[0] + "_minus_" + name_variables[1] + ")"
             )
             symbol_variables = helpers.symbolic_expression_variables_generator(other, self)
             new.symbolic_expression = symbol_variables[0] - symbol_variables[1]
@@ -436,7 +443,7 @@ class Value(InstanceMixin):
             new = Value()
             name_variables = helpers.name_variables_generator(other, self)
             new.name_expression = (
-                "(" + name_variables[0] + ")_per_(" + name_variables[1] + ")"
+                    "(" + name_variables[0] + ")_per_(" + name_variables[1] + ")"
             )
             symbol_variables = helpers.symbolic_expression_variables_generator(other, self)
             new.symbolic_expression = symbol_variables[0] / symbol_variables[1]
@@ -451,7 +458,7 @@ class Value(InstanceMixin):
             new = Value()
             name_variables = helpers.name_variables_generator(self, other)
             new.name_expression = (
-                "(" + name_variables[0] + ")_per_(" + name_variables[1] + ")"
+                    "(" + name_variables[0] + ")_per_(" + name_variables[1] + ")"
             )
             symbol_variables = helpers.symbolic_expression_variables_generator(self, other)
             new.symbolic_expression = symbol_variables[0] / symbol_variables[1]
@@ -473,7 +480,10 @@ class Value(InstanceMixin):
     @property
     def symbol(self):
         """Return unit symbol value shorthand"""
-        return sy.Symbol(self.__symbol__)
+        if isinstance(self.__symbol__, str):
+            return sy.Symbol(self.__symbol__)
+        else:
+            return self.__symbol__
 
     @symbol.setter
     def symbol(self, value):
@@ -548,6 +558,7 @@ class Constant(Value):
 
 class Variable(Value):
     pass
+
 
 # Shorthand classes
 C = Constant
