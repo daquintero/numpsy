@@ -297,8 +297,6 @@ class Value(InstanceMixin):
         self.__symbol__ = helpers.__select_available_property__(symbol,
                                                                 s,
                                                                 configuration.undefined_value_symbol)
-        print("0")
-        print(self.__symbol__)
         self.__symbolic_expression__ = helpers.__select_available_property__(symbolic_expression,
                                                                              se,
                                                                              configuration.undefined_value_symbolic_expression,
@@ -468,6 +466,16 @@ class Value(InstanceMixin):
             new.unit = unit_variables[0] / unit_variables[1]
             return new
 
+    def lambdify_symbolic_expression(self,
+                                     lambdify_string=None):
+        """
+        This method uses sympy lambdify on the symbolic expression based on the lambdify_symbol term
+        """
+        lambdify_symbol = sy.Symbol(lambdify_string)
+        return sy.lambdify(lambdify_symbol,
+                           self.symbolic_expression,
+                           "numpy")
+
     @property
     def numerical(self):
         """Return unit numerical value shorthand"""
@@ -557,6 +565,7 @@ class Constant(Value):
 
 
 class Variable(Value):
+
     pass
 
 

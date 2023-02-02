@@ -17,6 +17,15 @@ def __variable_compatibility_check__(input):
         new = core.Variable()
     return new
 
+def abs(instance=core.Variable()):
+    new = __variable_compatibility_check__(instance)
+    instance_parameters = helpers.full_variable_generator(instance)
+    new.numerical = np.abs(instance_parameters["numerical"])
+    # TODO operate on both symbolic variables
+    new.symbolic_expression = sy.Abs(instance_parameters["symbolic"])
+    new.name_expression = "abs(" + instance_parameters["name"] + ")"
+    return new
+
 
 def complete_elliptical_integral_first_kind(instance=core.Variable()):
     new = __variable_compatibility_check__(instance)
@@ -36,30 +45,6 @@ def complete_elliptical_integral_first_kind(instance=core.Variable()):
     )
     return new
 
-
-def sqrt(instance=core.Variable()):
-    new = __variable_compatibility_check__(instance)
-    instance_parameters = helpers.full_variable_generator(instance)
-    new.numerical = np.sqrt(instance_parameters["numerical"])
-    new.symbolic_expression = sy.sqrt(instance_parameters["symbolic"])
-    new.name_expression = "square_root(" + instance_parameters["name"] + ")"
-    # TODO automate this
-    new.unit.name = "square_root(" + instance_parameters["unit"].name + ")"
-    # TODO get symbolic parameters
-    new.unit.symbolic_expression = sy.sqrt(
-        instance_parameters["unit"].symbolic_expression
-    )
-    return new
-
-
-def sinh(instance=core.Variable()):
-    new = __variable_compatibility_check__(instance)
-    instance_parameters = helpers.full_variable_generator(instance)
-    new.numerical = np.sinh(instance_parameters["numerical"])
-    # TODO operate on both symbolic variables
-    new.symbolic_expression = sy.sinh(instance_parameters["symbolic"])
-    new.name_expression = "sinh(" + instance_parameters["name"] + ")"
-    return new
 
 def exp(instance=core.Variable()):
     new = __variable_compatibility_check__(instance)
@@ -89,13 +74,39 @@ def log10(instance=core.Variable()):
     new.name_expression = "exp(" + instance_parameters["name"] + ")"
     return new
 
+def sqrt(instance=core.Variable()):
+    new = __variable_compatibility_check__(instance)
+    instance_parameters = helpers.full_variable_generator(instance)
+    new.numerical = np.sqrt(instance_parameters["numerical"])
+    new.symbolic_expression = sy.sqrt(instance_parameters["symbolic"])
+    new.name_expression = "square_root(" + instance_parameters["name"] + ")"
+    # TODO automate this
+    new.unit.name = "square_root(" + instance_parameters["unit"].name + ")"
+    # TODO get symbolic parameters
+    new.unit.symbolic_expression = sy.sqrt(
+        instance_parameters["unit"].symbolic_expression
+    )
+    return new
+
+
+def sinh(instance=core.Variable()):
+    new = __variable_compatibility_check__(instance)
+    instance_parameters = helpers.full_variable_generator(instance)
+    new.numerical = np.sinh(instance_parameters["numerical"])
+    # TODO operate on both symbolic variables
+    new.symbolic_expression = sy.sinh(instance_parameters["symbolic"])
+    new.name_expression = "sinh(" + instance_parameters["name"] + ")"
+    return new
+
+def tanh(instance=core.Variable()):
+    new = __variable_compatibility_check__(instance)
+    instance_parameters = helpers.full_variable_generator(instance)
+    new.numerical = np.tanh(instance_parameters["numerical"])
+    # TODO operate on both symbolic variables
+    new.symbolic_expression = sy.tanh(instance_parameters["symbolic"])
+    new.name_expression = "tanh(" + instance_parameters["name"] + ")"
+    return new
+
+
 
 e = exp
-
-
-# def ellipk(instance=core.Variable()):
-#    sp.special.ellipk(m)
-
-
-# if __name__ == "__main__":
-#     sinh()
