@@ -1,5 +1,6 @@
 import numpy as np
 import sympy as sy
+from collections.abc import Iterable
 from . import configuration
 from . import core
 
@@ -75,13 +76,22 @@ def symbolic_expression_variable_generator(instance):
     if hasattr(instance, "__symbol__"):
         if instance.__symbol__ == configuration.undefined_unit_symbol:
             if hasattr(instance, "symbolic_expression"):
-                if instance.__symbolic_expression__ == configuration.undefined_value_symbolic_expression:
-                    if hasattr(instance, "numerical"):
-                        instance_symbolic_variable = instance.numerical
+                if isinstance(instance.__symbolic_expression__, Iterable):
+                    if instance.__symbolic_expression__[0] == configuration.undefined_value_symbolic_expression:
+                        if hasattr(instance, "numerical"):
+                            instance_symbolic_variable = instance.numerical
+                        else:
+                            instance_symbolic_variable = sy.Symbol(configuration.undefined_unit_symbol)
                     else:
-                        instance_symbolic_variable = sy.Symbol(configuration.undefined_unit_symbol)
+                        instance_symbolic_variable = instance.symbolic_expression[0]
                 else:
-                    instance_symbolic_variable = instance.symbolic_expression
+                    if instance.__symbolic_expression__ == configuration.undefined_value_symbolic_expression:
+                        if hasattr(instance, "numerical"):
+                            instance_symbolic_variable = instance.numerical
+                        else:
+                            instance_symbolic_variable = sy.Symbol(configuration.undefined_unit_symbol)
+                    else:
+                        instance_symbolic_variable = instance.symbolic_expression
             elif hasattr(instance, "numerical"):
                 instance_symbolic_variable = instance.numerical
             else:

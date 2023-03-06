@@ -26,6 +26,26 @@ def abs(instance=core.Variable()):
     new.name_expression = "abs(" + instance_parameters["name"] + ")"
     return new
 
+def binomial_coefficient(instance=core.Variable(), instance_2=core.Variable()):
+    new = __variable_compatibility_check__(instance)
+    new_2 = __variable_compatibility_check__(instance_2)
+    instance_parameters = helpers.full_variable_generator(instance)
+    instance_parameters_2 = helpers.full_variable_generator(instance_2)
+    new.numerical = sp.special.binom(instance_parameters["numerical"], instance_parameters_2["numerical"])
+    # TODO operate on both symbolic variables
+    new.symbolic_expression = sy.binomial(instance_parameters["symbolic"], instance_parameters_2["symbolic"])
+    new.name_expression = "binomial(" + instance_parameters["name"] + "," + instance_parameters_2["name"] + ")"
+    return new
+
+def ciel(instance=core.Variable()):
+    new = __variable_compatibility_check__(instance)
+    instance_parameters = helpers.full_variable_generator(instance)
+    new.numerical = np.ceil(instance_parameters["numerical"])
+    # TODO operate on both symbolic variables
+    new.symbolic_expression = sy.ceiling(instance_parameters["symbolic"])
+    new.name_expression = "ceil(" + instance_parameters["name"] + ")"
+    return new
+
 
 def complete_elliptical_integral_first_kind(instance=core.Variable()):
     new = __variable_compatibility_check__(instance)
@@ -62,7 +82,16 @@ def log(instance=core.Variable()):
     new.numerical = np.log(instance_parameters["numerical"])
     # TODO operate on both symbolic variables
     new.symbolic_expression = sy.log(instance_parameters["symbolic"])
-    new.name_expression = "exp(" + instance_parameters["name"] + ")"
+    new.name_expression = "ln(" + instance_parameters["name"] + ")"
+    return new
+
+def log2(instance=core.Variable()):
+    new = __variable_compatibility_check__(instance)
+    instance_parameters = helpers.full_variable_generator(instance)
+    new.numerical = np.log2(instance_parameters["numerical"])
+    # TODO operate on both symbolic variables
+    new.symbolic_expression = sy.log(instance_parameters["symbolic"], 2)
+    new.name_expression = "log2(" + instance_parameters["name"] + ")"
     return new
 
 def log10(instance=core.Variable()):
@@ -72,6 +101,32 @@ def log10(instance=core.Variable()):
     # TODO operate on both symbolic variables
     new.symbolic_expression = sy.log(instance_parameters["symbolic"], 10)
     new.name_expression = "exp(" + instance_parameters["name"] + ")"
+    return new
+
+def prod(instance=core.Variable(),
+         sum_variable_string="i",
+         minimum_range_amount=0,
+         maximum_range_amount=None
+         ):
+    new = __variable_compatibility_check__(instance)
+    instance_parameters = helpers.full_variable_generator(instance)
+    new.numerical = np.prod(instance_parameters["numerical"])
+    # TODO operate on both symbolic variables
+    new.symbolic_expression = sy.Product(instance_parameters["symbolic"], (sy.Symbol(sum_variable_string),
+                                                                           minimum_range_amount,
+                                                                           maximum_range_amount))
+    new.name_expression = "prod(" + instance_parameters["name"] + ")"
+    return new
+
+def repeat(instance=core.Variable(), repeats=1):
+    # TODO unconvinced about the symbolic implementation of this.
+    new = __variable_compatibility_check__(instance)
+    instance_parameters = helpers.full_variable_generator(instance)
+    # print(instance_parameters["numerical"])
+    new.numerical = np.repeat(instance_parameters["numerical"], repeats)
+    # TODO operate on both symbolic variables
+    new.symbolic_expression = instance_parameters["symbolic"]
+    new.name_expression = "repeat(" + instance_parameters["name"] + ")"
     return new
 
 def sqrt(instance=core.Variable()):
@@ -96,6 +151,21 @@ def sinh(instance=core.Variable()):
     # TODO operate on both symbolic variables
     new.symbolic_expression = sy.sinh(instance_parameters["symbolic"])
     new.name_expression = "sinh(" + instance_parameters["name"] + ")"
+    return new
+
+def sum(instance=core.Variable(),
+        sum_variable_string="i",
+        minimum_range_amount=0,
+        maximum_range_amount=0,
+        axis=0):
+    new = __variable_compatibility_check__(instance)
+    instance_parameters = helpers.full_variable_generator(instance)
+    new.numerical = np.sum(instance_parameters["numerical"], axis=axis)
+    # TODO operate on both symbolic variables
+    new.symbolic_expression = sy.Sum(instance_parameters["symbolic"], (sy.Symbol(sum_variable_string),
+                                                                       minimum_range_amount,
+                                                                       maximum_range_amount))
+    new.name_expression = "sum(" + instance_parameters["name"] + ")"
     return new
 
 def tanh(instance=core.Variable()):
