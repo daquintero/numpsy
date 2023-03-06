@@ -11,46 +11,88 @@ class DataMixin:
 
     @property
     def data(self):
-        data = {}
-        if hasattr(self, "name"):
-            data["name"] = self.name
-        if hasattr(self, "name_expression"):
-            data["name_expression"] = self.name_expression
-        if hasattr(self, "note"):
-            data["note"] = self.note
-        if hasattr(self, "numerical"):
-            data["numerical"] = self.numerical
-        if hasattr(self, "symbol"):
-            if bool(self.symbol):
-                a = sy.latex(self.symbol, mode="equation")
-                data["symbol"] = a
-            else:
-                raise ValueError(
-                    "Sympy incompatible symbol input: self.symbol: " + str(self.__symbol__) + " for class: " + str(
-                        self.__class__))
-        if hasattr(self, "symbolic_expression"):
-            if sy.latex(self.symbolic_expression):
-                b = sy.latex(self.symbolic_expression, mode="equation")
-            else:
-                b = ""
-            data["symbolic_expression"] = b
-        if hasattr(self, "unit"):
-            # if self.unit.symbol:
-            #    data["unit"] = "$" + self.unit.__symbol__ + "$"
-            # else:
-            #    data["unit"] = "$" + sy.latex(self.unit.data.symbolic_expression) + "$"
-            self.unit.data.symbol = "$" + self.unit.data.symbol + "$"
-            self.unit.data.symbolic_expression = (
-                    "$" + self.unit.data.symbolic_expression + "$"
-            )
-            data["unit"] = (
-                    "Symbol: "
-                    + self.unit.data["symbol"].values[0]
-                    + "\n"
-                    + "Symbolic Expression: "
-                    + self.unit.data["symbolic_expression"].values[0]
-            )
-        return pd.DataFrame([data], index=[self.__class__.__name__])
+        if configuration.setup.calculation_style == "numpsy":
+            data = {}
+            if hasattr(self, "name"):
+                data["name"] = self.name
+            if hasattr(self, "name_expression"):
+                data["name_expression"] = self.name_expression
+            if hasattr(self, "note"):
+                data["note"] = self.note
+            if hasattr(self, "numerical"):
+                data["numerical"] = self.numerical
+            if hasattr(self, "symbol"):
+                if bool(self.symbol):
+                    a = sy.latex(self.symbol, mode="equation")
+                    data["symbol"] = a
+                else:
+                    raise ValueError(
+                        "Sympy incompatible symbol input: self.symbol: " + str(self.__symbol__) + " for class: " + str(
+                            self.__class__))
+            if hasattr(self, "symbolic_expression"):
+                if sy.latex(self.symbolic_expression):
+                    b = sy.latex(self.symbolic_expression, mode="equation")
+                else:
+                    b = ""
+                data["symbolic_expression"] = b
+            if hasattr(self, "unit"):
+                # if self.unit.symbol:
+                #    data["unit"] = "$" + self.unit.__symbol__ + "$"
+                # else:
+                #    data["unit"] = "$" + sy.latex(self.unit.data.symbolic_expression) + "$"
+                self.unit.data.symbol = "$" + self.unit.data.symbol + "$"
+                self.unit.data.symbolic_expression = (
+                        "$" + self.unit.data.symbolic_expression + "$"
+                )
+                data["unit"] = (
+                        "Symbol: "
+                        + self.unit.data["symbol"].values[0]
+                        + "\n"
+                        + "Symbolic Expression: "
+                        + self.unit.data["symbolic_expression"].values[0]
+                )
+            return pd.DataFrame([data], index=[self.__class__.__name__])
+        if configuration.setup.calculation_style == "numpy":
+            data = {}
+            # if hasattr(self, "name"):
+            #     data["name"] = self.name
+            # if hasattr(self, "name_expression"):
+            #     data["name_expression"] = self.name_expression
+            # if hasattr(self, "note"):
+            #     data["note"] = self.note
+            if hasattr(self, "numerical"):
+                data["numerical"] = self.numerical
+            # if hasattr(self, "symbol"):
+            #     if bool(self.symbol):
+            #         a = sy.latex(self.symbol, mode="equation")
+            #         data["symbol"] = a
+            #     else:
+            #         raise ValueError(
+            #             "Sympy incompatible symbol input: self.symbol: " + str(self.__symbol__) + " for class: " + str(
+            #                 self.__class__))
+            # if hasattr(self, "symbolic_expression"):
+            #     if sy.latex(self.symbolic_expression):
+            #         b = sy.latex(self.symbolic_expression, mode="equation")
+            #     else:
+            #         b = ""
+            #     data["symbolic_expression"] = b
+            # if hasattr(self, "unit"):
+            #     # if self.unit.symbol:
+            #     #    data["unit"] = "$" + self.unit.__symbol__ + "$"
+            #     # else:
+            #     #    data["unit"] = "$" + sy.latex(self.unit.data.symbolic_expression) + "$"
+            #     self.unit.data.symbol = "$" + self.unit.data.symbol + "$"
+            #     self.unit.data.symbolic_expression = (
+            #             "$" + self.unit.data.symbolic_expression + "$"
+            #     )
+            #     data["unit"] = (
+            #             "Symbol: "
+            #             + self.unit.data["symbol"].values[0]
+            #             + "\n"
+            #             + "Symbolic Expression: "
+            #             + self.unit.data["symbolic_expression"].values[0]
+            #     )
+            return pd.DataFrame([data], index=[self.__class__.__name__])
 
     @data.setter
     def data(self, value):
@@ -80,15 +122,26 @@ class InstanceMixin(DataMixin):
             print_style=configuration.undefined_print_style
     ):
         super(InstanceMixin, self).__init__()
-        self.__name__ = helpers.__select_available_property__(name,
-                                                              n,
-                                                              configuration.undefined_unit_name)
-        self.__name_expression__ = helpers.__select_available_property__(name_expression,
-                                                                         self.__name__,
-                                                                         configuration.undefined_unit_name)
-        self.__note__ = note
-        self.__print_style__ = print_style
-        self.data
+        if configuration.setup.calculation_style == "numpsy":
+            self.__name__ = helpers.__select_available_property__(name,
+                                                                  n,
+                                                                  configuration.undefined_unit_name)
+            self.__name_expression__ = helpers.__select_available_property__(name_expression,
+                                                                             self.__name__,
+                                                                             configuration.undefined_unit_name)
+            self.__note__ = note
+            self.__print_style__ = print_style
+            self.data
+        if configuration.setup.calculation_style == "numpy":
+            # self.__name__ = helpers.__select_available_property__(name,
+            #                                                       n,
+            #                                                       configuration.undefined_unit_name)
+            # self.__name_expression__ = helpers.__select_available_property__(name_expression,
+            #                                                                  self.__name__,
+            #                                                                  configuration.undefined_unit_name)
+            # self.__note__ = note
+            self.__print_style__ = print_style
+            self.data
 
     @property
     def name(self):
@@ -283,33 +336,62 @@ class Value(InstanceMixin):
             u=Unit(),
     ):
         super(Value, self).__init__()
-        self.__name__ = helpers.__select_available_property__(name,
-                                                              na,
-                                                              [configuration.undefined_value_name,
-                                                               configuration.undefined_value_symbol],
-                                                              symbol,
-                                                              s
-                                                              )
-        self.__name_expression__ = helpers.__select_available_property__(name_expression,
-                                                                         self.__name__,
-                                                                         configuration.undefined_value_name)
-        self.__note__ = note
-        self.__symbol__ = helpers.__select_available_property__(symbol,
-                                                                s,
-                                                                configuration.undefined_value_symbol)
-        self.__symbolic_expression__ = helpers.__select_available_property__(symbolic_expression,
-                                                                             se,
-                                                                             configuration.undefined_value_symbolic_expression,
-                                                                             )
-        self.__numerical__ = helpers.__validate_numeric__(helpers.__select_available_property__(
-            numerical,
-            n,
-            configuration.undefined_value_numerical))
-        self.__print_style__ = print_style
-        self.__unit__ = helpers.__select_available_property__(first=unit,
-                                                              second=u,
-                                                              default=undefined_unit_default,
-                                                              )
+        if configuration.setup.calculation_style == "numpsy":
+            self.__name__ = helpers.__select_available_property__(name,
+                                                                  na,
+                                                                  [configuration.undefined_value_name,
+                                                                   configuration.undefined_value_symbol],
+                                                                  symbol,
+                                                                  s
+                                                                  )
+            self.__name_expression__ = helpers.__select_available_property__(name_expression,
+                                                                             self.__name__,
+                                                                             configuration.undefined_value_name)
+            self.__note__ = note
+            self.__symbol__ = helpers.__select_available_property__(symbol,
+                                                                    s,
+                                                                    configuration.undefined_value_symbol)
+            self.__symbolic_expression__ = helpers.__select_available_property__(symbolic_expression,
+                                                                                 se,
+                                                                                 configuration.undefined_value_symbolic_expression,
+                                                                                 )
+            self.__numerical__ = helpers.__validate_numeric__(helpers.__select_available_property__(
+                numerical,
+                n,
+                configuration.undefined_value_numerical))
+            self.__print_style__ = print_style
+            self.__unit__ = helpers.__select_available_property__(first=unit,
+                                                                  second=u,
+                                                                  default=undefined_unit_default,
+                                                                  )
+        if configuration.setup.calculation_style == "numpy":
+            # self.__name__ = helpers.__select_available_property__(name,
+            #                                                       na,
+            #                                                       [configuration.undefined_value_name,
+            #                                                        configuration.undefined_value_symbol],
+            #                                                       symbol,
+            #                                                       s
+            #                                                       )
+            # self.__name_expression__ = helpers.__select_available_property__(name_expression,
+            #                                                                  self.__name__,
+            #                                                                  configuration.undefined_value_name)
+            # self.__note__ = note
+            # self.__symbol__ = helpers.__select_available_property__(symbol,
+            #                                                         s,
+            #                                                         configuration.undefined_value_symbol)
+            # self.__symbolic_expression__ = helpers.__select_available_property__(symbolic_expression,
+            #                                                                      se,
+            #                                                                      configuration.undefined_value_symbolic_expression,
+            #                                                                      )
+            self.__numerical__ = helpers.__validate_numeric__(helpers.__select_available_property__(
+                numerical,
+                n,
+                configuration.undefined_value_numerical))
+            self.__print_style__ = print_style
+            # self.__unit__ = helpers.__select_available_property__(first=unit,
+            #                                                       second=u,
+            #                                                       default=undefined_unit_default,
+            #                                                       )
 
     @property
     def __type__(self):
@@ -696,7 +778,6 @@ class Constant(Value):
 
 
 class Variable(Value):
-
     pass
 
 
