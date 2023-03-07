@@ -6,7 +6,7 @@ with open("README_RAW.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="numpsy",
-    version="0.0.8",
+    version="0.0.9",
     description="NumpSy - Integrated NumPy, SymPy, SciPy and Pandas with unit management for scientific programming with IPython.",
     long_description=long_description,
     long_description_content_type="text/markdown",
