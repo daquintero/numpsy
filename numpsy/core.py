@@ -595,6 +595,35 @@ class Value(InstanceMixin):
             # new.unit = unit_variables[0] * unit_variables[1]
             return new
 
+    def __rpow__(self, other):
+        if configuration.setup.calculation_style == "numpsy":
+            new = Value()
+            name_variables = helpers.name_variables_generator(other, self)
+            new.name_expression = (
+                    "(" + name_variables[0] + "_power_" + name_variables[1] + ")"
+            )
+            symbol_variables = helpers.symbolic_expression_variables_generator(other, self)
+            new.symbolic_expression = symbol_variables[0] ** symbol_variables[1]
+            numerical_variables = helpers.numerical_variables_generator(other, self)
+            new.numerical = numerical_variables[0] ** numerical_variables[1]
+            unit_variables = helpers.__unit_variables_generator__(other, self)
+            new.unit = unit_variables[0] ** unit_variables[1]
+            return new
+        if configuration.setup.calculation_style == "numpy":
+            new = Value()
+            # name_variables = helpers.name_variables_generator(self, other)
+            # new.name_expression = (
+            #         "(" + name_variables[0] + "_power_" + name_variables[1] + ")"
+            # )
+            # symbol_variables = helpers.symbolic_expression_variables_generator(self, other)
+            # new.symbolic_expression = symbol_variables[0] ** symbol_variables[1]
+            numerical_variables = helpers.numerical_variables_generator(other, self)
+            new.numerical = numerical_variables[0] ** numerical_variables[1]
+            # unit_variables = helpers.__unit_variables_generator__(self, other)
+            # new.unit = unit_variables[0] ** unit_variables[1]
+            return new
+
+
     def __rsub__(self, other):
         if configuration.setup.calculation_style == "numpsy":
             new = Value()
@@ -651,6 +680,8 @@ class Value(InstanceMixin):
             # new.unit = unit_variables[0] / unit_variables[1]
             return new
 
+
+
     def __truediv__(self, other):
         if configuration.setup.calculation_style == "numpsy":
             new = Value()
@@ -680,15 +711,21 @@ class Value(InstanceMixin):
             return new
 
     def lambdify_symbolic_expression(self,
-                                     lambdify_string=None):
+                                     lambdify_string=configuration.undefined_unit_symbol):
         """
-        This method uses sympy lambdify on the symbolic expression based on the lambdify_symbol term
+        This method uses sympy lambdify on the symbolic expression based on the lambdify_symbol term.
+        This is an issue when using the numpy only calculation mode, as the lambdification process would not effectively work.
         """
-        lambdify_symbol = sy.Symbol(lambdify_string)
-        return sy.lambdify(lambdify_symbol,
-                           self.symbolic_expression,
-                           "numpy")
-
+        if configuration.setup.calculation_style == "numpsy":
+            lambdify_symbol = sy.Symbol(lambdify_string)
+            return sy.lambdify(lambdify_symbol,
+                               self.symbolic_expression,
+                               "numpy")
+        if configuration.setup.calculation_style == "numpy":
+            lambdify_symbol = sy.Symbol(lambdify_string)
+            return sy.lambdify(lambdify_symbol,
+                               self.symbolic_expression,
+                               "numpy")
     @property
     def numerical(self):
         """Return unit numerical value shorthand"""

@@ -65,6 +65,9 @@ class ConfigurationSetup:
 
     @property
     def calculation_style(self):
+        """
+        Part of the complexity is that there are some circumstances where for a local operation, a calculation_style may be desired, but not necessarily for a global case.
+        """
         return self.__calculation_style__
 
     @calculation_style.setter
