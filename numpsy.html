@@ -1,0 +1,568 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>numpsy package &#8212; numpsy  documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/sphinx_highlight.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Quick Start" href="install.html" />
+    <link rel="prev" title="numpsy" href="modules.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="numpsy-package">
+<h1>numpsy package<a class="headerlink" href="#numpsy-package" title="Permalink to this heading">¶</a></h1>
+<section id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-numpsy.configuration">
+<span id="numpsy-configuration-module"></span><h2>numpsy.configuration module<a class="headerlink" href="#module-numpsy.configuration" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="numpsy.configuration.ConfigurationSetup">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">ConfigurationSetup</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">calculation_style</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'numpsy'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">debug_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">matrix_operation_mode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'vectorial'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_style</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'numpsy'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">value_printer_columns</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">['name',</span> <span class="pre">'symbol',</span> <span class="pre">'symbolic_expression',</span> <span class="pre">'numerical',</span> <span class="pre">'unit',</span> <span class="pre">'note']</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/numpsy/configuration.html#ConfigurationSetup"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#numpsy.configuration.ConfigurationSetup" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>calculation_style</strong> – </p></li>
+<li><p><strong>debug_mode</strong> – </p></li>
+<li><p><strong>matrix_operation_mode</strong> – </p></li>
+<li><p><strong>print_style</strong> – </p></li>
+<li><p><strong>value_printer_columns</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="numpsy.configuration.ConfigurationSetup.calculation_style">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">calculation_style</span></span><a class="headerlink" href="#numpsy.configuration.ConfigurationSetup.calculation_style" title="Permalink to this definition">¶</a></dt>
+<dd><p>Part of the complexity is that there are some circumstances where for a local operation, a calculation_style may be desired, but not necessarily for a global case.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="numpsy.configuration.ConfigurationSetup.debug_mode">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">debug_mode</span></span><a class="headerlink" href="#numpsy.configuration.ConfigurationSetup.debug_mode" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return name string</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="numpsy.configuration.ConfigurationSetup.matrix_operation_mode">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">matrix_operation_mode</span></span><a class="headerlink" href="#numpsy.configuration.ConfigurationSetup.matrix_operation_mode" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="numpsy.configuration.ConfigurationSetup.print_style">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">print_style</span></span><a class="headerlink" href="#numpsy.configuration.ConfigurationSetup.print_style" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return name string</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="numpsy.configuration.ConfigurationSetup.value_printer_columns">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">value_printer_columns</span></span><a class="headerlink" href="#numpsy.configuration.ConfigurationSetup.value_printer_columns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return name string</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="numpsy-constants-module">
+<h2>numpsy.constants module<a class="headerlink" href="#numpsy-constants-module" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-numpsy.core">
+<span id="numpsy-core-module"></span><h2>numpsy.core module<a class="headerlink" href="#module-numpsy.core" title="Permalink to this heading">¶</a></h2>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="numpsy.core.C">
+<span class="sig-name descname"><span class="pre">C</span></span><a class="headerlink" href="#numpsy.core.C" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#numpsy.core.Constant" title="numpsy.core.Constant"><code class="xref py py-class docutils literal notranslate"><span class="pre">Constant</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="numpsy.core.Constant">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Constant</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">name='undefined',</span> <span class="pre">na='undefined',</span> <span class="pre">name_expression='undefined',</span> <span class="pre">n=array([],</span> <span class="pre">dtype=float64),</span> <span class="pre">note='',</span> <span class="pre">numerical=array([],</span> <span class="pre">dtype=float64),</span> <span class="pre">symbol='Ø',</span> <span class="pre">s='Ø',</span> <span class="pre">symbolic_expression=Ø,</span> <span class="pre">se=Ø,</span> <span class="pre">print_style=None,</span> <span class="pre">unit=Unit</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">name</span>&#160; <span class="pre">...</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">symbolic_expression</span> <span class="pre">Unit</span>&#160; <span class="pre">undefined</span>&#160; <span class="pre">...</span>&#160; <span class="pre">\begin{equation}Ø\end{equation}</span>&#160; <span class="pre">[1</span> <span class="pre">rows</span> <span class="pre">x</span> <span class="pre">5</span> <span class="pre">columns],</span> <span class="pre">u=Unit</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">name</span>&#160; <span class="pre">...</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">symbolic_expression</span> <span class="pre">Unit</span>&#160; <span class="pre">undefined</span>&#160; <span class="pre">...</span>&#160; <span class="pre">\begin{equation}Ø\end{equation}</span>&#160; <span class="pre">[1</span> <span class="pre">rows</span> <span class="pre">x</span> <span class="pre">5</span> <span class="pre">columns]</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/numpsy/core.html#Constant"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#numpsy.core.Constant" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#numpsy.core.Value" title="numpsy.core.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – </p></li>
+<li><p><strong>na</strong> – </p></li>
+<li><p><strong>name_expression</strong> – </p></li>
+<li><p><strong>n</strong> – </p></li>
+<li><p><strong>note</strong> – </p></li>
+<li><p><strong>numerical</strong> – </p></li>
+<li><p><strong>symbol</strong> – </p></li>
+<li><p><strong>s</strong> – </p></li>
+<li><p><strong>symbolic_expression</strong> – </p></li>
+<li><p><strong>se</strong> – </p></li>
+<li><p><strong>print_style</strong> – </p></li>
+<li><p><strong>unit</strong> – </p></li>
+<li><p><strong>u</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="numpsy.core.Constant.n">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">n</span></span><a class="headerlink" href="#numpsy.core.Constant.n" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return unit numerical value shorthand</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="numpsy.core.Constant.numerical">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">numerical</span></span><a class="headerlink" href="#numpsy.core.Constant.numerical" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return unit numerical value shorthand</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="numpsy.core.Constant.s">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">s</span></span><a class="headerlink" href="#numpsy.core.Constant.s" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return unit symbol value shorthand</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="numpsy.core.Constant.se">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">se</span></span><a class="headerlink" href="#numpsy.core.Constant.se" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return symbolic expression consisting of an equivalent mathemtical representation to symbol</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="numpsy.core.Constant.symbol">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">symbol</span></span><a class="headerlink" href="#numpsy.core.Constant.symbol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return unit symbol value shorthand</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="numpsy.core.Constant.symbolic_expression">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">symbolic_expression</span></span><a class="headerlink" href="#numpsy.core.Constant.symbolic_expression" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return symbolic expression consisting of an equivalent mathemtical representation to symbol</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="numpsy.core.Constant.u">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">u</span></span><a class="headerlink" href="#numpsy.core.Constant.u" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return unit symbol unit shorthand</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="numpsy.core.Constant.unit">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">unit</span></span><a class="headerlink" href="#numpsy.core.Constant.unit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return unit symbol unit shorthand</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="numpsy.core.DataMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">DataMixin</span></span><a class="reference internal" href="_modules/numpsy/core.html#DataMixin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#numpsy.core.DataMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py property">
+<dt class="sig sig-object py" id="numpsy.core.DataMixin.data">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#numpsy.core.DataMixin.data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="numpsy.core.InstanceMixin">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">InstanceMixin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'undefined'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'undefined'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_expression</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'undefined'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">note</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_style</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/numpsy/core.html#InstanceMixin"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#numpsy.core.InstanceMixin" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#numpsy.core.DataMixin" title="numpsy.core.DataMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataMixin</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – </p></li>
+<li><p><strong>n</strong> – </p></li>
+<li><p><strong>name_expression</strong> – </p></li>
+<li><p><strong>note</strong> – </p></li>
+<li><p><strong>print_style</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="numpsy.core.InstanceMixin.na">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">na</span></span><a class="headerlink" href="#numpsy.core.InstanceMixin.na" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return name string</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="numpsy.core.InstanceMixin.nae">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">nae</span></span><a class="headerlink" href="#numpsy.core.InstanceMixin.nae" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return name expression consisting of an equivalent string representation to name</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="numpsy.core.InstanceMixin.name">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#numpsy.core.InstanceMixin.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return name string</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="numpsy.core.InstanceMixin.name_expression">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">name_expression</span></span><a class="headerlink" href="#numpsy.core.InstanceMixin.name_expression" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return name expression consisting of an equivalent string representation to name</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="numpsy.core.InstanceMixin.no">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">no</span></span><a class="headerlink" href="#numpsy.core.InstanceMixin.no" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return note string</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="numpsy.core.InstanceMixin.note">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">note</span></span><a class="headerlink" href="#numpsy.core.InstanceMixin.note" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return note string</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="numpsy.core.InstanceMixin.p">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">p</span></span><a class="headerlink" href="#numpsy.core.InstanceMixin.p" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return name string</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="numpsy.core.InstanceMixin.print_style">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">print_style</span></span><a class="headerlink" href="#numpsy.core.InstanceMixin.print_style" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return name string</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="numpsy.core.U">
+<span class="sig-name descname"><span class="pre">U</span></span><a class="headerlink" href="#numpsy.core.U" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#numpsy.core.Unit" title="numpsy.core.Unit"><code class="xref py py-class docutils literal notranslate"><span class="pre">Unit</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="numpsy.core.Unit">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Unit</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'undefined'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">na</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'undefined'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name_expression</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'undefined'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">note</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">''</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Ø'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Ø'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">symbolic_expression</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">Ø</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">print_style</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/numpsy/core.html#Unit"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#numpsy.core.Unit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#numpsy.core.InstanceMixin" title="numpsy.core.InstanceMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">InstanceMixin</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – </p></li>
+<li><p><strong>na</strong> – </p></li>
+<li><p><strong>name_expression</strong> – </p></li>
+<li><p><strong>note</strong> – </p></li>
+<li><p><strong>symbol</strong> – </p></li>
+<li><p><strong>s</strong> – </p></li>
+<li><p><strong>symbolic_expression</strong> – </p></li>
+<li><p><strong>print_style</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="numpsy.core.Unit.s">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">s</span></span><a class="headerlink" href="#numpsy.core.Unit.s" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return unit symbol shorthand from Sympy</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="numpsy.core.Unit.se">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">se</span></span><a class="headerlink" href="#numpsy.core.Unit.se" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return symbolic expression shorthand shorthand</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="numpsy.core.Unit.symbol">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">symbol</span></span><a class="headerlink" href="#numpsy.core.Unit.symbol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return unit symbol shorthand from Sympy</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="numpsy.core.Unit.symbolic_expression">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">symbolic_expression</span></span><a class="headerlink" href="#numpsy.core.Unit.symbolic_expression" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return symbolic expression shorthand shorthand</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="numpsy.core.V">
+<span class="sig-name descname"><span class="pre">V</span></span><a class="headerlink" href="#numpsy.core.V" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#numpsy.core.Variable" title="numpsy.core.Variable"><code class="xref py py-class docutils literal notranslate"><span class="pre">Variable</span></code></a></p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="numpsy.core.Value">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">name='undefined',</span> <span class="pre">na='undefined',</span> <span class="pre">name_expression='undefined',</span> <span class="pre">n=array([],</span> <span class="pre">dtype=float64),</span> <span class="pre">note='',</span> <span class="pre">numerical=array([],</span> <span class="pre">dtype=float64),</span> <span class="pre">symbol='Ø',</span> <span class="pre">s='Ø',</span> <span class="pre">symbolic_expression=Ø,</span> <span class="pre">se=Ø,</span> <span class="pre">print_style=None,</span> <span class="pre">unit=Unit</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">name</span>&#160; <span class="pre">...</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">symbolic_expression</span> <span class="pre">Unit</span>&#160; <span class="pre">undefined</span>&#160; <span class="pre">...</span>&#160; <span class="pre">\begin{equation}Ø\end{equation}</span>&#160; <span class="pre">[1</span> <span class="pre">rows</span> <span class="pre">x</span> <span class="pre">5</span> <span class="pre">columns],</span> <span class="pre">u=Unit</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">name</span>&#160; <span class="pre">...</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">symbolic_expression</span> <span class="pre">Unit</span>&#160; <span class="pre">undefined</span>&#160; <span class="pre">...</span>&#160; <span class="pre">\begin{equation}Ø\end{equation}</span>&#160; <span class="pre">[1</span> <span class="pre">rows</span> <span class="pre">x</span> <span class="pre">5</span> <span class="pre">columns]</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/numpsy/core.html#Value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#numpsy.core.Value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#numpsy.core.InstanceMixin" title="numpsy.core.InstanceMixin"><code class="xref py py-class docutils literal notranslate"><span class="pre">InstanceMixin</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – </p></li>
+<li><p><strong>na</strong> – </p></li>
+<li><p><strong>name_expression</strong> – </p></li>
+<li><p><strong>n</strong> – </p></li>
+<li><p><strong>note</strong> – </p></li>
+<li><p><strong>numerical</strong> – </p></li>
+<li><p><strong>symbol</strong> – </p></li>
+<li><p><strong>s</strong> – </p></li>
+<li><p><strong>symbolic_expression</strong> – </p></li>
+<li><p><strong>se</strong> – </p></li>
+<li><p><strong>print_style</strong> – </p></li>
+<li><p><strong>unit</strong> – </p></li>
+<li><p><strong>u</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="numpsy.core.Value.lambdify_symbolic_expression">
+<span class="sig-name descname"><span class="pre">lambdify_symbolic_expression</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">lambdify_string</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Ø'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/numpsy/core.html#Value.lambdify_symbolic_expression"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#numpsy.core.Value.lambdify_symbolic_expression" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method uses sympy lambdify on the symbolic expression based on the lambdify_symbol term.
+This is an issue when using the numpy only calculation mode, as the lambdification process would not effectively work.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="numpsy.core.Value.n">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">n</span></span><a class="headerlink" href="#numpsy.core.Value.n" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return unit numerical value shorthand</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="numpsy.core.Value.numerical">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">numerical</span></span><a class="headerlink" href="#numpsy.core.Value.numerical" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return unit numerical value shorthand</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="numpsy.core.Value.s">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">s</span></span><a class="headerlink" href="#numpsy.core.Value.s" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return unit symbol value shorthand</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="numpsy.core.Value.se">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">se</span></span><a class="headerlink" href="#numpsy.core.Value.se" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return symbolic expression consisting of an equivalent mathemtical representation to symbol</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="numpsy.core.Value.symbol">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">symbol</span></span><a class="headerlink" href="#numpsy.core.Value.symbol" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return unit symbol value shorthand</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="numpsy.core.Value.symbolic_expression">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">symbolic_expression</span></span><a class="headerlink" href="#numpsy.core.Value.symbolic_expression" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return symbolic expression consisting of an equivalent mathemtical representation to symbol</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="numpsy.core.Value.u">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">u</span></span><a class="headerlink" href="#numpsy.core.Value.u" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return unit symbol unit shorthand</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="numpsy.core.Value.unit">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">unit</span></span><a class="headerlink" href="#numpsy.core.Value.unit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return unit symbol unit shorthand</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="numpsy.core.Variable">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Variable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">name='undefined',</span> <span class="pre">na='undefined',</span> <span class="pre">name_expression='undefined',</span> <span class="pre">n=array([],</span> <span class="pre">dtype=float64),</span> <span class="pre">note='',</span> <span class="pre">numerical=array([],</span> <span class="pre">dtype=float64),</span> <span class="pre">symbol='Ø',</span> <span class="pre">s='Ø',</span> <span class="pre">symbolic_expression=Ø,</span> <span class="pre">se=Ø,</span> <span class="pre">print_style=None,</span> <span class="pre">unit=Unit</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">name</span>&#160; <span class="pre">...</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">symbolic_expression</span> <span class="pre">Unit</span>&#160; <span class="pre">undefined</span>&#160; <span class="pre">...</span>&#160; <span class="pre">\begin{equation}Ø\end{equation}</span>&#160; <span class="pre">[1</span> <span class="pre">rows</span> <span class="pre">x</span> <span class="pre">5</span> <span class="pre">columns],</span> <span class="pre">u=Unit</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">name</span>&#160; <span class="pre">...</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; <span class="pre">symbolic_expression</span> <span class="pre">Unit</span>&#160; <span class="pre">undefined</span>&#160; <span class="pre">...</span>&#160; <span class="pre">\begin{equation}Ø\end{equation}</span>&#160; <span class="pre">[1</span> <span class="pre">rows</span> <span class="pre">x</span> <span class="pre">5</span> <span class="pre">columns]</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/numpsy/core.html#Variable"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#numpsy.core.Variable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#numpsy.core.Value" title="numpsy.core.Value"><code class="xref py py-class docutils literal notranslate"><span class="pre">Value</span></code></a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – </p></li>
+<li><p><strong>na</strong> – </p></li>
+<li><p><strong>name_expression</strong> – </p></li>
+<li><p><strong>n</strong> – </p></li>
+<li><p><strong>note</strong> – </p></li>
+<li><p><strong>numerical</strong> – </p></li>
+<li><p><strong>symbol</strong> – </p></li>
+<li><p><strong>s</strong> – </p></li>
+<li><p><strong>symbolic_expression</strong> – </p></li>
+<li><p><strong>se</strong> – </p></li>
+<li><p><strong>print_style</strong> – </p></li>
+<li><p><strong>unit</strong> – </p></li>
+<li><p><strong>u</strong> – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="numpsy.core.undefined_unit_default_generator">
+<span class="sig-name descname"><span class="pre">undefined_unit_default_generator</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/numpsy/core.html#undefined_unit_default_generator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#numpsy.core.undefined_unit_default_generator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="numpsy-functions-module">
+<h2>numpsy.functions module<a class="headerlink" href="#numpsy-functions-module" title="Permalink to this heading">¶</a></h2>
+</section>
+<section id="module-numpsy.helpers">
+<span id="numpsy-helpers-module"></span><h2>numpsy.helpers module<a class="headerlink" href="#module-numpsy.helpers" title="Permalink to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="numpsy.helpers.full_variable_generator">
+<span class="sig-name descname"><span class="pre">full_variable_generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/numpsy/helpers.html#full_variable_generator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#numpsy.helpers.full_variable_generator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="numpsy.helpers.name_variable_generator">
+<span class="sig-name descname"><span class="pre">name_variable_generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/numpsy/helpers.html#name_variable_generator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#numpsy.helpers.name_variable_generator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="numpsy.helpers.name_variables_generator">
+<span class="sig-name descname"><span class="pre">name_variables_generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">first</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">second</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/numpsy/helpers.html#name_variables_generator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#numpsy.helpers.name_variables_generator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="numpsy.helpers.numerical_variable_generator">
+<span class="sig-name descname"><span class="pre">numerical_variable_generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/numpsy/helpers.html#numerical_variable_generator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#numpsy.helpers.numerical_variable_generator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="numpsy.helpers.numerical_variables_generator">
+<span class="sig-name descname"><span class="pre">numerical_variables_generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">first</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">second</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/numpsy/helpers.html#numerical_variables_generator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#numpsy.helpers.numerical_variables_generator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="numpsy.helpers.symbolic_expression_variable_generator">
+<span class="sig-name descname"><span class="pre">symbolic_expression_variable_generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/numpsy/helpers.html#symbolic_expression_variable_generator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#numpsy.helpers.symbolic_expression_variable_generator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="numpsy.helpers.symbolic_expression_variables_generator">
+<span class="sig-name descname"><span class="pre">symbolic_expression_variables_generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">first</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">second</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/numpsy/helpers.html#symbolic_expression_variables_generator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#numpsy.helpers.symbolic_expression_variables_generator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="numpsy.helpers.unit_variable_generator">
+<span class="sig-name descname"><span class="pre">unit_variable_generator</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/numpsy/helpers.html#unit_variable_generator"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#numpsy.helpers.unit_variable_generator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-numpsy.printers">
+<span id="numpsy-printers-module"></span><h2>numpsy.printers module<a class="headerlink" href="#module-numpsy.printers" title="Permalink to this heading">¶</a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="numpsy.printers.markdownify">
+<span class="sig-name descname"><span class="pre">markdownify</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/numpsy/printers.html#markdownify"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#numpsy.printers.markdownify" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</section>
+<section id="module-numpsy.units">
+<span id="numpsy-units-module"></span><h2>numpsy.units module<a class="headerlink" href="#module-numpsy.units" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="numpsy.units.Units">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">Units</span></span><a class="reference internal" href="_modules/numpsy/units.html#Units"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#numpsy.units.Units" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py property">
+<dt class="sig sig-object py" id="numpsy.units.Units.data">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#numpsy.units.Units.data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Full dataframe</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-contents">
+<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this heading">¶</a></h2>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">numpsy</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="introduction.html">NumpSy</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">numpsy</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">numpsy package</a></li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Introductory tutorials</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Quick Start</a></li>
+<li class="toctree-l1"><a class="reference internal" href="examples/ten_minutes_to_numpsy/10_minutes_to_numpsy.html">Installation</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  <li><a href="modules.html">numpsy</a><ul>
+      <li>Previous: <a href="modules.html" title="previous chapter">numpsy</a></li>
+      <li>Next: <a href="install.html" title="next chapter">Quick Start</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2023, Dario Quintero.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 6.2.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.13</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
