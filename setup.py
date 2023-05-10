@@ -23,7 +23,7 @@ setuptools.setup(
                 "sphinx_autodoc_typehints",
                 "nbsphinx",
                 "myst_parser",
-                "pandoc",
+                "pypandoc",
                 "flake8"
             ]
         },
