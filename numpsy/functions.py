@@ -9,6 +9,13 @@ from . import helpers
 
 
 def __variable_compatibility_check__(input):
+    """
+    Args:
+        input:
+
+    Returns:
+
+    """
     if hasattr(input, "__parent_class__"):
         if input.__parent_class__ == "Value":
             new = input.__class__()
@@ -19,6 +26,13 @@ def __variable_compatibility_check__(input):
     return new
 
 def abs(instance=core.Variable()):
+    """
+    Args:
+        instance:
+
+    Returns:
+
+    """
     if configuration.setup.calculation_style == "numpsy":
         new = __variable_compatibility_check__(instance)
         instance_parameters = helpers.full_variable_generator(instance)
@@ -37,6 +51,14 @@ def abs(instance=core.Variable()):
         return new
 
 def binomial_coefficient(instance=core.Variable(), instance_2=core.Variable()):
+    """
+    Args:
+        instance:
+        instance_2:
+
+    Returns:
+
+    """
     if configuration.setup.calculation_style == "numpsy":
         new = __variable_compatibility_check__(instance)
         new_2 = __variable_compatibility_check__(instance_2)
@@ -59,6 +81,13 @@ def binomial_coefficient(instance=core.Variable(), instance_2=core.Variable()):
         return new
 
 def ciel(instance=core.Variable()):
+    """
+    Args:
+        instance:
+
+    Returns:
+
+    """
     if configuration.setup.calculation_style == "numpsy":
         new = __variable_compatibility_check__(instance)
         instance_parameters = helpers.full_variable_generator(instance)

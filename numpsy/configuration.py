@@ -48,6 +48,14 @@ class ConfigurationSetup:
                  print_style=default_print_style,
                  value_printer_columns=default_numpsy_value_printer_columns
                  ):
+        """
+        Args:
+            calculation_style:
+            debug_mode:
+            matrix_operation_mode:
+            print_style:
+            value_printer_columns:
+        """
         self.__calculation_style__ = calculation_style
         self.__debug_mode__ = debug_mode
         self.__matrix_operation_mode__ = matrix_operation_mode

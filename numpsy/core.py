@@ -121,6 +121,14 @@ class InstanceMixin(DataMixin):
             note=configuration.undefined_note,
             print_style=configuration.undefined_print_style
     ):
+        """
+        Args:
+            name:
+            n:
+            name_expression:
+            note:
+            print_style:
+        """
         super(InstanceMixin, self).__init__()
         if configuration.setup.calculation_style == "numpsy":
             self.__name__ = helpers.__select_available_property__(name,
@@ -204,6 +212,17 @@ class Unit(InstanceMixin):
             symbolic_expression=sy.Symbol(configuration.undefined_unit_symbol),
             print_style=configuration.undefined_print_style
     ):
+        """
+        Args:
+            name:
+            na:
+            name_expression:
+            note:
+            symbol:
+            s:
+            symbolic_expression:
+            print_style:
+        """
         super(Unit, self).__init__()
         self.__name__ = helpers.__select_available_property__(name,
                                                               na,
@@ -315,10 +334,6 @@ undefined_unit_default = undefined_unit_default_generator()
 
 
 class Value(InstanceMixin):
-    @property
-    def __parent_class__(self):
-        return "Value"
-
     def __init__(
             self,
             name=configuration.undefined_value_name,
@@ -335,6 +350,22 @@ class Value(InstanceMixin):
             unit=Unit(),
             u=Unit(),
     ):
+        """
+        Args:
+            name:
+            na:
+            name_expression:
+            n:
+            note:
+            numerical:
+            symbol:
+            s:
+            symbolic_expression:
+            se:
+            print_style:
+            unit:
+            u:
+        """
         super(Value, self).__init__()
         if configuration.setup.calculation_style == "numpsy":
             self.__name__ = helpers.__select_available_property__(name,
@@ -709,6 +740,10 @@ class Value(InstanceMixin):
             # unit_variables = helpers.__unit_variables_generator__(self, other)
             # new.unit = unit_variables[0] / unit_variables[1]
             return new
+
+    @property
+    def __parent_class__(self):
+        return "Value"
 
     def lambdify_symbolic_expression(self,
                                      lambdify_string=configuration.undefined_unit_symbol):
