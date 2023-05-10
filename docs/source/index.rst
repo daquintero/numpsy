@@ -10,6 +10,7 @@ Welcome to numpsy's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   introduction
    modules
 
 .. toctree::
@@ -18,7 +19,8 @@ Welcome to numpsy's documentation!
 
    examples/ten_minutes_to_numpsy/10_minutes_to_numpsy
 
-   README
+   install
+
 
 Indices and tables
 ==================

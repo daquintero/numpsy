@@ -10,7 +10,8 @@ jobs:
       - uses: actions/setup-python@v3
       - name: Install dependencies
         run: |
-          pip install sphinx sphinx_rtd_theme sphinx_autodoc_typehints nbsphinx myst_parser pandoc
+          pip install sphinx sphinx_rtd_theme sphinx_autodoc_typehints nbsphinx myst_parser
+          conda install pandoc
       - name: Sphinx build
         run: |
           sphinx-build docs/source docs/build
