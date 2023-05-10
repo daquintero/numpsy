@@ -12,6 +12,14 @@ Welcome to numpsy's documentation!
 
    modules
 
+.. toctree::
+   :caption: Introductory tutorials
+   :maxdepth: 1
+
+   examples/ten_minutes_to_numpsy/10_minutes_to_numpsy
+
+   README
+
 Indices and tables
 ==================
 

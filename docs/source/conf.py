@@ -29,7 +29,8 @@ extensions = [
     'sphinx_autodoc_typehints', # Automatically document param types (less noise in class signature)
     'nbsphinx',  # Integrate Jupyter Notebooks and Sphinx
     'IPython.sphinxext.ipython_console_highlighting',
-    'sphinx.ext.napoleon'
+    'sphinx.ext.napoleon',
+    'myst_parser',
 ]
 templates_path = ['_templates']
 exclude_patterns = []
@@ -49,3 +50,5 @@ set_type_checking_flag = True  # Enable 'expensive' imports for sphinx_autodoc_t
 nbsphinx_allow_errors = True  # Continue through Jupyter errors
 #autodoc_typehints = "description" # Sphinx-native method. Not as good as sphinx_autodoc_typehints
 add_module_names = False # Remove namespaces from class/method signatures
+
+source_suffix = ['.rst', '.md']
